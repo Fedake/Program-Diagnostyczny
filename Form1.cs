@@ -40,5 +40,30 @@ namespace Diag
                 }
             }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void coresLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void threads_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void threadsLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cores_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
