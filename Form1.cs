@@ -39,31 +39,33 @@ namespace Diag
                     if (data.Name == "Name") this.videoCardName.Text = data.Value.ToString();
                 }
             }
-        }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
+            searcher.Query = new ObjectQuery("SELECT * FROM Win32_CacheMemory");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                string size = "";
+                foreach (PropertyData data in obj.Properties)
+                {
+                    if (data.Name == "InstalledSize") size = data.Value.ToString() + " kB";
+                    if (data.Name == "Purpose")
+                    {
+                        switch (data.Value.ToString())
+                        {
+                            case "L1-Cache":
+                                cache1Box.Text = size;
+                            break;
 
-        }
+                            case "L2-Cache":
+                                cache2Box.Text = size;
+                            break;
 
-        private void coresLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void threads_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void threadsLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cores_TextChanged(object sender, EventArgs e)
-        {
-
+                            case "L3-Cache":
+                                cache3Box.Text = size;
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }
