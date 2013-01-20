@@ -37,7 +37,7 @@
             this.cache3Label = new System.Windows.Forms.Label();
             this.cache2Label = new System.Windows.Forms.Label();
             this.cache1Label = new System.Windows.Forms.Label();
-            this.coresNthreadsGroup = new System.Windows.Forms.GroupBox();
+            this.processorGeneralGroup = new System.Windows.Forms.GroupBox();
             this.coresLabel = new System.Windows.Forms.Label();
             this.cores = new System.Windows.Forms.TextBox();
             this.threads = new System.Windows.Forms.TextBox();
@@ -50,7 +50,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.cacheGroup.SuspendLayout();
-            this.coresNthreadsGroup.SuspendLayout();
+            this.processorGeneralGroup.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,9 +67,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.cacheGroup);
-            this.tabPage1.Controls.Add(this.coresNthreadsGroup);
-            this.tabPage1.Controls.Add(this.processorName);
-            this.tabPage1.Controls.Add(this.processorNameLabel);
+            this.tabPage1.Controls.Add(this.processorGeneralGroup);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -86,9 +84,9 @@
             this.cacheGroup.Controls.Add(this.cache2Label);
             this.cacheGroup.Controls.Add(this.cache1Box);
             this.cacheGroup.Controls.Add(this.cache3Label);
-            this.cacheGroup.Location = new System.Drawing.Point(10, 76);
+            this.cacheGroup.Location = new System.Drawing.Point(10, 88);
             this.cacheGroup.Name = "cacheGroup";
-            this.cacheGroup.Size = new System.Drawing.Size(159, 103);
+            this.cacheGroup.Size = new System.Drawing.Size(159, 102);
             this.cacheGroup.TabIndex = 7;
             this.cacheGroup.TabStop = false;
             this.cacheGroup.Text = "Cache";
@@ -100,6 +98,7 @@
             this.cache3Box.ReadOnly = true;
             this.cache3Box.Size = new System.Drawing.Size(93, 20);
             this.cache3Box.TabIndex = 5;
+            this.cache3Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cache2Box
             // 
@@ -108,6 +107,7 @@
             this.cache2Box.ReadOnly = true;
             this.cache2Box.Size = new System.Drawing.Size(93, 20);
             this.cache2Box.TabIndex = 4;
+            this.cache2Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cache1Box
             // 
@@ -116,6 +116,7 @@
             this.cache1Box.ReadOnly = true;
             this.cache1Box.Size = new System.Drawing.Size(93, 20);
             this.cache1Box.TabIndex = 3;
+            this.cache1Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cache3Label
             // 
@@ -144,22 +145,25 @@
             this.cache1Label.TabIndex = 0;
             this.cache1Label.Text = "Level 1";
             // 
-            // coresNthreadsGroup
+            // processorGeneralGroup
             // 
-            this.coresNthreadsGroup.Controls.Add(this.coresLabel);
-            this.coresNthreadsGroup.Controls.Add(this.cores);
-            this.coresNthreadsGroup.Controls.Add(this.threads);
-            this.coresNthreadsGroup.Controls.Add(this.threadsLabel);
-            this.coresNthreadsGroup.Location = new System.Drawing.Point(10, 30);
-            this.coresNthreadsGroup.Name = "coresNthreadsGroup";
-            this.coresNthreadsGroup.Size = new System.Drawing.Size(159, 40);
-            this.coresNthreadsGroup.TabIndex = 6;
-            this.coresNthreadsGroup.TabStop = false;
+            this.processorGeneralGroup.Controls.Add(this.coresLabel);
+            this.processorGeneralGroup.Controls.Add(this.cores);
+            this.processorGeneralGroup.Controls.Add(this.processorName);
+            this.processorGeneralGroup.Controls.Add(this.processorNameLabel);
+            this.processorGeneralGroup.Controls.Add(this.threads);
+            this.processorGeneralGroup.Controls.Add(this.threadsLabel);
+            this.processorGeneralGroup.Location = new System.Drawing.Point(10, 6);
+            this.processorGeneralGroup.Name = "processorGeneralGroup";
+            this.processorGeneralGroup.Size = new System.Drawing.Size(324, 76);
+            this.processorGeneralGroup.TabIndex = 6;
+            this.processorGeneralGroup.TabStop = false;
+            this.processorGeneralGroup.Text = "General";
             // 
             // coresLabel
             // 
             this.coresLabel.AutoSize = true;
-            this.coresLabel.Location = new System.Drawing.Point(6, 16);
+            this.coresLabel.Location = new System.Drawing.Point(7, 48);
             this.coresLabel.Name = "coresLabel";
             this.coresLabel.Size = new System.Drawing.Size(34, 13);
             this.coresLabel.TabIndex = 2;
@@ -167,7 +171,7 @@
             // 
             // cores
             // 
-            this.cores.Location = new System.Drawing.Point(48, 13);
+            this.cores.Location = new System.Drawing.Point(47, 45);
             this.cores.Name = "cores";
             this.cores.ReadOnly = true;
             this.cores.Size = new System.Drawing.Size(20, 20);
@@ -176,7 +180,7 @@
             // 
             // threads
             // 
-            this.threads.Location = new System.Drawing.Point(127, 13);
+            this.threads.Location = new System.Drawing.Point(125, 45);
             this.threads.Name = "threads";
             this.threads.ReadOnly = true;
             this.threads.Size = new System.Drawing.Size(20, 20);
@@ -186,7 +190,7 @@
             // threadsLabel
             // 
             this.threadsLabel.AutoSize = true;
-            this.threadsLabel.Location = new System.Drawing.Point(75, 16);
+            this.threadsLabel.Location = new System.Drawing.Point(73, 48);
             this.threadsLabel.Name = "threadsLabel";
             this.threadsLabel.Size = new System.Drawing.Size(46, 13);
             this.threadsLabel.TabIndex = 4;
@@ -194,17 +198,17 @@
             // 
             // processorName
             // 
-            this.processorName.Location = new System.Drawing.Point(48, 4);
+            this.processorName.Location = new System.Drawing.Point(47, 19);
             this.processorName.Name = "processorName";
             this.processorName.ReadOnly = true;
-            this.processorName.Size = new System.Drawing.Size(286, 20);
+            this.processorName.Size = new System.Drawing.Size(271, 20);
             this.processorName.TabIndex = 1;
             this.processorName.Text = "Witamson";
             // 
             // processorNameLabel
             // 
             this.processorNameLabel.AutoSize = true;
-            this.processorNameLabel.Location = new System.Drawing.Point(7, 7);
+            this.processorNameLabel.Location = new System.Drawing.Point(6, 22);
             this.processorNameLabel.Name = "processorNameLabel";
             this.processorNameLabel.Size = new System.Drawing.Size(35, 13);
             this.processorNameLabel.TabIndex = 0;
@@ -248,11 +252,10 @@
             this.Text = "Program Diagnostyczny";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.cacheGroup.ResumeLayout(false);
             this.cacheGroup.PerformLayout();
-            this.coresNthreadsGroup.ResumeLayout(false);
-            this.coresNthreadsGroup.PerformLayout();
+            this.processorGeneralGroup.ResumeLayout(false);
+            this.processorGeneralGroup.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -272,7 +275,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox videoCardName;
         private System.Windows.Forms.Label videoCardLabel;
-        private System.Windows.Forms.GroupBox coresNthreadsGroup;
+        private System.Windows.Forms.GroupBox processorGeneralGroup;
         private System.Windows.Forms.GroupBox cacheGroup;
         private System.Windows.Forms.TextBox cache3Box;
         private System.Windows.Forms.TextBox cache2Box;
