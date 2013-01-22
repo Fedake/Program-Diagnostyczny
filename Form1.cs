@@ -135,6 +135,11 @@ namespace Diag
                 resolutionBox.Text = width + " x " + height;
             }
         }
+
+        private void threads_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     struct VideoCardInfo

@@ -38,6 +38,7 @@
             this.cache1Box = new System.Windows.Forms.TextBox();
             this.cache3Label = new System.Windows.Forms.Label();
             this.processorGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.addressWidthLabel = new System.Windows.Forms.Label();
             this.coresLabel = new System.Windows.Forms.Label();
             this.cores = new System.Windows.Forms.TextBox();
             this.processorName = new System.Windows.Forms.TextBox();
@@ -65,6 +66,7 @@
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
             this.resolutionBox = new System.Windows.Forms.TextBox();
             this.resolutionLabel = new System.Windows.Forms.Label();
+            this.addressWidthTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.processorPage.SuspendLayout();
             this.cacheGroup.SuspendLayout();
@@ -173,6 +175,8 @@
             // 
             // processorGeneralGroup
             // 
+            this.processorGeneralGroup.Controls.Add(this.addressWidthTextBox);
+            this.processorGeneralGroup.Controls.Add(this.addressWidthLabel);
             this.processorGeneralGroup.Controls.Add(this.coresLabel);
             this.processorGeneralGroup.Controls.Add(this.cores);
             this.processorGeneralGroup.Controls.Add(this.processorName);
@@ -185,6 +189,15 @@
             this.processorGeneralGroup.TabIndex = 6;
             this.processorGeneralGroup.TabStop = false;
             this.processorGeneralGroup.Text = "General";
+            // 
+            // addressWidthLabel
+            // 
+            this.addressWidthLabel.AutoSize = true;
+            this.addressWidthLabel.Location = new System.Drawing.Point(151, 48);
+            this.addressWidthLabel.Name = "addressWidthLabel";
+            this.addressWidthLabel.Size = new System.Drawing.Size(76, 13);
+            this.addressWidthLabel.TabIndex = 6;
+            this.addressWidthLabel.Text = "Address Width";
             // 
             // coresLabel
             // 
@@ -232,6 +245,7 @@
             this.threads.TabIndex = 5;
             this.threads.Text = "99";
             this.threads.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.threads.TextChanged += new System.EventHandler(this.threads_TextChanged);
             // 
             // threadsLabel
             // 
@@ -450,6 +464,16 @@
             this.resolutionLabel.TabIndex = 2;
             this.resolutionLabel.Text = "Current resolution";
             // 
+            // addressWidthTextBox
+            // 
+            this.addressWidthTextBox.Location = new System.Drawing.Point(233, 45);
+            this.addressWidthTextBox.Name = "addressWidthTextBox";
+            this.addressWidthTextBox.ReadOnly = true;
+            this.addressWidthTextBox.Size = new System.Drawing.Size(22, 20);
+            this.addressWidthTextBox.TabIndex = 7;
+            this.addressWidthTextBox.Text = "99";
+            this.addressWidthTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +543,8 @@
         private System.Windows.Forms.Label resolutionLabel;
         private System.Windows.Forms.Label VideoSelectLabel;
         private System.Windows.Forms.ComboBox VideoCardDropDownBox;
+        private System.Windows.Forms.Label addressWidthLabel;
+        private System.Windows.Forms.TextBox addressWidthTextBox;
     }
 }
 
