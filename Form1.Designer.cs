@@ -60,11 +60,11 @@
             this.memorySizeBox = new System.Windows.Forms.TextBox();
             this.memorySizeLabel = new System.Windows.Forms.Label();
             this.videoPage = new System.Windows.Forms.TabPage();
+            this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
             this.resolutionBox = new System.Windows.Forms.TextBox();
             this.resolutionLabel = new System.Windows.Forms.Label();
-            this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.processorPage.SuspendLayout();
             this.cacheGroup.SuspendLayout();
@@ -403,6 +403,16 @@
             this.videoPage.Text = "Video";
             this.videoPage.UseVisualStyleBackColor = true;
             // 
+            // VideoCardDropDownBox
+            // 
+            this.VideoCardDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.VideoCardDropDownBox.FormattingEnabled = true;
+            this.VideoCardDropDownBox.Location = new System.Drawing.Point(105, 13);
+            this.VideoCardDropDownBox.Name = "VideoCardDropDownBox";
+            this.VideoCardDropDownBox.Size = new System.Drawing.Size(225, 21);
+            this.VideoCardDropDownBox.TabIndex = 6;
+            this.VideoCardDropDownBox.SelectedIndexChanged += new System.EventHandler(this.VideoCardDropDownBox_SelectedIndexChanged);
+            // 
             // VideoSelectLabel
             // 
             this.VideoSelectLabel.AutoSize = true;
@@ -425,29 +435,20 @@
             // 
             // resolutionBox
             // 
-            this.resolutionBox.Location = new System.Drawing.Point(102, 40);
+            this.resolutionBox.Location = new System.Drawing.Point(102, 19);
             this.resolutionBox.Name = "resolutionBox";
             this.resolutionBox.ReadOnly = true;
-            this.resolutionBox.Size = new System.Drawing.Size(225, 20);
+            this.resolutionBox.Size = new System.Drawing.Size(152, 20);
             this.resolutionBox.TabIndex = 3;
             // 
             // resolutionLabel
             // 
             this.resolutionLabel.AutoSize = true;
-            this.resolutionLabel.Location = new System.Drawing.Point(39, 43);
+            this.resolutionLabel.Location = new System.Drawing.Point(6, 22);
             this.resolutionLabel.Name = "resolutionLabel";
-            this.resolutionLabel.Size = new System.Drawing.Size(57, 13);
+            this.resolutionLabel.Size = new System.Drawing.Size(89, 13);
             this.resolutionLabel.TabIndex = 2;
-            this.resolutionLabel.Text = "Resolution";
-            // 
-            // VideoCardDropDownBox
-            // 
-            this.VideoCardDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.VideoCardDropDownBox.FormattingEnabled = true;
-            this.VideoCardDropDownBox.Location = new System.Drawing.Point(105, 13);
-            this.VideoCardDropDownBox.Name = "VideoCardDropDownBox";
-            this.VideoCardDropDownBox.Size = new System.Drawing.Size(225, 21);
-            this.VideoCardDropDownBox.TabIndex = 6;
+            this.resolutionLabel.Text = "Current resolution";
             // 
             // Form1
             // 
