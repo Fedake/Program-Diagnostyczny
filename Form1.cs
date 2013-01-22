@@ -102,6 +102,9 @@ namespace Diag
                 info.width = getValue(obj, "CurrentHorizontalResolution");
                 info.height = getValue(obj, "CurrentVerticalResolution");
 
+				info.memory = (Convert.ToUInt64(getValue(obj, "AdapterRAM"))/1024/1024).ToString();
+
+				info.driverVersion = getValue(obj, "DriverVersion");
 
                 videoCards.Add(info);
             }
@@ -121,6 +124,8 @@ namespace Diag
         {
             string width = videoCards[VideoCardDropDownBox.SelectedIndex].width;
             string height = videoCards[VideoCardDropDownBox.SelectedIndex].height;
+			string memory = videoCards[VideoCardDropDownBox.SelectedIndex].memory;
+			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
 
             if (width == "NULL" || height == "NULL")
             {
@@ -134,12 +139,17 @@ namespace Diag
                 resolutionLabel.Enabled = true;
                 resolutionBox.Text = width + " x " + height;
             }
+
+			videoCardRamBox.Text = memory + " MB";
+			videoCardDriverBox.Text = driver;
         }
     }
 
     struct VideoCardInfo
     {
         public string width, height;
+		public string memory;
+		public string driverVersion;
         
     }
 }
