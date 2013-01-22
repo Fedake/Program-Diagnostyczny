@@ -60,11 +60,11 @@
             this.memorySizeBox = new System.Windows.Forms.TextBox();
             this.memorySizeLabel = new System.Windows.Forms.Label();
             this.videoPage = new System.Windows.Forms.TabPage();
+            this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
             this.resolutionBox = new System.Windows.Forms.TextBox();
             this.resolutionLabel = new System.Windows.Forms.Label();
-            this.videoCardLabel = new System.Windows.Forms.Label();
-            this.videoCardName = new System.Windows.Forms.TextBox();
+            this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.processorPage.SuspendLayout();
             this.cacheGroup.SuspendLayout();
@@ -284,7 +284,6 @@
             this.biosManuBox.Size = new System.Drawing.Size(240, 20);
             this.biosManuBox.TabIndex = 4;
             this.biosManuBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.biosManuBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // biosManuLabel
             // 
@@ -294,7 +293,6 @@
             this.biosManuLabel.Size = new System.Drawing.Size(70, 13);
             this.biosManuLabel.TabIndex = 6;
             this.biosManuLabel.Text = "Manufacturer";
-            this.biosManuLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // biosVerLabel
             // 
@@ -304,7 +302,6 @@
             this.biosVerLabel.Size = new System.Drawing.Size(42, 13);
             this.biosVerLabel.TabIndex = 7;
             this.biosVerLabel.Text = "Version";
-            this.biosVerLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // moboGeneralGroup
             // 
@@ -396,6 +393,8 @@
             // 
             // videoPage
             // 
+            this.videoPage.Controls.Add(this.VideoCardDropDownBox);
+            this.videoPage.Controls.Add(this.VideoSelectLabel);
             this.videoPage.Controls.Add(this.videoGeneralGroup);
             this.videoPage.Location = new System.Drawing.Point(4, 22);
             this.videoPage.Name = "videoPage";
@@ -404,13 +403,20 @@
             this.videoPage.Text = "Video";
             this.videoPage.UseVisualStyleBackColor = true;
             // 
+            // VideoSelectLabel
+            // 
+            this.VideoSelectLabel.AutoSize = true;
+            this.VideoSelectLabel.Location = new System.Drawing.Point(9, 16);
+            this.VideoSelectLabel.Name = "VideoSelectLabel";
+            this.VideoSelectLabel.Size = new System.Drawing.Size(92, 13);
+            this.VideoSelectLabel.TabIndex = 5;
+            this.VideoSelectLabel.Text = "Select Video Card";
+            // 
             // videoGeneralGroup
             // 
             this.videoGeneralGroup.Controls.Add(this.resolutionBox);
             this.videoGeneralGroup.Controls.Add(this.resolutionLabel);
-            this.videoGeneralGroup.Controls.Add(this.videoCardLabel);
-            this.videoGeneralGroup.Controls.Add(this.videoCardName);
-            this.videoGeneralGroup.Location = new System.Drawing.Point(3, 3);
+            this.videoGeneralGroup.Location = new System.Drawing.Point(3, 40);
             this.videoGeneralGroup.Name = "videoGeneralGroup";
             this.videoGeneralGroup.Size = new System.Drawing.Size(334, 135);
             this.videoGeneralGroup.TabIndex = 2;
@@ -419,7 +425,7 @@
             // 
             // resolutionBox
             // 
-            this.resolutionBox.Location = new System.Drawing.Point(102, 46);
+            this.resolutionBox.Location = new System.Drawing.Point(102, 40);
             this.resolutionBox.Name = "resolutionBox";
             this.resolutionBox.ReadOnly = true;
             this.resolutionBox.Size = new System.Drawing.Size(225, 20);
@@ -428,28 +434,20 @@
             // resolutionLabel
             // 
             this.resolutionLabel.AutoSize = true;
-            this.resolutionLabel.Location = new System.Drawing.Point(39, 49);
+            this.resolutionLabel.Location = new System.Drawing.Point(39, 43);
             this.resolutionLabel.Name = "resolutionLabel";
             this.resolutionLabel.Size = new System.Drawing.Size(57, 13);
             this.resolutionLabel.TabIndex = 2;
             this.resolutionLabel.Text = "Resolution";
             // 
-            // videoCardLabel
+            // VideoCardDropDownBox
             // 
-            this.videoCardLabel.AutoSize = true;
-            this.videoCardLabel.Location = new System.Drawing.Point(6, 22);
-            this.videoCardLabel.Name = "videoCardLabel";
-            this.videoCardLabel.Size = new System.Drawing.Size(90, 13);
-            this.videoCardLabel.TabIndex = 0;
-            this.videoCardLabel.Text = "Video Card Name";
-            // 
-            // videoCardName
-            // 
-            this.videoCardName.Location = new System.Drawing.Point(102, 19);
-            this.videoCardName.Name = "videoCardName";
-            this.videoCardName.ReadOnly = true;
-            this.videoCardName.Size = new System.Drawing.Size(225, 20);
-            this.videoCardName.TabIndex = 1;
+            this.VideoCardDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.VideoCardDropDownBox.FormattingEnabled = true;
+            this.VideoCardDropDownBox.Location = new System.Drawing.Point(105, 13);
+            this.VideoCardDropDownBox.Name = "VideoCardDropDownBox";
+            this.VideoCardDropDownBox.Size = new System.Drawing.Size(225, 21);
+            this.VideoCardDropDownBox.TabIndex = 6;
             // 
             // Form1
             // 
@@ -474,6 +472,7 @@
             this.memoryGeneralGroup.ResumeLayout(false);
             this.memoryGeneralGroup.PerformLayout();
             this.videoPage.ResumeLayout(false);
+            this.videoPage.PerformLayout();
             this.videoGeneralGroup.ResumeLayout(false);
             this.videoGeneralGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -491,8 +490,6 @@
         private System.Windows.Forms.TextBox cores;
         private System.Windows.Forms.Label coresLabel;
         private System.Windows.Forms.TabPage videoPage;
-        private System.Windows.Forms.TextBox videoCardName;
-        private System.Windows.Forms.Label videoCardLabel;
         private System.Windows.Forms.GroupBox processorGeneralGroup;
         private System.Windows.Forms.GroupBox cacheGroup;
         private System.Windows.Forms.TextBox cache3Box;
@@ -518,7 +515,9 @@
 		private System.Windows.Forms.Label memorySizeLabel;
 		private System.Windows.Forms.GroupBox videoGeneralGroup;
 		private System.Windows.Forms.TextBox resolutionBox;
-		private System.Windows.Forms.Label resolutionLabel;
+        private System.Windows.Forms.Label resolutionLabel;
+        private System.Windows.Forms.Label VideoSelectLabel;
+        private System.Windows.Forms.ComboBox VideoCardDropDownBox;
     }
 }
 

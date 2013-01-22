@@ -23,38 +23,31 @@ namespace Diag
 
             foreach (ManagementObject obj in searcher.Get())
             {
-                foreach (PropertyData data in obj.Properties)
-                {
-                    if (data.Name == "Name") this.processorName.Text = data.Value.ToString();
-                    if (data.Name == "NumberOfCores") this.cores.Text = data.Value.ToString();
-                    if (data.Name == "NumberOfLogicalProcessors") this.threads.Text = data.Value.ToString();
-                }
+                this.processorName.Text = getValue(obj, "Name");
+                this.cores.Text = getValue(obj, "NumberOfCores");
+                this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+                
             }
 
             searcher.Query = new ObjectQuery("SELECT * FROM Win32_CacheMemory");
             foreach (ManagementObject obj in searcher.Get())
             {
                 string size = "";
-                foreach (PropertyData data in obj.Properties)
+                size = obj["InstalledSize"].ToString() + " kB";
+
+                switch (obj["Level"].ToString())
                 {
-                    if (data.Name == "InstalledSize") size = data.Value.ToString() + " kB";
-                    if (data.Name == "Level")
-                    {
-                        switch (data.Value.ToString())
-                        {
-                            case "3":
-                                cache1Box.Text = size;
-                            break;
+                    case "3":
+                        cache1Box.Text = size;
+                    break;
 
-                            case "4":
-                                cache2Box.Text = size;
-                            break;
+                    case "4":
+                        cache2Box.Text = size;
+                    break;
 
-                            case "5":
-                                cache3Box.Text = size;
-                            break;
-                        }
-                    }
+                    case "5":
+                        cache3Box.Text = size;
+                    break;
                 }
             }
 
@@ -96,31 +89,25 @@ namespace Diag
 			uint w = 0, h = 0, r = 0;
             foreach (ManagementObject obj in searcher.Get())
             {
+                VideoCardDropDownBox.Items.Add(obj["Name"]);
                 foreach (PropertyData data in obj.Properties)
                 {
-                    if (data.Name == "Name") this.videoCardName.Text = data.Value.ToString();
 
-	//				if (data.Name == "CurrentHorizontalResolution") w = (uint)(data.Value);
-	//				if (data.Name == "CurrentVerticalResolution") h = (uint)data.Value;
-	//				if (data.Name == "CurrentRefreshRate") r = (uint)data.Value;
+//	          		if (data.Name == "CurrentHorizontalResolution") w = (uint)(data.Value);
+//    				if (data.Name == "CurrentVerticalResolution") h = (uint)data.Value;
+//					if (data.Name == "CurrentRefreshRate") r = (uint)data.Value;
                 }
             }
 			resolutionBox.Text = w.ToString() + " x " + h.ToString() + " @ " + r.ToString() + "Hz";
+            VideoCardDropDownBox.SelectedIndex = 0;
         }
 
-		private void textBox2_TextChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void label1_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void label2_Click(object sender, EventArgs e)
-		{
-
-		}
+        private string getValue(ManagementObject obj, string str)
+        {
+            if (obj[str] != null)
+                return obj[str].ToString();
+            else
+                return "Brak informacyji";
+        }
     }
 }
