@@ -15,49 +15,48 @@ namespace Diag
 {
     public partial class Form1 : Form
     {
+        List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
+
+        /* CONSTRUCTOR */
         public Form1()
         {
             InitializeComponent();
 
+            // Processor //
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-
+        
             foreach (ManagementObject obj in searcher.Get())
             {
-                foreach (PropertyData data in obj.Properties)
-                {
-                    if (data.Name == "Name") this.processorName.Text = data.Value.ToString();
-                    if (data.Name == "NumberOfCores") this.cores.Text = data.Value.ToString();
-                    if (data.Name == "NumberOfLogicalProcessors") this.threads.Text = data.Value.ToString();
-                }
+                this.processorName.Text = getValue(obj, "Name");
+                this.cores.Text = getValue(obj, "NumberOfCores");
+                this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+                
             }
 
+            // Cache memory //
             searcher.Query = new ObjectQuery("SELECT * FROM Win32_CacheMemory");
             foreach (ManagementObject obj in searcher.Get())
             {
                 string size = "";
-                foreach (PropertyData data in obj.Properties)
+                size = obj["InstalledSize"].ToString() + " kB";
+
+                switch (obj["Level"].ToString())
                 {
-                    if (data.Name == "InstalledSize") size = data.Value.ToString() + " kB";
-                    if (data.Name == "Level")
-                    {
-                        switch (data.Value.ToString())
-                        {
-                            case "3":
-                                cache1Box.Text = size;
-                            break;
+                    case "3":
+                        cache1Box.Text = size;
+                    break;
 
-                            case "4":
-                                cache2Box.Text = size;
-                            break;
+                    case "4":
+                        cache2Box.Text = size;
+                    break;
 
-                            case "5":
-                                cache3Box.Text = size;
-                            break;
-                        }
-                    }
+                    case "5":
+                        cache3Box.Text = size;
+                    break;
                 }
             }
 
+            // Motherboard //
 			searcher.Query = new ObjectQuery("SELECT * FROM Win32_BaseBoard");
 			foreach (ManagementObject obj in searcher.Get())
 			{
@@ -68,6 +67,7 @@ namespace Diag
 				}
 			}
 
+            // BIOS //
 			searcher.Query = new ObjectQuery("SELECT * FROM Win32_BIOS");
 			foreach (ManagementObject obj in searcher.Get())
 			{
@@ -78,6 +78,7 @@ namespace Diag
 				}
 			}
 
+            // Physical Memory //
 			searcher.Query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
 
 			ulong totalSize = 0;
@@ -91,36 +92,54 @@ namespace Diag
 			totalSize = totalSize/1024/1024;
 			this.memorySizeBox.Text = totalSize.ToString() + " MB";
 
-
+            // Video Controller //
             searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
-			uint w = 0, h = 0, r = 0;
             foreach (ManagementObject obj in searcher.Get())
             {
-                foreach (PropertyData data in obj.Properties)
-                {
-                    if (data.Name == "Name") this.videoCardName.Text = data.Value.ToString();
+                VideoCardDropDownBox.Items.Add(obj["Name"]);
 
-					if (data.Name == "CurrentHorizontalResolution") w = (uint)data.Value;
-					if (data.Name == "CurrentVerticalResolution") h = (uint)data.Value;
-					if (data.Name == "CurrentRefreshRate") r = (uint)data.Value;
-                }
+                VideoCardInfo info;
+                info.width = getValue(obj, "CurrentHorizontalResolution");
+                info.height = getValue(obj, "CurrentVerticalResolution");
+
+
+                videoCards.Add(info);
             }
-			resolutionBox.Text = w.ToString() + " x " + h.ToString() + " @ " + r.ToString() + "Hz";
+            VideoCardDropDownBox.SelectedIndex = 0;
         }
 
-		private void textBox2_TextChanged(object sender, EventArgs e)
-		{
+        // Get value of object property
+        private string getValue(ManagementObject obj, string str)
+        {
+            if (obj[str] != null)
+                return obj[str].ToString();
+            else
+                return "NULL";
+        }
 
-		}
+        private void VideoCardDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string width = videoCards[VideoCardDropDownBox.SelectedIndex].width;
+            string height = videoCards[VideoCardDropDownBox.SelectedIndex].height;
 
-		private void label1_Click(object sender, EventArgs e)
-		{
+            if (width == "NULL" || height == "NULL")
+            {
+                resolutionBox.Enabled = false;
+                resolutionLabel.Enabled = false;
+                resolutionBox.Text = "No information available";
+            }
+            else
+            {
+                resolutionBox.Enabled = true;
+                resolutionLabel.Enabled = true;
+                resolutionBox.Text = width + " x " + height;
+            }
+        }
+    }
 
-		}
-
-		private void label2_Click(object sender, EventArgs e)
-		{
-
-		}
+    struct VideoCardInfo
+    {
+        public string width, height;
+        
     }
 }
