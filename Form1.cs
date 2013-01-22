@@ -38,19 +38,19 @@ namespace Diag
                 foreach (PropertyData data in obj.Properties)
                 {
                     if (data.Name == "InstalledSize") size = data.Value.ToString() + " kB";
-                    if (data.Name == "Purpose")
+                    if (data.Name == "Level")
                     {
                         switch (data.Value.ToString())
                         {
-                            case "L1-Cache":
+                            case "3":
                                 cache1Box.Text = size;
                             break;
 
-                            case "L2-Cache":
+                            case "4":
                                 cache2Box.Text = size;
                             break;
 
-                            case "L3-Cache":
+                            case "5":
                                 cache3Box.Text = size;
                             break;
                         }
