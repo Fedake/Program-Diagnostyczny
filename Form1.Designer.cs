@@ -56,9 +56,20 @@
 			this.moboModelLabel = new System.Windows.Forms.Label();
 			this.moboManuLabel = new System.Windows.Forms.Label();
 			this.memoryPage = new System.Windows.Forms.TabPage();
+			this.memoryModuleInfoGroup = new System.Windows.Forms.GroupBox();
+			this.memorySerialBox = new System.Windows.Forms.TextBox();
+			this.memorySerialLabel = new System.Windows.Forms.Label();
+			this.memoryPartBox = new System.Windows.Forms.TextBox();
+			this.memoryPartLabel = new System.Windows.Forms.Label();
+			this.memoryFrequencyBox = new System.Windows.Forms.TextBox();
+			this.memoryFreqencyLabel = new System.Windows.Forms.Label();
+			this.memoryModuleSizeBox = new System.Windows.Forms.TextBox();
+			this.memoryModuleSizeLabel = new System.Windows.Forms.Label();
 			this.memoryGeneralGroup = new System.Windows.Forms.GroupBox();
-			this.memorySizeBox = new System.Windows.Forms.TextBox();
-			this.memorySizeLabel = new System.Windows.Forms.Label();
+			this.memorySelectionBox = new System.Windows.Forms.ComboBox();
+			this.memorySelectionLabel = new System.Windows.Forms.Label();
+			this.memoryTotalSizeBox = new System.Windows.Forms.TextBox();
+			this.memoryTotalSizeLabel = new System.Windows.Forms.Label();
 			this.videoPage = new System.Windows.Forms.TabPage();
 			this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
 			this.VideoSelectLabel = new System.Windows.Forms.Label();
@@ -71,12 +82,18 @@
 			this.resolutionLabel = new System.Windows.Forms.Label();
 			this.systemPage = new System.Windows.Forms.TabPage();
 			this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
-			this.osNameLabel = new System.Windows.Forms.Label();
-			this.osVersionBox = new System.Windows.Forms.TextBox();
-			this.osArchitectureLabel = new System.Windows.Forms.Label();
-			this.osArchitectureBox = new System.Windows.Forms.TextBox();
+			this.osBootBox = new System.Windows.Forms.TextBox();
+			this.osBootLabel = new System.Windows.Forms.Label();
+			this.osInstallBox = new System.Windows.Forms.TextBox();
+			this.osInstallLabel = new System.Windows.Forms.Label();
 			this.osBuildBox = new System.Windows.Forms.TextBox();
 			this.osBuildLabel = new System.Windows.Forms.Label();
+			this.osArchitectureBox = new System.Windows.Forms.TextBox();
+			this.osArchitectureLabel = new System.Windows.Forms.Label();
+			this.osVersionBox = new System.Windows.Forms.TextBox();
+			this.osNameLabel = new System.Windows.Forms.Label();
+			this.memoryBankBox = new System.Windows.Forms.TextBox();
+			this.memoryBankLabel = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.processorPage.SuspendLayout();
 			this.cacheGroup.SuspendLayout();
@@ -85,6 +102,7 @@
 			this.moboBiosGroup.SuspendLayout();
 			this.moboGeneralGroup.SuspendLayout();
 			this.memoryPage.SuspendLayout();
+			this.memoryModuleInfoGroup.SuspendLayout();
 			this.memoryGeneralGroup.SuspendLayout();
 			this.videoPage.SuspendLayout();
 			this.videoGeneralGroup.SuspendLayout();
@@ -369,6 +387,7 @@
 			// 
 			// memoryPage
 			// 
+			this.memoryPage.Controls.Add(this.memoryModuleInfoGroup);
 			this.memoryPage.Controls.Add(this.memoryGeneralGroup);
 			this.memoryPage.Location = new System.Drawing.Point(4, 22);
 			this.memoryPage.Name = "memoryPage";
@@ -377,34 +396,146 @@
 			this.memoryPage.Text = "Memory";
 			this.memoryPage.UseVisualStyleBackColor = true;
 			// 
+			// memoryModuleInfoGroup
+			// 
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryBankBox);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryBankLabel);
+			this.memoryModuleInfoGroup.Controls.Add(this.memorySerialBox);
+			this.memoryModuleInfoGroup.Controls.Add(this.memorySerialLabel);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryPartBox);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryPartLabel);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryFrequencyBox);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryFreqencyLabel);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryModuleSizeBox);
+			this.memoryModuleInfoGroup.Controls.Add(this.memoryModuleSizeLabel);
+			this.memoryModuleInfoGroup.Location = new System.Drawing.Point(3, 60);
+			this.memoryModuleInfoGroup.Name = "memoryModuleInfoGroup";
+			this.memoryModuleInfoGroup.Size = new System.Drawing.Size(334, 103);
+			this.memoryModuleInfoGroup.TabIndex = 1;
+			this.memoryModuleInfoGroup.TabStop = false;
+			this.memoryModuleInfoGroup.Text = "Module Information";
+			// 
+			// memorySerialBox
+			// 
+			this.memorySerialBox.Location = new System.Drawing.Point(223, 71);
+			this.memorySerialBox.Name = "memorySerialBox";
+			this.memorySerialBox.ReadOnly = true;
+			this.memorySerialBox.Size = new System.Drawing.Size(105, 20);
+			this.memorySerialBox.TabIndex = 16;
+			this.memorySerialBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memorySerialLabel
+			// 
+			this.memorySerialLabel.AutoSize = true;
+			this.memorySerialLabel.Location = new System.Drawing.Point(144, 74);
+			this.memorySerialLabel.Name = "memorySerialLabel";
+			this.memorySerialLabel.Size = new System.Drawing.Size(73, 13);
+			this.memorySerialLabel.TabIndex = 15;
+			this.memorySerialLabel.Text = "Serial Number";
+			// 
+			// memoryPartBox
+			// 
+			this.memoryPartBox.Location = new System.Drawing.Point(223, 45);
+			this.memoryPartBox.Name = "memoryPartBox";
+			this.memoryPartBox.ReadOnly = true;
+			this.memoryPartBox.Size = new System.Drawing.Size(105, 20);
+			this.memoryPartBox.TabIndex = 14;
+			this.memoryPartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memoryPartLabel
+			// 
+			this.memoryPartLabel.AutoSize = true;
+			this.memoryPartLabel.Location = new System.Drawing.Point(144, 48);
+			this.memoryPartLabel.Name = "memoryPartLabel";
+			this.memoryPartLabel.Size = new System.Drawing.Size(66, 13);
+			this.memoryPartLabel.TabIndex = 13;
+			this.memoryPartLabel.Text = "Part Number";
+			// 
+			// memoryFrequencyBox
+			// 
+			this.memoryFrequencyBox.Location = new System.Drawing.Point(69, 71);
+			this.memoryFrequencyBox.Name = "memoryFrequencyBox";
+			this.memoryFrequencyBox.ReadOnly = true;
+			this.memoryFrequencyBox.Size = new System.Drawing.Size(67, 20);
+			this.memoryFrequencyBox.TabIndex = 12;
+			this.memoryFrequencyBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memoryFreqencyLabel
+			// 
+			this.memoryFreqencyLabel.AutoSize = true;
+			this.memoryFreqencyLabel.Location = new System.Drawing.Point(6, 74);
+			this.memoryFreqencyLabel.Name = "memoryFreqencyLabel";
+			this.memoryFreqencyLabel.Size = new System.Drawing.Size(57, 13);
+			this.memoryFreqencyLabel.TabIndex = 11;
+			this.memoryFreqencyLabel.Text = "Frequency";
+			// 
+			// memoryModuleSizeBox
+			// 
+			this.memoryModuleSizeBox.Location = new System.Drawing.Point(39, 45);
+			this.memoryModuleSizeBox.Name = "memoryModuleSizeBox";
+			this.memoryModuleSizeBox.ReadOnly = true;
+			this.memoryModuleSizeBox.Size = new System.Drawing.Size(97, 20);
+			this.memoryModuleSizeBox.TabIndex = 10;
+			this.memoryModuleSizeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memoryModuleSizeLabel
+			// 
+			this.memoryModuleSizeLabel.AutoSize = true;
+			this.memoryModuleSizeLabel.Location = new System.Drawing.Point(6, 48);
+			this.memoryModuleSizeLabel.Name = "memoryModuleSizeLabel";
+			this.memoryModuleSizeLabel.Size = new System.Drawing.Size(27, 13);
+			this.memoryModuleSizeLabel.TabIndex = 9;
+			this.memoryModuleSizeLabel.Text = "Size";
+			// 
 			// memoryGeneralGroup
 			// 
-			this.memoryGeneralGroup.Controls.Add(this.memorySizeBox);
-			this.memoryGeneralGroup.Controls.Add(this.memorySizeLabel);
+			this.memoryGeneralGroup.Controls.Add(this.memorySelectionBox);
+			this.memoryGeneralGroup.Controls.Add(this.memorySelectionLabel);
+			this.memoryGeneralGroup.Controls.Add(this.memoryTotalSizeBox);
+			this.memoryGeneralGroup.Controls.Add(this.memoryTotalSizeLabel);
 			this.memoryGeneralGroup.Location = new System.Drawing.Point(3, 3);
 			this.memoryGeneralGroup.Name = "memoryGeneralGroup";
-			this.memoryGeneralGroup.Size = new System.Drawing.Size(334, 155);
+			this.memoryGeneralGroup.Size = new System.Drawing.Size(334, 51);
 			this.memoryGeneralGroup.TabIndex = 0;
 			this.memoryGeneralGroup.TabStop = false;
 			this.memoryGeneralGroup.Text = "General";
 			// 
-			// memorySizeBox
+			// memorySelectionBox
 			// 
-			this.memorySizeBox.Location = new System.Drawing.Point(39, 19);
-			this.memorySizeBox.Name = "memorySizeBox";
-			this.memorySizeBox.ReadOnly = true;
-			this.memorySizeBox.Size = new System.Drawing.Size(100, 20);
-			this.memorySizeBox.TabIndex = 1;
-			this.memorySizeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.memorySelectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.memorySelectionBox.FormattingEnabled = true;
+			this.memorySelectionBox.Location = new System.Drawing.Point(87, 19);
+			this.memorySelectionBox.Name = "memorySelectionBox";
+			this.memorySelectionBox.Size = new System.Drawing.Size(75, 21);
+			this.memorySelectionBox.TabIndex = 8;
+			this.memorySelectionBox.SelectedIndexChanged += new System.EventHandler(this.memorySelectionBox_SelectedIndexChanged);
 			// 
-			// memorySizeLabel
+			// memorySelectionLabel
 			// 
-			this.memorySizeLabel.AutoSize = true;
-			this.memorySizeLabel.Location = new System.Drawing.Point(6, 22);
-			this.memorySizeLabel.Name = "memorySizeLabel";
-			this.memorySizeLabel.Size = new System.Drawing.Size(27, 13);
-			this.memorySizeLabel.TabIndex = 0;
-			this.memorySizeLabel.Text = "Size";
+			this.memorySelectionLabel.AutoSize = true;
+			this.memorySelectionLabel.Location = new System.Drawing.Point(6, 22);
+			this.memorySelectionLabel.Name = "memorySelectionLabel";
+			this.memorySelectionLabel.Size = new System.Drawing.Size(75, 13);
+			this.memorySelectionLabel.TabIndex = 7;
+			this.memorySelectionLabel.Text = "Select Module";
+			// 
+			// memoryTotalSizeBox
+			// 
+			this.memoryTotalSizeBox.Location = new System.Drawing.Point(228, 19);
+			this.memoryTotalSizeBox.Name = "memoryTotalSizeBox";
+			this.memoryTotalSizeBox.ReadOnly = true;
+			this.memoryTotalSizeBox.Size = new System.Drawing.Size(100, 20);
+			this.memoryTotalSizeBox.TabIndex = 1;
+			this.memoryTotalSizeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memoryTotalSizeLabel
+			// 
+			this.memoryTotalSizeLabel.AutoSize = true;
+			this.memoryTotalSizeLabel.Location = new System.Drawing.Point(168, 22);
+			this.memoryTotalSizeLabel.Name = "memoryTotalSizeLabel";
+			this.memoryTotalSizeLabel.Size = new System.Drawing.Size(54, 13);
+			this.memoryTotalSizeLabel.TabIndex = 0;
+			this.memoryTotalSizeLabel.Text = "Total Size";
 			// 
 			// videoPage
 			// 
@@ -516,6 +647,10 @@
 			// 
 			// systemGeneralGroup
 			// 
+			this.systemGeneralGroup.Controls.Add(this.osBootBox);
+			this.systemGeneralGroup.Controls.Add(this.osBootLabel);
+			this.systemGeneralGroup.Controls.Add(this.osInstallBox);
+			this.systemGeneralGroup.Controls.Add(this.osInstallLabel);
 			this.systemGeneralGroup.Controls.Add(this.osBuildBox);
 			this.systemGeneralGroup.Controls.Add(this.osBuildLabel);
 			this.systemGeneralGroup.Controls.Add(this.osArchitectureBox);
@@ -529,40 +664,41 @@
 			this.systemGeneralGroup.TabStop = false;
 			this.systemGeneralGroup.Text = "General";
 			// 
-			// osNameLabel
+			// osBootBox
 			// 
-			this.osNameLabel.AutoSize = true;
-			this.osNameLabel.Location = new System.Drawing.Point(6, 22);
-			this.osNameLabel.Name = "osNameLabel";
-			this.osNameLabel.Size = new System.Drawing.Size(42, 13);
-			this.osNameLabel.TabIndex = 0;
-			this.osNameLabel.Text = "Version";
+			this.osBootBox.Location = new System.Drawing.Point(102, 97);
+			this.osBootBox.Name = "osBootBox";
+			this.osBootBox.ReadOnly = true;
+			this.osBootBox.Size = new System.Drawing.Size(136, 20);
+			this.osBootBox.TabIndex = 9;
+			this.osBootBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// osVersionBox
+			// osBootLabel
 			// 
-			this.osVersionBox.Location = new System.Drawing.Point(54, 19);
-			this.osVersionBox.Name = "osVersionBox";
-			this.osVersionBox.ReadOnly = true;
-			this.osVersionBox.Size = new System.Drawing.Size(274, 20);
-			this.osVersionBox.TabIndex = 1;
+			this.osBootLabel.AutoSize = true;
+			this.osBootLabel.Location = new System.Drawing.Point(6, 100);
+			this.osBootLabel.Name = "osBootLabel";
+			this.osBootLabel.Size = new System.Drawing.Size(90, 13);
+			this.osBootLabel.TabIndex = 8;
+			this.osBootLabel.Text = "Last Startup Time";
 			// 
-			// osArchitectureLabel
+			// osInstallBox
 			// 
-			this.osArchitectureLabel.AutoSize = true;
-			this.osArchitectureLabel.Location = new System.Drawing.Point(6, 48);
-			this.osArchitectureLabel.Name = "osArchitectureLabel";
-			this.osArchitectureLabel.Size = new System.Drawing.Size(64, 13);
-			this.osArchitectureLabel.TabIndex = 2;
-			this.osArchitectureLabel.Text = "Architecture";
+			this.osInstallBox.Location = new System.Drawing.Point(102, 71);
+			this.osInstallBox.Name = "osInstallBox";
+			this.osInstallBox.ReadOnly = true;
+			this.osInstallBox.Size = new System.Drawing.Size(136, 20);
+			this.osInstallBox.TabIndex = 7;
+			this.osInstallBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// osArchitectureBox
+			// osInstallLabel
 			// 
-			this.osArchitectureBox.Location = new System.Drawing.Point(76, 45);
-			this.osArchitectureBox.Name = "osArchitectureBox";
-			this.osArchitectureBox.ReadOnly = true;
-			this.osArchitectureBox.Size = new System.Drawing.Size(49, 20);
-			this.osArchitectureBox.TabIndex = 3;
-			this.osArchitectureBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.osInstallLabel.AutoSize = true;
+			this.osInstallLabel.Location = new System.Drawing.Point(36, 74);
+			this.osInstallLabel.Name = "osInstallLabel";
+			this.osInstallLabel.Size = new System.Drawing.Size(60, 13);
+			this.osInstallLabel.TabIndex = 6;
+			this.osInstallLabel.Text = "Install Date";
 			// 
 			// osBuildBox
 			// 
@@ -581,6 +717,59 @@
 			this.osBuildLabel.Size = new System.Drawing.Size(30, 13);
 			this.osBuildLabel.TabIndex = 4;
 			this.osBuildLabel.Text = "Build";
+			// 
+			// osArchitectureBox
+			// 
+			this.osArchitectureBox.Location = new System.Drawing.Point(76, 45);
+			this.osArchitectureBox.Name = "osArchitectureBox";
+			this.osArchitectureBox.ReadOnly = true;
+			this.osArchitectureBox.Size = new System.Drawing.Size(49, 20);
+			this.osArchitectureBox.TabIndex = 3;
+			this.osArchitectureBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// osArchitectureLabel
+			// 
+			this.osArchitectureLabel.AutoSize = true;
+			this.osArchitectureLabel.Location = new System.Drawing.Point(6, 48);
+			this.osArchitectureLabel.Name = "osArchitectureLabel";
+			this.osArchitectureLabel.Size = new System.Drawing.Size(64, 13);
+			this.osArchitectureLabel.TabIndex = 2;
+			this.osArchitectureLabel.Text = "Architecture";
+			// 
+			// osVersionBox
+			// 
+			this.osVersionBox.Location = new System.Drawing.Point(54, 19);
+			this.osVersionBox.Name = "osVersionBox";
+			this.osVersionBox.ReadOnly = true;
+			this.osVersionBox.Size = new System.Drawing.Size(274, 20);
+			this.osVersionBox.TabIndex = 1;
+			// 
+			// osNameLabel
+			// 
+			this.osNameLabel.AutoSize = true;
+			this.osNameLabel.Location = new System.Drawing.Point(6, 22);
+			this.osNameLabel.Name = "osNameLabel";
+			this.osNameLabel.Size = new System.Drawing.Size(42, 13);
+			this.osNameLabel.TabIndex = 0;
+			this.osNameLabel.Text = "Version";
+			// 
+			// memoryBankBox
+			// 
+			this.memoryBankBox.Location = new System.Drawing.Point(73, 19);
+			this.memoryBankBox.Name = "memoryBankBox";
+			this.memoryBankBox.ReadOnly = true;
+			this.memoryBankBox.Size = new System.Drawing.Size(63, 20);
+			this.memoryBankBox.TabIndex = 18;
+			this.memoryBankBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// memoryBankLabel
+			// 
+			this.memoryBankLabel.AutoSize = true;
+			this.memoryBankLabel.Location = new System.Drawing.Point(6, 22);
+			this.memoryBankLabel.Name = "memoryBankLabel";
+			this.memoryBankLabel.Size = new System.Drawing.Size(61, 13);
+			this.memoryBankLabel.TabIndex = 17;
+			this.memoryBankLabel.Text = "Bank Label";
 			// 
 			// Form1
 			// 
@@ -602,6 +791,8 @@
 			this.moboGeneralGroup.ResumeLayout(false);
 			this.moboGeneralGroup.PerformLayout();
 			this.memoryPage.ResumeLayout(false);
+			this.memoryModuleInfoGroup.ResumeLayout(false);
+			this.memoryModuleInfoGroup.PerformLayout();
 			this.memoryGeneralGroup.ResumeLayout(false);
 			this.memoryGeneralGroup.PerformLayout();
 			this.videoPage.ResumeLayout(false);
@@ -647,8 +838,8 @@
 		private System.Windows.Forms.Label biosVerLabel;
 		private System.Windows.Forms.TabPage memoryPage;
 		private System.Windows.Forms.GroupBox memoryGeneralGroup;
-		private System.Windows.Forms.TextBox memorySizeBox;
-		private System.Windows.Forms.Label memorySizeLabel;
+		private System.Windows.Forms.TextBox memoryTotalSizeBox;
+		private System.Windows.Forms.Label memoryTotalSizeLabel;
 		private System.Windows.Forms.GroupBox videoGeneralGroup;
 		private System.Windows.Forms.TextBox resolutionBox;
         private System.Windows.Forms.Label resolutionLabel;
@@ -668,6 +859,23 @@
 		private System.Windows.Forms.Label osArchitectureLabel;
 		private System.Windows.Forms.TextBox osVersionBox;
 		private System.Windows.Forms.Label osNameLabel;
+		private System.Windows.Forms.TextBox osInstallBox;
+		private System.Windows.Forms.Label osInstallLabel;
+		private System.Windows.Forms.TextBox osBootBox;
+		private System.Windows.Forms.Label osBootLabel;
+		private System.Windows.Forms.ComboBox memorySelectionBox;
+		private System.Windows.Forms.Label memorySelectionLabel;
+		private System.Windows.Forms.GroupBox memoryModuleInfoGroup;
+		private System.Windows.Forms.TextBox memoryModuleSizeBox;
+		private System.Windows.Forms.Label memoryModuleSizeLabel;
+		private System.Windows.Forms.TextBox memorySerialBox;
+		private System.Windows.Forms.Label memorySerialLabel;
+		private System.Windows.Forms.TextBox memoryPartBox;
+		private System.Windows.Forms.Label memoryPartLabel;
+		private System.Windows.Forms.TextBox memoryFrequencyBox;
+		private System.Windows.Forms.Label memoryFreqencyLabel;
+		private System.Windows.Forms.TextBox memoryBankBox;
+		private System.Windows.Forms.Label memoryBankLabel;
     }
 }
 

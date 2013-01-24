@@ -15,7 +15,8 @@ namespace Diag
 {
     public partial class Form1 : Form
     {
-        List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
+		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
+		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
 
         /* CONSTRUCTOR */
         public Form1()
@@ -82,15 +83,27 @@ namespace Diag
 			searcher.Query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
 
 			ulong totalSize = 0;
+			int i = 0;
 			foreach (ManagementObject obj in searcher.Get())
 			{
-				foreach (PropertyData data in obj.Properties)
-				{
-					if (data.Name == "Capacity") totalSize += (ulong)data.Value;
-				}
+				memorySelectionBox.Items.Add("#" + i++.ToString());
+
+				totalSize += (ulong)obj["Capacity"];
+
+				MemoryInfo stick;
+				stick.bank = obj["BankLabel"].ToString();
+
+				stick.size = (ulong)obj["Capacity"]/1024/1024;
+				stick.speed = (uint)obj["Speed"];
+				stick.partNumber = obj["PartNumber"].ToString();
+				stick.serialNumber = obj["SerialNumber"].ToString();
+
+				ramSticks.Add(stick);
+				
 			}
+			memorySelectionBox.SelectedIndex = 0;
 			totalSize = totalSize/1024/1024;
-			this.memorySizeBox.Text = totalSize.ToString() + " MB";
+			this.memoryTotalSizeBox.Text = totalSize.ToString() + " MB";
 
             // Video Controller //
             searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
@@ -120,7 +133,11 @@ namespace Diag
 					osArchitectureBox.Text = getValue(obj, "OSArchitecture");
 					osBuildBox.Text = getValue(obj, "BuildNumber");
 
-					
+					DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
+					DateTime bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
+
+					osInstallBox.Text = installDate.GetDateTimeFormats()[2];
+					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
 				}
 			}
         }
@@ -158,10 +175,16 @@ namespace Diag
 			videoCardDriverBox.Text = driver;
         }
 
-        private void threads_TextChanged(object sender, EventArgs e)
-        {
+		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			memoryBankBox.Text = ramSticks[memorySelectionBox.SelectedIndex].bank;
 
-        }
+			memoryModuleSizeBox.Text = ramSticks[memorySelectionBox.SelectedIndex].size.ToString() + " MB";
+			memoryFrequencyBox.Text = ramSticks[memorySelectionBox.SelectedIndex].speed.ToString() + " MHz";
+
+			memoryPartBox.Text = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
+			memorySerialBox.Text = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
+		}
     }
 
     struct VideoCardInfo
@@ -171,4 +194,14 @@ namespace Diag
 		public string driverVersion;
         
     }
+
+	struct MemoryInfo
+	{
+		public string bank;
+
+		public ulong size;
+		public uint speed;
+		public string partNumber;
+		public string serialNumber;
+	}
 }
