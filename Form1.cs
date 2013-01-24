@@ -109,6 +109,20 @@ namespace Diag
                 videoCards.Add(info);
             }
             VideoCardDropDownBox.SelectedIndex = 0;
+
+			// System //
+			searcher.Query = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+			foreach (ManagementObject obj in searcher.Get())
+			{
+				if ((bool)obj["Primary"] == true)
+				{
+					osVersionBox.Text = getValue(obj, "Caption");
+					osArchitectureBox.Text = getValue(obj, "OSArchitecture");
+					osBuildBox.Text = getValue(obj, "BuildNumber");
+
+					
+				}
+			}
         }
 
         // Get value of object property

@@ -63,12 +63,20 @@
 			this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
 			this.VideoSelectLabel = new System.Windows.Forms.Label();
 			this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
+			this.videoCardDriverBox = new System.Windows.Forms.TextBox();
+			this.videoCardDriverLabel = new System.Windows.Forms.Label();
+			this.videoCardRamLabel = new System.Windows.Forms.Label();
+			this.videoCardRamBox = new System.Windows.Forms.TextBox();
 			this.resolutionBox = new System.Windows.Forms.TextBox();
 			this.resolutionLabel = new System.Windows.Forms.Label();
-			this.videoCardRamBox = new System.Windows.Forms.TextBox();
-			this.videoCardRamLabel = new System.Windows.Forms.Label();
-			this.videoCardDriverLabel = new System.Windows.Forms.Label();
-			this.videoCardDriverBox = new System.Windows.Forms.TextBox();
+			this.systemPage = new System.Windows.Forms.TabPage();
+			this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
+			this.osNameLabel = new System.Windows.Forms.Label();
+			this.osVersionBox = new System.Windows.Forms.TextBox();
+			this.osArchitectureLabel = new System.Windows.Forms.Label();
+			this.osArchitectureBox = new System.Windows.Forms.TextBox();
+			this.osBuildBox = new System.Windows.Forms.TextBox();
+			this.osBuildLabel = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.processorPage.SuspendLayout();
 			this.cacheGroup.SuspendLayout();
@@ -80,6 +88,8 @@
 			this.memoryGeneralGroup.SuspendLayout();
 			this.videoPage.SuspendLayout();
 			this.videoGeneralGroup.SuspendLayout();
+			this.systemPage.SuspendLayout();
+			this.systemGeneralGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -88,6 +98,7 @@
 			this.tabControl1.Controls.Add(this.moboPage);
 			this.tabControl1.Controls.Add(this.memoryPage);
 			this.tabControl1.Controls.Add(this.videoPage);
+			this.tabControl1.Controls.Add(this.systemPage);
 			this.tabControl1.Location = new System.Drawing.Point(12, 12);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
@@ -441,6 +452,40 @@
 			this.videoGeneralGroup.TabStop = false;
 			this.videoGeneralGroup.Text = "General";
 			// 
+			// videoCardDriverBox
+			// 
+			this.videoCardDriverBox.Location = new System.Drawing.Point(102, 71);
+			this.videoCardDriverBox.Name = "videoCardDriverBox";
+			this.videoCardDriverBox.ReadOnly = true;
+			this.videoCardDriverBox.Size = new System.Drawing.Size(152, 20);
+			this.videoCardDriverBox.TabIndex = 7;
+			// 
+			// videoCardDriverLabel
+			// 
+			this.videoCardDriverLabel.AutoSize = true;
+			this.videoCardDriverLabel.Location = new System.Drawing.Point(22, 74);
+			this.videoCardDriverLabel.Name = "videoCardDriverLabel";
+			this.videoCardDriverLabel.Size = new System.Drawing.Size(73, 13);
+			this.videoCardDriverLabel.TabIndex = 6;
+			this.videoCardDriverLabel.Text = "Driver Version";
+			// 
+			// videoCardRamLabel
+			// 
+			this.videoCardRamLabel.AutoSize = true;
+			this.videoCardRamLabel.Location = new System.Drawing.Point(28, 22);
+			this.videoCardRamLabel.Name = "videoCardRamLabel";
+			this.videoCardRamLabel.Size = new System.Drawing.Size(67, 13);
+			this.videoCardRamLabel.TabIndex = 5;
+			this.videoCardRamLabel.Text = "Memory Size";
+			// 
+			// videoCardRamBox
+			// 
+			this.videoCardRamBox.Location = new System.Drawing.Point(101, 19);
+			this.videoCardRamBox.Name = "videoCardRamBox";
+			this.videoCardRamBox.ReadOnly = true;
+			this.videoCardRamBox.Size = new System.Drawing.Size(152, 20);
+			this.videoCardRamBox.TabIndex = 4;
+			// 
 			// resolutionBox
 			// 
 			this.resolutionBox.Location = new System.Drawing.Point(101, 45);
@@ -458,39 +503,84 @@
 			this.resolutionLabel.TabIndex = 2;
 			this.resolutionLabel.Text = "Current resolution";
 			// 
-			// videoCardRamBox
+			// systemPage
 			// 
-			this.videoCardRamBox.Location = new System.Drawing.Point(101, 19);
-			this.videoCardRamBox.Name = "videoCardRamBox";
-			this.videoCardRamBox.ReadOnly = true;
-			this.videoCardRamBox.Size = new System.Drawing.Size(152, 20);
-			this.videoCardRamBox.TabIndex = 4;
+			this.systemPage.Controls.Add(this.systemGeneralGroup);
+			this.systemPage.Location = new System.Drawing.Point(4, 22);
+			this.systemPage.Name = "systemPage";
+			this.systemPage.Padding = new System.Windows.Forms.Padding(3);
+			this.systemPage.Size = new System.Drawing.Size(340, 293);
+			this.systemPage.TabIndex = 4;
+			this.systemPage.Text = "System";
+			this.systemPage.UseVisualStyleBackColor = true;
 			// 
-			// videoCardRamLabel
+			// systemGeneralGroup
 			// 
-			this.videoCardRamLabel.AutoSize = true;
-			this.videoCardRamLabel.Location = new System.Drawing.Point(28, 22);
-			this.videoCardRamLabel.Name = "videoCardRamLabel";
-			this.videoCardRamLabel.Size = new System.Drawing.Size(67, 13);
-			this.videoCardRamLabel.TabIndex = 5;
-			this.videoCardRamLabel.Text = "Memory Size";
+			this.systemGeneralGroup.Controls.Add(this.osBuildBox);
+			this.systemGeneralGroup.Controls.Add(this.osBuildLabel);
+			this.systemGeneralGroup.Controls.Add(this.osArchitectureBox);
+			this.systemGeneralGroup.Controls.Add(this.osArchitectureLabel);
+			this.systemGeneralGroup.Controls.Add(this.osVersionBox);
+			this.systemGeneralGroup.Controls.Add(this.osNameLabel);
+			this.systemGeneralGroup.Location = new System.Drawing.Point(3, 6);
+			this.systemGeneralGroup.Name = "systemGeneralGroup";
+			this.systemGeneralGroup.Size = new System.Drawing.Size(334, 140);
+			this.systemGeneralGroup.TabIndex = 0;
+			this.systemGeneralGroup.TabStop = false;
+			this.systemGeneralGroup.Text = "General";
 			// 
-			// videoCardDriverLabel
+			// osNameLabel
 			// 
-			this.videoCardDriverLabel.AutoSize = true;
-			this.videoCardDriverLabel.Location = new System.Drawing.Point(22, 74);
-			this.videoCardDriverLabel.Name = "videoCardDriverLabel";
-			this.videoCardDriverLabel.Size = new System.Drawing.Size(73, 13);
-			this.videoCardDriverLabel.TabIndex = 6;
-			this.videoCardDriverLabel.Text = "Driver Version";
+			this.osNameLabel.AutoSize = true;
+			this.osNameLabel.Location = new System.Drawing.Point(6, 22);
+			this.osNameLabel.Name = "osNameLabel";
+			this.osNameLabel.Size = new System.Drawing.Size(42, 13);
+			this.osNameLabel.TabIndex = 0;
+			this.osNameLabel.Text = "Version";
 			// 
-			// videoCardDriverBox
+			// osVersionBox
 			// 
-			this.videoCardDriverBox.Location = new System.Drawing.Point(102, 71);
-			this.videoCardDriverBox.Name = "videoCardDriverBox";
-			this.videoCardDriverBox.ReadOnly = true;
-			this.videoCardDriverBox.Size = new System.Drawing.Size(152, 20);
-			this.videoCardDriverBox.TabIndex = 7;
+			this.osVersionBox.Location = new System.Drawing.Point(54, 19);
+			this.osVersionBox.Name = "osVersionBox";
+			this.osVersionBox.ReadOnly = true;
+			this.osVersionBox.Size = new System.Drawing.Size(274, 20);
+			this.osVersionBox.TabIndex = 1;
+			// 
+			// osArchitectureLabel
+			// 
+			this.osArchitectureLabel.AutoSize = true;
+			this.osArchitectureLabel.Location = new System.Drawing.Point(6, 48);
+			this.osArchitectureLabel.Name = "osArchitectureLabel";
+			this.osArchitectureLabel.Size = new System.Drawing.Size(64, 13);
+			this.osArchitectureLabel.TabIndex = 2;
+			this.osArchitectureLabel.Text = "Architecture";
+			// 
+			// osArchitectureBox
+			// 
+			this.osArchitectureBox.Location = new System.Drawing.Point(76, 45);
+			this.osArchitectureBox.Name = "osArchitectureBox";
+			this.osArchitectureBox.ReadOnly = true;
+			this.osArchitectureBox.Size = new System.Drawing.Size(49, 20);
+			this.osArchitectureBox.TabIndex = 3;
+			this.osArchitectureBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// osBuildBox
+			// 
+			this.osBuildBox.Location = new System.Drawing.Point(167, 45);
+			this.osBuildBox.Name = "osBuildBox";
+			this.osBuildBox.ReadOnly = true;
+			this.osBuildBox.Size = new System.Drawing.Size(45, 20);
+			this.osBuildBox.TabIndex = 5;
+			this.osBuildBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// osBuildLabel
+			// 
+			this.osBuildLabel.AutoSize = true;
+			this.osBuildLabel.Location = new System.Drawing.Point(131, 48);
+			this.osBuildLabel.Name = "osBuildLabel";
+			this.osBuildLabel.Size = new System.Drawing.Size(30, 13);
+			this.osBuildLabel.TabIndex = 4;
+			this.osBuildLabel.Text = "Build";
 			// 
 			// Form1
 			// 
@@ -518,6 +608,9 @@
 			this.videoPage.PerformLayout();
 			this.videoGeneralGroup.ResumeLayout(false);
 			this.videoGeneralGroup.PerformLayout();
+			this.systemPage.ResumeLayout(false);
+			this.systemGeneralGroup.ResumeLayout(false);
+			this.systemGeneralGroup.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -567,6 +660,14 @@
 		private System.Windows.Forms.TextBox videoCardRamBox;
 		private System.Windows.Forms.TextBox videoCardDriverBox;
 		private System.Windows.Forms.Label videoCardDriverLabel;
+		private System.Windows.Forms.TabPage systemPage;
+		private System.Windows.Forms.GroupBox systemGeneralGroup;
+		private System.Windows.Forms.TextBox osBuildBox;
+		private System.Windows.Forms.Label osBuildLabel;
+		private System.Windows.Forms.TextBox osArchitectureBox;
+		private System.Windows.Forms.Label osArchitectureLabel;
+		private System.Windows.Forms.TextBox osVersionBox;
+		private System.Windows.Forms.Label osNameLabel;
     }
 }
 
