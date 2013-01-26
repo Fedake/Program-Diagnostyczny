@@ -38,6 +38,8 @@
             this.cache1Box = new System.Windows.Forms.TextBox();
             this.cache3Label = new System.Windows.Forms.Label();
             this.processorGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.cpuUsageLabel = new System.Windows.Forms.Label();
+            this.cpuUsageBox = new System.Windows.Forms.TextBox();
             this.coresLabel = new System.Windows.Forms.Label();
             this.cores = new System.Windows.Forms.TextBox();
             this.processorName = new System.Windows.Forms.TextBox();
@@ -206,6 +208,8 @@
             // 
             // processorGeneralGroup
             // 
+            this.processorGeneralGroup.Controls.Add(this.cpuUsageLabel);
+            this.processorGeneralGroup.Controls.Add(this.cpuUsageBox);
             this.processorGeneralGroup.Controls.Add(this.coresLabel);
             this.processorGeneralGroup.Controls.Add(this.cores);
             this.processorGeneralGroup.Controls.Add(this.processorName);
@@ -218,6 +222,24 @@
             this.processorGeneralGroup.TabIndex = 6;
             this.processorGeneralGroup.TabStop = false;
             this.processorGeneralGroup.Text = "General";
+            // 
+            // cpuUsageLabel
+            // 
+            this.cpuUsageLabel.AutoSize = true;
+            this.cpuUsageLabel.Location = new System.Drawing.Point(160, 48);
+            this.cpuUsageLabel.Name = "cpuUsageLabel";
+            this.cpuUsageLabel.Size = new System.Drawing.Size(63, 13);
+            this.cpuUsageLabel.TabIndex = 8;
+            this.cpuUsageLabel.Text = "CPU Usage";
+            // 
+            // cpuUsageBox
+            // 
+            this.cpuUsageBox.Location = new System.Drawing.Point(229, 45);
+            this.cpuUsageBox.Name = "cpuUsageBox";
+            this.cpuUsageBox.ReadOnly = true;
+            this.cpuUsageBox.Size = new System.Drawing.Size(41, 20);
+            this.cpuUsageBox.TabIndex = 9;
+            this.cpuUsageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // coresLabel
             // 
@@ -779,6 +801,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Program Diagnostyczny";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
             this.cacheGroup.ResumeLayout(false);
@@ -876,6 +899,8 @@
 		private System.Windows.Forms.Label memoryFreqencyLabel;
 		private System.Windows.Forms.TextBox memoryBankBox;
 		private System.Windows.Forms.Label memoryBankLabel;
+        private System.Windows.Forms.Label cpuUsageLabel;
+        private System.Windows.Forms.TextBox cpuUsageBox;
     }
 }
 

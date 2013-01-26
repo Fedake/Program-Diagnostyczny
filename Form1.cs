@@ -5,10 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Management;
+using System.Diagnostics;
 
 
 namespace Diag
@@ -18,14 +20,22 @@ namespace Diag
 		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
 		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
 
+        PerformanceCounter cpuCounter = new PerformanceCounter();
+
+        bool running = true;
+
         /* CONSTRUCTOR */
         public Form1()
         {
             InitializeComponent();
 
             // Processor //
+            cpuCounter.CategoryName = "Processor";
+            cpuCounter.CounterName = "% Processor Time";
+            cpuCounter.InstanceName = "_Total";
+
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-        
+
             foreach (ManagementObject obj in searcher.Get())
             {
                 this.processorName.Text = getValue(obj, "Name");
@@ -140,6 +150,41 @@ namespace Diag
 					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
 				}
 			}
+
+            getCPUUsage();
+        }
+
+        private void getCPUUsage()
+        {
+            try
+            {
+                Thread thread = new Thread(new ThreadStart(delegate()
+                {
+                    try
+                    {
+                        while (running)
+                        {
+                            this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
+                            {
+                                cpuUsageBox.Text = Math.Round(cpuCounter.NextValue()) + "%";
+                            }));
+                            Thread.Sleep(1000);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }));
+
+                thread.Priority = ThreadPriority.Normal;
+                thread.IsBackground = true;
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         // Get value of object property
@@ -185,6 +230,11 @@ namespace Diag
 			memoryPartBox.Text = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
 			memorySerialBox.Text = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
 		}
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            running = false;
+        }
     }
 
     struct VideoCardInfo
