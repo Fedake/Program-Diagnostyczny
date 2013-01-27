@@ -86,7 +86,6 @@
 			this.resolutionLabel = new System.Windows.Forms.Label();
 			this.systemPage = new System.Windows.Forms.TabPage();
 			this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
-			this.systemLogoBox = new System.Windows.Forms.PictureBox();
 			this.osBootBox = new System.Windows.Forms.TextBox();
 			this.osBootLabel = new System.Windows.Forms.Label();
 			this.osInstallBox = new System.Windows.Forms.TextBox();
@@ -97,6 +96,8 @@
 			this.osArchitectureLabel = new System.Windows.Forms.Label();
 			this.osVersionBox = new System.Windows.Forms.TextBox();
 			this.osNameLabel = new System.Windows.Forms.Label();
+			this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
+			this.systemLogoBox = new System.Windows.Forms.PictureBox();
 			this.tabControl1.SuspendLayout();
 			this.processorPage.SuspendLayout();
 			this.cacheGroup.SuspendLayout();
@@ -111,6 +112,7 @@
 			this.videoGeneralGroup.SuspendLayout();
 			this.systemPage.SuspendLayout();
 			this.systemGeneralGroup.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -612,6 +614,7 @@
 			// 
 			// videoGeneralGroup
 			// 
+			this.videoGeneralGroup.Controls.Add(this.videoCardLogoBox);
 			this.videoGeneralGroup.Controls.Add(this.videoCardDriverBox);
 			this.videoGeneralGroup.Controls.Add(this.videoCardDriverLabel);
 			this.videoGeneralGroup.Controls.Add(this.videoCardRamLabel);
@@ -620,7 +623,7 @@
 			this.videoGeneralGroup.Controls.Add(this.resolutionLabel);
 			this.videoGeneralGroup.Location = new System.Drawing.Point(3, 40);
 			this.videoGeneralGroup.Name = "videoGeneralGroup";
-			this.videoGeneralGroup.Size = new System.Drawing.Size(334, 135);
+			this.videoGeneralGroup.Size = new System.Drawing.Size(334, 104);
 			this.videoGeneralGroup.TabIndex = 2;
 			this.videoGeneralGroup.TabStop = false;
 			this.videoGeneralGroup.Text = "General";
@@ -630,7 +633,7 @@
 			this.videoCardDriverBox.Location = new System.Drawing.Point(102, 71);
 			this.videoCardDriverBox.Name = "videoCardDriverBox";
 			this.videoCardDriverBox.ReadOnly = true;
-			this.videoCardDriverBox.Size = new System.Drawing.Size(152, 20);
+			this.videoCardDriverBox.Size = new System.Drawing.Size(148, 20);
 			this.videoCardDriverBox.TabIndex = 7;
 			// 
 			// videoCardDriverLabel
@@ -656,7 +659,7 @@
 			this.videoCardRamBox.Location = new System.Drawing.Point(101, 19);
 			this.videoCardRamBox.Name = "videoCardRamBox";
 			this.videoCardRamBox.ReadOnly = true;
-			this.videoCardRamBox.Size = new System.Drawing.Size(152, 20);
+			this.videoCardRamBox.Size = new System.Drawing.Size(149, 20);
 			this.videoCardRamBox.TabIndex = 4;
 			// 
 			// resolutionBox
@@ -664,7 +667,7 @@
 			this.resolutionBox.Location = new System.Drawing.Point(101, 45);
 			this.resolutionBox.Name = "resolutionBox";
 			this.resolutionBox.ReadOnly = true;
-			this.resolutionBox.Size = new System.Drawing.Size(152, 20);
+			this.resolutionBox.Size = new System.Drawing.Size(149, 20);
 			this.resolutionBox.TabIndex = 3;
 			// 
 			// resolutionLabel
@@ -706,14 +709,6 @@
 			this.systemGeneralGroup.TabIndex = 0;
 			this.systemGeneralGroup.TabStop = false;
 			this.systemGeneralGroup.Text = "General";
-			// 
-			// systemLogoBox
-			// 
-			this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
-			this.systemLogoBox.Name = "systemLogoBox";
-			this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
-			this.systemLogoBox.TabIndex = 10;
-			this.systemLogoBox.TabStop = false;
 			// 
 			// osBootBox
 			// 
@@ -804,6 +799,22 @@
 			this.osNameLabel.TabIndex = 0;
 			this.osNameLabel.Text = "Version";
 			// 
+			// videoCardLogoBox
+			// 
+			this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
+			this.videoCardLogoBox.Name = "videoCardLogoBox";
+			this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
+			this.videoCardLogoBox.TabIndex = 8;
+			this.videoCardLogoBox.TabStop = false;
+			// 
+			// systemLogoBox
+			// 
+			this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
+			this.systemLogoBox.Name = "systemLogoBox";
+			this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
+			this.systemLogoBox.TabIndex = 10;
+			this.systemLogoBox.TabStop = false;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,6 +847,7 @@
 			this.systemPage.ResumeLayout(false);
 			this.systemGeneralGroup.ResumeLayout(false);
 			this.systemGeneralGroup.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
 			this.ResumeLayout(false);
 
@@ -914,6 +926,7 @@
         private System.Windows.Forms.Label cpuUsageLabel;
 		private System.Windows.Forms.TextBox cpuUsageBox;
 		private System.Windows.Forms.PictureBox systemLogoBox;
+		private System.Windows.Forms.PictureBox videoCardLogoBox;
     }
 }
 

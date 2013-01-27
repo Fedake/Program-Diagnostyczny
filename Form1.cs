@@ -129,6 +129,8 @@ namespace Diag
 
 				info.driverVersion = getValue(obj, "DriverVersion");
 
+				info.adapter = getValue(obj, "AdapterCompatibility");
+
                 videoCards.Add(info);
             }
             VideoCardDropDownBox.SelectedIndex = 0;
@@ -149,7 +151,7 @@ namespace Diag
 					osInstallBox.Text = installDate.GetDateTimeFormats()[2];
 					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
 
-					string ver = obj["Version"].ToString().Substring(0, 3);
+					string ver = getValue(obj, "Version").Substring(0, 3);
 
 					if (ver == "5.1" || ver == "5.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinXP;
 					else if (ver == "6.0") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinVista;
@@ -210,6 +212,7 @@ namespace Diag
             string height = videoCards[VideoCardDropDownBox.SelectedIndex].height;
 			string memory = videoCards[VideoCardDropDownBox.SelectedIndex].memory;
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
+			string adapter = videoCards[VideoCardDropDownBox.SelectedIndex].adapter;
 
             if (width == "NULL" || height == "NULL")
             {
@@ -226,6 +229,9 @@ namespace Diag
 
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
+
+			if (adapter == "NVIDIA") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.NVIDIA;
+			if (adapter == "Advanced Micro Devices, Inc.") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,7 +256,7 @@ namespace Diag
         public string width, height;
 		public string memory;
 		public string driverVersion;
-        
+		public string adapter;
     }
 
 	struct MemoryInfo
