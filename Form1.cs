@@ -148,6 +148,14 @@ namespace Diag
 
 					osInstallBox.Text = installDate.GetDateTimeFormats()[2];
 					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
+
+					string ver = obj["Version"].ToString().Substring(0, 3);
+
+					if (ver == "5.1" || ver == "5.2") pictureBox1.Image = ProgramDiagnostyczny.Properties.Resources.WinXP;
+					else if (ver == "6.0") pictureBox1.Image = ProgramDiagnostyczny.Properties.Resources.WinVista;
+					else if (ver == "6.1") pictureBox1.Image = ProgramDiagnostyczny.Properties.Resources.Win7;
+					else if (ver == "6.2") pictureBox1.Image = ProgramDiagnostyczny.Properties.Resources.Win8;
+					
 				}
 			}
 
