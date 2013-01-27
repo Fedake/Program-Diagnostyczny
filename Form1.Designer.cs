@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.processorPage = new System.Windows.Forms.TabPage();
+            this.cpuUsageChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cacheGroup = new System.Windows.Forms.GroupBox();
             this.cache3Box = new System.Windows.Forms.TextBox();
             this.cache2Box = new System.Windows.Forms.TextBox();
@@ -98,6 +102,7 @@
             this.osNameLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.processorPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).BeginInit();
             this.cacheGroup.SuspendLayout();
             this.processorGeneralGroup.SuspendLayout();
             this.moboPage.SuspendLayout();
@@ -127,6 +132,7 @@
             // 
             // processorPage
             // 
+            this.processorPage.Controls.Add(this.cpuUsageChart);
             this.processorPage.Controls.Add(this.cacheGroup);
             this.processorPage.Controls.Add(this.processorGeneralGroup);
             this.processorPage.Location = new System.Drawing.Point(4, 22);
@@ -136,6 +142,22 @@
             this.processorPage.TabIndex = 0;
             this.processorPage.Text = "Processor";
             this.processorPage.UseVisualStyleBackColor = true;
+            // 
+            // cpuUsageChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.cpuUsageChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.cpuUsageChart.Legends.Add(legend1);
+            this.cpuUsageChart.Location = new System.Drawing.Point(12, 195);
+            this.cpuUsageChart.Name = "cpuUsageChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.cpuUsageChart.Series.Add(series1);
+            this.cpuUsageChart.Size = new System.Drawing.Size(287, 92);
+            this.cpuUsageChart.TabIndex = 8;
+            this.cpuUsageChart.Text = "chart1";
             // 
             // cacheGroup
             // 
@@ -804,6 +826,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).EndInit();
             this.cacheGroup.ResumeLayout(false);
             this.cacheGroup.PerformLayout();
             this.processorGeneralGroup.ResumeLayout(false);
@@ -901,6 +924,7 @@
 		private System.Windows.Forms.Label memoryBankLabel;
         private System.Windows.Forms.Label cpuUsageLabel;
         private System.Windows.Forms.TextBox cpuUsageBox;
+        private System.Windows.Forms.DataVisualization.Charting.Chart cpuUsageChart;
     }
 }
 

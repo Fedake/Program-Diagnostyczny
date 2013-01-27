@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 using System.Management;
 using System.Diagnostics;
@@ -30,6 +31,30 @@ namespace Diag
             InitializeComponent();
 
             // Processor //
+            string seriesStr = "CPU Usage";
+
+            this.cpuUsageChart.Palette = ChartColorPalette.SeaGreen;
+            this.cpuUsageChart.Titles.Add("CPU Usage");
+
+            this.cpuUsageChart.Series.Clear();
+            Series series = this.cpuUsageChart.Series.Add(seriesStr);
+            cpuUsageChart.Series[0].ChartType = SeriesChartType.FastLine;
+
+            series.Points.Add(0);
+
+            cpuUsageChart.Series[0].YAxisType = AxisType.Primary;
+            cpuUsageChart.Series[0].YValueType = ChartValueType.Int32;
+            cpuUsageChart.Series[0].IsXValueIndexed = false;
+            cpuUsageChart.Series[0].Color = Color.Red;
+
+            cpuUsageChart.ResetAutoValues();
+            cpuUsageChart.ChartAreas[0].AxisY.Maximum = 100;//Max Y 
+            cpuUsageChart.ChartAreas[0].AxisY.Minimum = 0;
+            cpuUsageChart.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
+            cpuUsageChart.ChartAreas[0].AxisY.Title = "CPU usage %";
+            cpuUsageChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+
+
             cpuCounter.CategoryName = "Processor";
             cpuCounter.CounterName = "% Processor Time";
             cpuCounter.InstanceName = "_Total";
@@ -166,7 +191,12 @@ namespace Diag
                         {
                             this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
                             {
-                                cpuUsageBox.Text = Math.Round(cpuCounter.NextValue()) + "%";
+                                float usage = cpuCounter.NextValue();
+                                cpuUsageBox.Text = Math.Round(usage) + "%";
+                                cpuUsageChart.Series[0].Points.AddY(usage);
+
+                                if (cpuUsageChart.Series[0].Points.Count > 5)
+                                    cpuUsageChart.Series[0].Points.RemoveAt(0);
                             }));
                             Thread.Sleep(1000);
                         }
