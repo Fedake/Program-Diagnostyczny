@@ -86,6 +86,7 @@
 			this.resolutionLabel = new System.Windows.Forms.Label();
 			this.systemPage = new System.Windows.Forms.TabPage();
 			this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
+			this.systemLogoBox = new System.Windows.Forms.PictureBox();
 			this.osBootBox = new System.Windows.Forms.TextBox();
 			this.osBootLabel = new System.Windows.Forms.Label();
 			this.osInstallBox = new System.Windows.Forms.TextBox();
@@ -96,7 +97,6 @@
 			this.osArchitectureLabel = new System.Windows.Forms.Label();
 			this.osVersionBox = new System.Windows.Forms.TextBox();
 			this.osNameLabel = new System.Windows.Forms.Label();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tabControl1.SuspendLayout();
 			this.processorPage.SuspendLayout();
 			this.cacheGroup.SuspendLayout();
@@ -111,7 +111,7 @@
 			this.videoGeneralGroup.SuspendLayout();
 			this.systemPage.SuspendLayout();
 			this.systemGeneralGroup.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -689,7 +689,7 @@
 			// 
 			// systemGeneralGroup
 			// 
-			this.systemGeneralGroup.Controls.Add(this.pictureBox1);
+			this.systemGeneralGroup.Controls.Add(this.systemLogoBox);
 			this.systemGeneralGroup.Controls.Add(this.osBootBox);
 			this.systemGeneralGroup.Controls.Add(this.osBootLabel);
 			this.systemGeneralGroup.Controls.Add(this.osInstallBox);
@@ -706,6 +706,14 @@
 			this.systemGeneralGroup.TabIndex = 0;
 			this.systemGeneralGroup.TabStop = false;
 			this.systemGeneralGroup.Text = "General";
+			// 
+			// systemLogoBox
+			// 
+			this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
+			this.systemLogoBox.Name = "systemLogoBox";
+			this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
+			this.systemLogoBox.TabIndex = 10;
+			this.systemLogoBox.TabStop = false;
 			// 
 			// osBootBox
 			// 
@@ -796,14 +804,6 @@
 			this.osNameLabel.TabIndex = 0;
 			this.osNameLabel.Text = "Version";
 			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.Location = new System.Drawing.Point(256, 45);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(72, 72);
-			this.pictureBox1.TabIndex = 10;
-			this.pictureBox1.TabStop = false;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,7 +836,7 @@
 			this.systemPage.ResumeLayout(false);
 			this.systemGeneralGroup.ResumeLayout(false);
 			this.systemGeneralGroup.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -913,7 +913,7 @@
 		private System.Windows.Forms.Label memoryBankLabel;
         private System.Windows.Forms.Label cpuUsageLabel;
 		private System.Windows.Forms.TextBox cpuUsageBox;
-		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox systemLogoBox;
     }
 }
 
