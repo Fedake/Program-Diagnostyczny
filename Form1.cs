@@ -197,15 +197,16 @@ namespace Diag
                     {
                         while (running)
                         {
-                            this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
-                            {
-                                float usage = cpuCounter.NextValue();
-                                cpuUsageBox.Text = Math.Round(usage) + "%";
-                                cpuUsageChart.Series[0].Points.AddY(usage);
 
-                                if (cpuUsageChart.Series[0].Points.Count > 20)
-                                    cpuUsageChart.Series[0].Points.RemoveAt(0);
-                            }));
+                            if (InvokeRequired)
+                                this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
+                                {
+                                    updateCPUUsage();
+                                }));
+                            else
+                            {
+                                updateCPUUsage();
+                            }
                             Thread.Sleep(1000);
                         }
                     }
@@ -232,6 +233,16 @@ namespace Diag
                 return obj[str].ToString();
             else
                 return "NULL";
+        }
+
+        private void updateCPUUsage()
+        {
+            float usage = cpuCounter.NextValue();
+            cpuUsageBox.Text = Math.Round(usage).ToString() + "%";
+            cpuUsageChart.Series[0].Points.AddY(usage);
+
+            if (cpuUsageChart.Series[0].Points.Count > 20)
+                cpuUsageChart.Series[0].Points.RemoveAt(0);
         }
 
         private void VideoCardDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
