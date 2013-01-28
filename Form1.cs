@@ -201,7 +201,6 @@ namespace Diag
                     {
                         while (running)
                         {
-
                             if (InvokeRequired)
                                 this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
                                 {
@@ -216,7 +215,7 @@ namespace Diag
                     }
                     catch (Exception ex)
                     {
-
+                        MessageBox.Show("Exception while invoking in CPU Usage thread");
                     }
                 }));
 
@@ -226,7 +225,7 @@ namespace Diag
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("Exception while running CPU Usage thread");
             }
         }
 
