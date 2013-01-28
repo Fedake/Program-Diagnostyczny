@@ -64,6 +64,10 @@ namespace Diag
                 this.processorName.Text = getValue(obj, "Name");
                 this.cores.Text = getValue(obj, "NumberOfCores");
                 this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+
+				if (getValue(obj, "Manufacturer").IndexOf("Intel") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
+				else if (getValue(obj, "Manufacturer").IndexOf("AMD") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
+
                 
             }
 
@@ -152,7 +156,7 @@ namespace Diag
 
 				info.driverVersion = getValue(obj, "DriverVersion");
 
-				info.adapter = getValue(obj, "AdapterCompatibility");
+				info.processor = getValue(obj, "VideoProcessor");
 
                 videoCards.Add(info);
             }
@@ -251,7 +255,7 @@ namespace Diag
             string height = videoCards[VideoCardDropDownBox.SelectedIndex].height;
 			string memory = videoCards[VideoCardDropDownBox.SelectedIndex].memory;
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
-			string adapter = videoCards[VideoCardDropDownBox.SelectedIndex].adapter;
+			string processor = videoCards[VideoCardDropDownBox.SelectedIndex].processor;
 
             if (width == "NULL" || height == "NULL")
             {
@@ -269,8 +273,8 @@ namespace Diag
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
 
-			if (adapter == "NVIDIA") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.NVIDIA;
-			if (adapter == "Advanced Micro Devices, Inc.") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
+			if (processor.IndexOf("GeForce") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
+			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -295,7 +299,7 @@ namespace Diag
         public string width, height;
 		public string memory;
 		public string driverVersion;
-		public string adapter;
+		public string processor;
     }
 
 	struct MemoryInfo
