@@ -38,7 +38,7 @@ namespace Diag
 
             this.cpuUsageChart.Series.Clear();
             Series series = this.cpuUsageChart.Series.Add(seriesStr);
-            cpuUsageChart.Series[0].ChartType = SeriesChartType.FastLine;
+            cpuUsageChart.Series[0].ChartType = SeriesChartType.Line;
 
             series.Points.Add(0);
 
@@ -51,8 +51,6 @@ namespace Diag
             cpuUsageChart.ChartAreas[0].AxisY.Maximum = 100;//Max Y 
             cpuUsageChart.ChartAreas[0].AxisY.Minimum = 0;
             cpuUsageChart.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
-            cpuUsageChart.ChartAreas[0].AxisY.Title = "CPU usage %";
-            cpuUsageChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
 
 
             cpuCounter.CategoryName = "Processor";
@@ -154,6 +152,8 @@ namespace Diag
 
 				info.driverVersion = getValue(obj, "DriverVersion");
 
+				info.adapter = getValue(obj, "AdapterCompatibility");
+
                 videoCards.Add(info);
             }
             VideoCardDropDownBox.SelectedIndex = 0;
@@ -166,13 +166,21 @@ namespace Diag
 				{
 					osVersionBox.Text = getValue(obj, "Caption");
 					osArchitectureBox.Text = getValue(obj, "OSArchitecture");
-					osBuildBox.Text = getValue(obj, "BuildNumber");
+                    osBuildBox.Text = getValue(obj, "BuildNumber");
 
 					DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
 					DateTime bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
 
 					osInstallBox.Text = installDate.GetDateTimeFormats()[2];
 					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
+                    
+					string ver = getValue(obj, "Version").Substring(0, 3);
+
+					if (ver == "5.1" || ver == "5.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinXP;
+					else if (ver == "6.0") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinVista;
+					else if (ver == "6.1") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win7;
+					else if (ver == "6.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win8;
+					
 				}
 			}
 
@@ -195,7 +203,7 @@ namespace Diag
                                 cpuUsageBox.Text = Math.Round(usage) + "%";
                                 cpuUsageChart.Series[0].Points.AddY(usage);
 
-                                if (cpuUsageChart.Series[0].Points.Count > 5)
+                                if (cpuUsageChart.Series[0].Points.Count > 20)
                                     cpuUsageChart.Series[0].Points.RemoveAt(0);
                             }));
                             Thread.Sleep(1000);
@@ -232,6 +240,7 @@ namespace Diag
             string height = videoCards[VideoCardDropDownBox.SelectedIndex].height;
 			string memory = videoCards[VideoCardDropDownBox.SelectedIndex].memory;
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
+			string adapter = videoCards[VideoCardDropDownBox.SelectedIndex].adapter;
 
             if (width == "NULL" || height == "NULL")
             {
@@ -248,6 +257,9 @@ namespace Diag
 
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
+
+			if (adapter == "NVIDIA") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.NVIDIA;
+			if (adapter == "Advanced Micro Devices, Inc.") videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -272,7 +284,7 @@ namespace Diag
         public string width, height;
 		public string memory;
 		public string driverVersion;
-        
+		public string adapter;
     }
 
 	struct MemoryInfo

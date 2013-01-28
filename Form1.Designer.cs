@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.processorPage = new System.Windows.Forms.TabPage();
@@ -82,6 +81,7 @@
             this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
             this.videoCardDriverBox = new System.Windows.Forms.TextBox();
             this.videoCardDriverLabel = new System.Windows.Forms.Label();
             this.videoCardRamLabel = new System.Windows.Forms.Label();
@@ -90,6 +90,7 @@
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.systemPage = new System.Windows.Forms.TabPage();
             this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.systemLogoBox = new System.Windows.Forms.PictureBox();
             this.osBootBox = new System.Windows.Forms.TextBox();
             this.osBootLabel = new System.Windows.Forms.Label();
             this.osInstallBox = new System.Windows.Forms.TextBox();
@@ -113,8 +114,10 @@
             this.memoryGeneralGroup.SuspendLayout();
             this.videoPage.SuspendLayout();
             this.videoGeneralGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
             this.systemPage.SuspendLayout();
             this.systemGeneralGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -147,17 +150,14 @@
             // 
             chartArea1.Name = "ChartArea1";
             this.cpuUsageChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.cpuUsageChart.Legends.Add(legend1);
-            this.cpuUsageChart.Location = new System.Drawing.Point(12, 195);
+            this.cpuUsageChart.Location = new System.Drawing.Point(3, 192);
             this.cpuUsageChart.Name = "cpuUsageChart";
             series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
+            series1.MarkerBorderWidth = 2;
             series1.Name = "Series1";
             this.cpuUsageChart.Series.Add(series1);
-            this.cpuUsageChart.Size = new System.Drawing.Size(287, 92);
+            this.cpuUsageChart.Size = new System.Drawing.Size(331, 98);
             this.cpuUsageChart.TabIndex = 8;
-            this.cpuUsageChart.Text = "chart1";
             // 
             // cacheGroup
             // 
@@ -632,6 +632,7 @@
             // 
             // videoGeneralGroup
             // 
+            this.videoGeneralGroup.Controls.Add(this.videoCardLogoBox);
             this.videoGeneralGroup.Controls.Add(this.videoCardDriverBox);
             this.videoGeneralGroup.Controls.Add(this.videoCardDriverLabel);
             this.videoGeneralGroup.Controls.Add(this.videoCardRamLabel);
@@ -640,17 +641,25 @@
             this.videoGeneralGroup.Controls.Add(this.resolutionLabel);
             this.videoGeneralGroup.Location = new System.Drawing.Point(3, 40);
             this.videoGeneralGroup.Name = "videoGeneralGroup";
-            this.videoGeneralGroup.Size = new System.Drawing.Size(334, 135);
+            this.videoGeneralGroup.Size = new System.Drawing.Size(334, 104);
             this.videoGeneralGroup.TabIndex = 2;
             this.videoGeneralGroup.TabStop = false;
             this.videoGeneralGroup.Text = "General";
+            // 
+            // videoCardLogoBox
+            // 
+            this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
+            this.videoCardLogoBox.Name = "videoCardLogoBox";
+            this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.videoCardLogoBox.TabIndex = 8;
+            this.videoCardLogoBox.TabStop = false;
             // 
             // videoCardDriverBox
             // 
             this.videoCardDriverBox.Location = new System.Drawing.Point(102, 71);
             this.videoCardDriverBox.Name = "videoCardDriverBox";
             this.videoCardDriverBox.ReadOnly = true;
-            this.videoCardDriverBox.Size = new System.Drawing.Size(152, 20);
+            this.videoCardDriverBox.Size = new System.Drawing.Size(148, 20);
             this.videoCardDriverBox.TabIndex = 7;
             // 
             // videoCardDriverLabel
@@ -676,7 +685,7 @@
             this.videoCardRamBox.Location = new System.Drawing.Point(101, 19);
             this.videoCardRamBox.Name = "videoCardRamBox";
             this.videoCardRamBox.ReadOnly = true;
-            this.videoCardRamBox.Size = new System.Drawing.Size(152, 20);
+            this.videoCardRamBox.Size = new System.Drawing.Size(149, 20);
             this.videoCardRamBox.TabIndex = 4;
             // 
             // resolutionBox
@@ -684,7 +693,7 @@
             this.resolutionBox.Location = new System.Drawing.Point(101, 45);
             this.resolutionBox.Name = "resolutionBox";
             this.resolutionBox.ReadOnly = true;
-            this.resolutionBox.Size = new System.Drawing.Size(152, 20);
+            this.resolutionBox.Size = new System.Drawing.Size(149, 20);
             this.resolutionBox.TabIndex = 3;
             // 
             // resolutionLabel
@@ -709,6 +718,7 @@
             // 
             // systemGeneralGroup
             // 
+            this.systemGeneralGroup.Controls.Add(this.systemLogoBox);
             this.systemGeneralGroup.Controls.Add(this.osBootBox);
             this.systemGeneralGroup.Controls.Add(this.osBootLabel);
             this.systemGeneralGroup.Controls.Add(this.osInstallBox);
@@ -726,12 +736,20 @@
             this.systemGeneralGroup.TabStop = false;
             this.systemGeneralGroup.Text = "General";
             // 
+            // systemLogoBox
+            // 
+            this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
+            this.systemLogoBox.Name = "systemLogoBox";
+            this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.systemLogoBox.TabIndex = 10;
+            this.systemLogoBox.TabStop = false;
+            // 
             // osBootBox
             // 
             this.osBootBox.Location = new System.Drawing.Point(102, 97);
             this.osBootBox.Name = "osBootBox";
             this.osBootBox.ReadOnly = true;
-            this.osBootBox.Size = new System.Drawing.Size(136, 20);
+            this.osBootBox.Size = new System.Drawing.Size(148, 20);
             this.osBootBox.TabIndex = 9;
             this.osBootBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -749,7 +767,7 @@
             this.osInstallBox.Location = new System.Drawing.Point(102, 71);
             this.osInstallBox.Name = "osInstallBox";
             this.osInstallBox.ReadOnly = true;
-            this.osInstallBox.Size = new System.Drawing.Size(136, 20);
+            this.osInstallBox.Size = new System.Drawing.Size(148, 20);
             this.osInstallBox.TabIndex = 7;
             this.osInstallBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -767,7 +785,7 @@
             this.osBuildBox.Location = new System.Drawing.Point(192, 45);
             this.osBuildBox.Name = "osBuildBox";
             this.osBuildBox.ReadOnly = true;
-            this.osBuildBox.Size = new System.Drawing.Size(45, 20);
+            this.osBuildBox.Size = new System.Drawing.Size(58, 20);
             this.osBuildBox.TabIndex = 5;
             this.osBuildBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -821,6 +839,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 343);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Program Diagnostyczny";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -845,9 +864,11 @@
             this.videoPage.PerformLayout();
             this.videoGeneralGroup.ResumeLayout(false);
             this.videoGeneralGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
             this.systemPage.ResumeLayout(false);
             this.systemGeneralGroup.ResumeLayout(false);
             this.systemGeneralGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -877,53 +898,55 @@
         private System.Windows.Forms.TextBox moboManuBox;
         private System.Windows.Forms.Label moboModelLabel;
         private System.Windows.Forms.Label moboManuLabel;
-		private System.Windows.Forms.GroupBox moboBiosGroup;
-		private System.Windows.Forms.TextBox biosVerBox;
-		private System.Windows.Forms.TextBox biosManuBox;
-		private System.Windows.Forms.Label biosManuLabel;
-		private System.Windows.Forms.Label biosVerLabel;
-		private System.Windows.Forms.TabPage memoryPage;
-		private System.Windows.Forms.GroupBox memoryGeneralGroup;
-		private System.Windows.Forms.TextBox memoryTotalSizeBox;
-		private System.Windows.Forms.Label memoryTotalSizeLabel;
-		private System.Windows.Forms.GroupBox videoGeneralGroup;
-		private System.Windows.Forms.TextBox resolutionBox;
+        private System.Windows.Forms.GroupBox moboBiosGroup;
+        private System.Windows.Forms.TextBox biosVerBox;
+        private System.Windows.Forms.TextBox biosManuBox;
+        private System.Windows.Forms.Label biosManuLabel;
+        private System.Windows.Forms.Label biosVerLabel;
+        private System.Windows.Forms.TabPage memoryPage;
+        private System.Windows.Forms.GroupBox memoryGeneralGroup;
+        private System.Windows.Forms.TextBox memoryTotalSizeBox;
+        private System.Windows.Forms.Label memoryTotalSizeLabel;
+        private System.Windows.Forms.GroupBox videoGeneralGroup;
+        private System.Windows.Forms.TextBox resolutionBox;
         private System.Windows.Forms.Label resolutionLabel;
         private System.Windows.Forms.Label VideoSelectLabel;
         private System.Windows.Forms.ComboBox VideoCardDropDownBox;
         private System.Windows.Forms.Label addressWidthLabel;
         private System.Windows.Forms.TextBox addressWidthTextBox;
-		private System.Windows.Forms.Label videoCardRamLabel;
-		private System.Windows.Forms.TextBox videoCardRamBox;
-		private System.Windows.Forms.TextBox videoCardDriverBox;
-		private System.Windows.Forms.Label videoCardDriverLabel;
-		private System.Windows.Forms.TabPage systemPage;
-		private System.Windows.Forms.GroupBox systemGeneralGroup;
-		private System.Windows.Forms.TextBox osBuildBox;
-		private System.Windows.Forms.Label osBuildLabel;
-		private System.Windows.Forms.TextBox osArchitectureBox;
-		private System.Windows.Forms.Label osArchitectureLabel;
-		private System.Windows.Forms.TextBox osVersionBox;
-		private System.Windows.Forms.Label osNameLabel;
-		private System.Windows.Forms.TextBox osInstallBox;
-		private System.Windows.Forms.Label osInstallLabel;
-		private System.Windows.Forms.TextBox osBootBox;
-		private System.Windows.Forms.Label osBootLabel;
-		private System.Windows.Forms.ComboBox memorySelectionBox;
-		private System.Windows.Forms.Label memorySelectionLabel;
-		private System.Windows.Forms.GroupBox memoryModuleInfoGroup;
-		private System.Windows.Forms.TextBox memoryModuleSizeBox;
-		private System.Windows.Forms.Label memoryModuleSizeLabel;
-		private System.Windows.Forms.TextBox memorySerialBox;
-		private System.Windows.Forms.Label memorySerialLabel;
-		private System.Windows.Forms.TextBox memoryPartBox;
-		private System.Windows.Forms.Label memoryPartLabel;
-		private System.Windows.Forms.TextBox memoryFrequencyBox;
-		private System.Windows.Forms.Label memoryFreqencyLabel;
-		private System.Windows.Forms.TextBox memoryBankBox;
-		private System.Windows.Forms.Label memoryBankLabel;
+        private System.Windows.Forms.Label videoCardRamLabel;
+        private System.Windows.Forms.TextBox videoCardRamBox;
+        private System.Windows.Forms.TextBox videoCardDriverBox;
+        private System.Windows.Forms.Label videoCardDriverLabel;
+        private System.Windows.Forms.TabPage systemPage;
+        private System.Windows.Forms.GroupBox systemGeneralGroup;
+        private System.Windows.Forms.TextBox osBuildBox;
+        private System.Windows.Forms.Label osBuildLabel;
+        private System.Windows.Forms.TextBox osArchitectureBox;
+        private System.Windows.Forms.Label osArchitectureLabel;
+        private System.Windows.Forms.TextBox osVersionBox;
+        private System.Windows.Forms.Label osNameLabel;
+        private System.Windows.Forms.TextBox osInstallBox;
+        private System.Windows.Forms.Label osInstallLabel;
+        private System.Windows.Forms.TextBox osBootBox;
+        private System.Windows.Forms.Label osBootLabel;
+        private System.Windows.Forms.ComboBox memorySelectionBox;
+        private System.Windows.Forms.Label memorySelectionLabel;
+        private System.Windows.Forms.GroupBox memoryModuleInfoGroup;
+        private System.Windows.Forms.TextBox memoryModuleSizeBox;
+        private System.Windows.Forms.Label memoryModuleSizeLabel;
+        private System.Windows.Forms.TextBox memorySerialBox;
+        private System.Windows.Forms.Label memorySerialLabel;
+        private System.Windows.Forms.TextBox memoryPartBox;
+        private System.Windows.Forms.Label memoryPartLabel;
+        private System.Windows.Forms.TextBox memoryFrequencyBox;
+        private System.Windows.Forms.Label memoryFreqencyLabel;
+        private System.Windows.Forms.TextBox memoryBankBox;
+        private System.Windows.Forms.Label memoryBankLabel;
         private System.Windows.Forms.Label cpuUsageLabel;
         private System.Windows.Forms.TextBox cpuUsageBox;
+        private System.Windows.Forms.PictureBox systemLogoBox;
+        private System.Windows.Forms.PictureBox videoCardLogoBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart cpuUsageChart;
     }
 }
