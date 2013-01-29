@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -28,167 +27,186 @@ namespace Diag
         /* CONSTRUCTOR */
         public Form1()
         {
-            InitializeComponent();
-
-            // Processor //
-            string seriesStr = "CPU Usage";
-
-            this.cpuUsageChart.Palette = ChartColorPalette.SeaGreen;
-            this.cpuUsageChart.Titles.Add("CPU Usage");
-
-            this.cpuUsageChart.Series.Clear();
-            Series series = this.cpuUsageChart.Series.Add(seriesStr);
-            cpuUsageChart.Series[0].ChartType = SeriesChartType.Line;
-
-            series.Points.Add(0);
-
-            cpuUsageChart.Series[0].YAxisType = AxisType.Primary;
-            cpuUsageChart.Series[0].YValueType = ChartValueType.Int32;
-            cpuUsageChart.Series[0].IsXValueIndexed = false;
-            cpuUsageChart.Series[0].Color = Color.Red;
-
-            cpuUsageChart.ResetAutoValues();
-            cpuUsageChart.ChartAreas[0].AxisY.Maximum = 100;//Max Y 
-            cpuUsageChart.ChartAreas[0].AxisY.Minimum = 0;
-            cpuUsageChart.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
-
-
-            cpuCounter.CategoryName = "Processor";
-            cpuCounter.CounterName = "% Processor Time";
-            cpuCounter.InstanceName = "_Total";
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-
-            foreach (ManagementObject obj in searcher.Get())
+            try
             {
-                this.processorName.Text = getValue(obj, "Name");
-                this.cores.Text = getValue(obj, "NumberOfCores");
-                this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+                InitializeComponent();
 
-				if (getValue(obj, "Manufacturer").IndexOf("Intel") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
-				else if (getValue(obj, "Manufacturer").IndexOf("AMD") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
+                // Processor //
+                string seriesStr = "CPU Usage";
 
-                
-            }
+                this.cpuUsageChart.Palette = ChartColorPalette.SeaGreen;
+                this.cpuUsageChart.Titles.Add("CPU Usage");
 
-            // Cache memory //
-            searcher.Query = new ObjectQuery("SELECT * FROM Win32_CacheMemory");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                string size = "";
-                size = obj["InstalledSize"].ToString() + " kB";
+                this.cpuUsageChart.Series.Clear();
+                Series series = this.cpuUsageChart.Series.Add(seriesStr);
+                cpuUsageChart.Series[0].ChartType = SeriesChartType.Line;
 
-                switch (obj["Level"].ToString())
+                series.Points.Add(0);
+
+                cpuUsageChart.Series[0].YAxisType = AxisType.Primary;
+                cpuUsageChart.Series[0].YValueType = ChartValueType.Int32;
+                cpuUsageChart.Series[0].IsXValueIndexed = false;
+                cpuUsageChart.Series[0].Color = Color.Red;
+
+                cpuUsageChart.ResetAutoValues();
+                cpuUsageChart.ChartAreas[0].AxisY.Maximum = 100;//Max Y 
+                cpuUsageChart.ChartAreas[0].AxisY.Minimum = 0;
+                cpuUsageChart.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
+
+
+                cpuCounter.CategoryName = "Processor";
+                cpuCounter.CounterName = "% Processor Time";
+                cpuCounter.InstanceName = "_Total";
+
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+
+                foreach (ManagementObject obj in searcher.Get())
                 {
-                    case "3":
-                        cache1Box.Text = size;
-                    break;
+                    this.processorName.Text = getValue(obj, "Name");
+                    this.cores.Text = getValue(obj, "NumberOfCores");
+                    this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
 
-                    case "4":
-                        cache2Box.Text = size;
-                    break;
+                    if (getValue(obj, "Manufacturer").IndexOf("Intel") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
+                    else if (getValue(obj, "Manufacturer").IndexOf("AMD") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
 
-                    case "5":
-                        cache3Box.Text = size;
-                    break;
+
                 }
+
+                // Cache memory //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_CacheMemory");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    string size = "";
+                    size = obj["InstalledSize"].ToString() + " kB";
+
+                    switch (obj["Level"].ToString())
+                    {
+                        case "3":
+                            cache1Box.Text = size;
+                            break;
+
+                        case "4":
+                            cache2Box.Text = size;
+                            break;
+
+                        case "5":
+                            cache3Box.Text = size;
+                            break;
+                    }
+                }
+
+                // Motherboard //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_BaseBoard");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    foreach (PropertyData data in obj.Properties)
+                    {
+                        if (data.Name == "Manufacturer") this.moboManuBox.Text = data.Value.ToString();
+                        if (data.Name == "Product") this.moboModelBox.Text = data.Value.ToString();
+                    }
+                }
+
+                // BIOS //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_BIOS");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    foreach (PropertyData data in obj.Properties)
+                    {
+                        if (data.Name == "Manufacturer") this.biosManuBox.Text = data.Value.ToString();
+                        if (data.Name == "SMBIOSBIOSVersion") this.biosVerBox.Text = data.Value.ToString();
+                    }
+                }
+
+                // Physical Memory //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
+
+                ulong totalSize = 0;
+                int i = 0;
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    memorySelectionBox.Items.Add("#" + i++.ToString());
+
+                    totalSize += ulong.Parse(getValue(obj, "Capacity"));
+
+                    MemoryInfo stick;
+                    stick.bank = getValue(obj, "BankLabel");
+
+                    stick.size = ulong.Parse(getValue(obj, "Capacity")) / 1024 / 1024;
+                    stick.speed = uint.Parse(getValue(obj, "Speed"));
+                    stick.partNumber = getValue(obj, "PartNumber");
+                    stick.serialNumber = getValue(obj, "SerialNumber");
+
+                    ramSticks.Add(stick);
+
+                }
+                memorySelectionBox.SelectedIndex = 0;
+                totalSize = totalSize / 1024 / 1024;
+                this.memoryTotalSizeBox.Text = totalSize.ToString() + " MB";
+
+                // Video Controller //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    VideoCardDropDownBox.Items.Add(getValue(obj, "Name"));
+
+                    VideoCardInfo info;
+                    info.width = getValue(obj, "CurrentHorizontalResolution");
+                    info.height = getValue(obj, "CurrentVerticalResolution");
+
+                    info.memory = (ulong.Parse(getValue(obj, "AdapterRAM")) / 1024 / 1024).ToString();
+
+                    info.driverVersion = getValue(obj, "DriverVersion");
+
+                    info.processor = getValue(obj, "VideoProcessor");
+
+                    videoCards.Add(info);
+                }
+                VideoCardDropDownBox.SelectedIndex = 0;
+
+                // System //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    if ((bool)obj["Primary"] == true)
+                    {
+                        osVersionBox.Text = getValue(obj, "Caption");
+                        
+                        osBuildBox.Text = getValue(obj, "BuildNumber");
+
+                        DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
+                        DateTime bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
+
+                        osInstallBox.Text = installDate.GetDateTimeFormats()[2];
+                        osBootBox.Text = bootTime.GetDateTimeFormats()[4];
+
+                        string ver = getValue(obj, "Version").Substring(0, 3);
+
+                        if (ver == "5.1" || ver == "5.2")
+                        {
+                            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));                            if (is64bit)
+                                osArchitectureBox.Text = "64 bit";
+                            else
+                                osArchitectureBox.Text = "32 bit";
+
+                            systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinXP;
+                        }
+                        else
+                        {
+                            osArchitectureBox.Text = getValue(obj, "OSArchitecture");
+                            if (ver == "6.0") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinVista;
+                            else if (ver == "6.1") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win7;
+                            else if (ver == "6.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win8;
+                        }
+
+                    }
+                }
+
+                getCPUUsage();
             }
-
-            // Motherboard //
-			searcher.Query = new ObjectQuery("SELECT * FROM Win32_BaseBoard");
-			foreach (ManagementObject obj in searcher.Get())
-			{
-				foreach (PropertyData data in obj.Properties)
-				{
-					if (data.Name == "Manufacturer") this.moboManuBox.Text = data.Value.ToString();
-					if (data.Name == "Product") this.moboModelBox.Text = data.Value.ToString();
-				}
-			}
-
-            // BIOS //
-			searcher.Query = new ObjectQuery("SELECT * FROM Win32_BIOS");
-			foreach (ManagementObject obj in searcher.Get())
-			{
-				foreach (PropertyData data in obj.Properties)
-				{
-					if (data.Name == "Manufacturer") this.biosManuBox.Text = data.Value.ToString();
-					if (data.Name == "SMBIOSBIOSVersion") this.biosVerBox.Text = data.Value.ToString();
-				}
-			}
-
-            // Physical Memory //
-			searcher.Query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
-
-			ulong totalSize = 0;
-			int i = 0;
-			foreach (ManagementObject obj in searcher.Get())
-			{
-				memorySelectionBox.Items.Add("#" + i++.ToString());
-
-				totalSize += (ulong)obj["Capacity"];
-
-				MemoryInfo stick;
-				stick.bank = obj["BankLabel"].ToString();
-
-				stick.size = (ulong)obj["Capacity"]/1024/1024;
-				stick.speed = (uint)obj["Speed"];
-				stick.partNumber = obj["PartNumber"].ToString();
-				stick.serialNumber = obj["SerialNumber"].ToString();
-
-				ramSticks.Add(stick);
-				
-			}
-			memorySelectionBox.SelectedIndex = 0;
-			totalSize = totalSize/1024/1024;
-			this.memoryTotalSizeBox.Text = totalSize.ToString() + " MB";
-
-            // Video Controller //
-            searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
-            foreach (ManagementObject obj in searcher.Get())
+            catch (Exception ex)
             {
-                VideoCardDropDownBox.Items.Add(obj["Name"]);
-
-                VideoCardInfo info;
-                info.width = getValue(obj, "CurrentHorizontalResolution");
-                info.height = getValue(obj, "CurrentVerticalResolution");
-
-				info.memory = (Convert.ToUInt64(getValue(obj, "AdapterRAM"))/1024/1024).ToString();
-
-				info.driverVersion = getValue(obj, "DriverVersion");
-
-				info.processor = getValue(obj, "VideoProcessor");
-
-                videoCards.Add(info);
+                MessageBox.Show(ex.ToString() + "\n" + ex.Message.ToString());
             }
-            VideoCardDropDownBox.SelectedIndex = 0;
-
-			// System //
-			searcher.Query = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
-			foreach (ManagementObject obj in searcher.Get())
-			{
-				if ((bool)obj["Primary"] == true)
-				{
-					osVersionBox.Text = getValue(obj, "Caption");
-					osArchitectureBox.Text = getValue(obj, "OSArchitecture");
-                    osBuildBox.Text = getValue(obj, "BuildNumber");
-
-					DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
-					DateTime bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
-
-					osInstallBox.Text = installDate.GetDateTimeFormats()[2];
-					osBootBox.Text = bootTime.GetDateTimeFormats()[4];
-                    
-					string ver = getValue(obj, "Version").Substring(0, 3);
-
-					if (ver == "5.1" || ver == "5.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinXP;
-					else if (ver == "6.0") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.WinVista;
-					else if (ver == "6.1") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win7;
-					else if (ver == "6.2") systemLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Win8;
-					
-				}
-			}
-
-            getCPUUsage();
         }
 
         private void getCPUUsage()
@@ -235,7 +253,7 @@ namespace Diag
             if (obj[str] != null)
                 return obj[str].ToString();
             else
-                return "NULL";
+                return "0";
         }
 
         private void updateCPUUsage()
@@ -256,7 +274,7 @@ namespace Diag
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
 			string processor = videoCards[VideoCardDropDownBox.SelectedIndex].processor;
 
-            if (width == "NULL" || height == "NULL")
+            if (width == "0" || height == "0")
             {
                 resolutionBox.Enabled = false;
                 resolutionLabel.Enabled = false;
@@ -272,6 +290,7 @@ namespace Diag
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
 
+            if (processor.IndexOf("IntelVideo") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
 			if (processor.IndexOf("GeForce") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
 			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
