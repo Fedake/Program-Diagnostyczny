@@ -103,6 +103,7 @@ namespace Diag
                     {
                         if (data.Name == "Manufacturer") this.moboManuBox.Text = data.Value.ToString();
                         if (data.Name == "Product") this.moboModelBox.Text = data.Value.ToString();
+                        if (data.Name == "SerialNumber") this.moboSerialTextBox.Text = data.Value.ToString();
                     }
                 }
 
@@ -114,6 +115,7 @@ namespace Diag
                     {
                         if (data.Name == "Manufacturer") this.biosManuBox.Text = data.Value.ToString();
                         if (data.Name == "SMBIOSBIOSVersion") this.biosVerBox.Text = data.Value.ToString();
+                        if (data.Name == "SerialNumber") this.biosSerialTextBox.Text = data.Value.ToString();
                     }
                 }
 
