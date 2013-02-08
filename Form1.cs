@@ -19,10 +19,15 @@ namespace Diag
     {
 		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
 		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
+        List<MonitorInfo> monitorsList = new List<MonitorInfo>();
+
+        Screen[] monitors = Screen.AllScreens;
 
         PerformanceCounter cpuCounter = new PerformanceCounter();
 
         bool running = true;
+
+        DateTime m_bootTime;
 
         /* CONSTRUCTOR */
         public Form1()
@@ -165,6 +170,21 @@ namespace Diag
                 }
                 VideoCardDropDownBox.SelectedIndex = 0;
 
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_DesktopMonitor");
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    monitorDropDownBox.Items.Add(getValue(obj, "Name"));
+
+                    MonitorInfo info;
+                    info.id = getValue(obj, "DeviceID");
+                    info.width = getValue(obj, "ScreenWidth");
+                    info.height = getValue(obj, "ScreenHeight");
+
+                    monitorsList.Add(info);
+                }
+                monitorDropDownBox.SelectedIndex = 0;
+
+
                 // System //
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
                 foreach (ManagementObject obj in searcher.Get())
@@ -177,7 +197,7 @@ namespace Diag
 
                         DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
                         DateTime bootTime = ManagementDateTimeConverter.ToDateTime(obj["LastBootUpTime"].ToString());
-
+                        m_bootTime = bootTime;
                         osInstallBox.Text = installDate.GetDateTimeFormats()[2];
                         osBootBox.Text = bootTime.GetDateTimeFormats()[4];
 
@@ -203,7 +223,7 @@ namespace Diag
                     }
                 }
 
-                getCPUUsage();
+                update();
             }
             catch (Exception ex)
             {
@@ -211,7 +231,7 @@ namespace Diag
             }
         }
 
-        private void getCPUUsage()
+        private void update()
         {
             try
             {
@@ -225,10 +245,12 @@ namespace Diag
                                 this.Invoke(new System.Windows.Forms.MethodInvoker(delegate()
                                 {
                                     updateCPUUsage();
+                                    updateUpTime();
                                 }));
                             else
                             {
                                 updateCPUUsage();
+                                updateUpTime();
                             }
                             Thread.Sleep(1000);
                         }
@@ -263,9 +285,16 @@ namespace Diag
             float usage = cpuCounter.NextValue();
             cpuUsageBox.Text = Math.Round(usage).ToString() + "%";
             cpuUsageChart.Series[0].Points.AddY(usage);
-
+            
             if (cpuUsageChart.Series[0].Points.Count > 20)
                 cpuUsageChart.Series[0].Points.RemoveAt(0);
+        }
+
+        private void updateUpTime()
+        {
+            TimeSpan interwał_czasowyxD = DateTime.Now - m_bootTime;
+            osUpTimeTextBox.Text = (interwał_czasowyxD.Days*24 + interwał_czasowyxD.Hours).ToString() + "h " 
+                + (interwał_czasowyxD.Minutes).ToString() + "m " + (interwał_czasowyxD.Seconds).ToString() + "s";
         }
 
         private void VideoCardDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -292,7 +321,7 @@ namespace Diag
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
 
-            if (processor.IndexOf("IntelVideo") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
+            if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
 			if (processor.IndexOf("GeForce") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
 			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
@@ -307,6 +336,17 @@ namespace Diag
 			memoryPartBox.Text = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
 			memorySerialBox.Text = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
 		}
+
+        private void monitorDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = monitorsList[monitorDropDownBox.SelectedIndex].id;
+            string width = monitorsList[monitorDropDownBox.SelectedIndex].width;
+            string height = monitorsList[monitorDropDownBox.SelectedIndex].height;
+            
+
+            monitorIdTextBox.Text = id;
+            monitorResolutionTextBox.Text = width + " x " + height;
+        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -331,4 +371,11 @@ namespace Diag
 		public string partNumber;
 		public string serialNumber;
 	}
+
+    struct MonitorInfo
+    {
+        public string id;
+        public string width;
+        public string height;
+    }
 }

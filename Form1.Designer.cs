@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.processorPage = new System.Windows.Forms.TabPage();
             this.processorLogoBox = new System.Windows.Forms.PictureBox();
             this.cpuUsageChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -52,11 +53,15 @@
             this.threadsLabel = new System.Windows.Forms.Label();
             this.moboPage = new System.Windows.Forms.TabPage();
             this.moboBiosGroup = new System.Windows.Forms.GroupBox();
+            this.biosSerialTextBox = new System.Windows.Forms.TextBox();
+            this.biosSerialLabel = new System.Windows.Forms.Label();
             this.biosVerBox = new System.Windows.Forms.TextBox();
             this.biosManuBox = new System.Windows.Forms.TextBox();
             this.biosManuLabel = new System.Windows.Forms.Label();
             this.biosVerLabel = new System.Windows.Forms.Label();
             this.moboGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.moboSerialTextBox = new System.Windows.Forms.TextBox();
+            this.moboSerialLabel = new System.Windows.Forms.Label();
             this.moboModelBox = new System.Windows.Forms.TextBox();
             this.moboManuBox = new System.Windows.Forms.TextBox();
             this.moboModelLabel = new System.Windows.Forms.Label();
@@ -79,6 +84,13 @@
             this.memoryTotalSizeBox = new System.Windows.Forms.TextBox();
             this.memoryTotalSizeLabel = new System.Windows.Forms.Label();
             this.videoPage = new System.Windows.Forms.TabPage();
+            this.monitorDropDownBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.monitorGroup = new System.Windows.Forms.GroupBox();
+            this.monitorIdLabel = new System.Windows.Forms.Label();
+            this.monitorIdTextBox = new System.Windows.Forms.TextBox();
+            this.monitorResolutionTextBox = new System.Windows.Forms.TextBox();
+            this.monitorResolutionLabel = new System.Windows.Forms.Label();
             this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
@@ -91,6 +103,8 @@
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.systemPage = new System.Windows.Forms.TabPage();
             this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.osUpTimeTextBox = new System.Windows.Forms.TextBox();
+            this.osUpTimeLabel = new System.Windows.Forms.Label();
             this.systemLogoBox = new System.Windows.Forms.PictureBox();
             this.osBootBox = new System.Windows.Forms.TextBox();
             this.osBootLabel = new System.Windows.Forms.Label();
@@ -102,11 +116,12 @@
             this.osArchitectureLabel = new System.Windows.Forms.Label();
             this.osVersionBox = new System.Windows.Forms.TextBox();
             this.osNameLabel = new System.Windows.Forms.Label();
-            this.moboSerialTextBox = new System.Windows.Forms.TextBox();
-            this.moboSerialLabel = new System.Windows.Forms.Label();
-            this.biosSerialTextBox = new System.Windows.Forms.TextBox();
-            this.biosSerialLabel = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.infoPage = new System.Windows.Forms.TabPage();
+            this.disclaimerGroup = new System.Windows.Forms.GroupBox();
+            this.disclaimerTextBox = new System.Windows.Forms.TextBox();
+            this.authorsGroup = new System.Windows.Forms.GroupBox();
+            this.authorsTextBox = new System.Windows.Forms.TextBox();
+            this.tabControl.SuspendLayout();
             this.processorPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).BeginInit();
@@ -119,25 +134,31 @@
             this.memoryModuleInfoGroup.SuspendLayout();
             this.memoryGeneralGroup.SuspendLayout();
             this.videoPage.SuspendLayout();
+            this.monitorGroup.SuspendLayout();
             this.videoGeneralGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
             this.systemPage.SuspendLayout();
             this.systemGeneralGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
+            this.infoPage.SuspendLayout();
+            this.disclaimerGroup.SuspendLayout();
+            this.authorsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.processorPage);
-            this.tabControl1.Controls.Add(this.moboPage);
-            this.tabControl1.Controls.Add(this.memoryPage);
-            this.tabControl1.Controls.Add(this.videoPage);
-            this.tabControl1.Controls.Add(this.systemPage);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(348, 319);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.processorPage);
+            this.tabControl.Controls.Add(this.moboPage);
+            this.tabControl.Controls.Add(this.memoryPage);
+            this.tabControl.Controls.Add(this.videoPage);
+            this.tabControl.Controls.Add(this.systemPage);
+            this.tabControl.Controls.Add(this.infoPage);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Multiline = true;
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(348, 319);
+            this.tabControl.TabIndex = 0;
             // 
             // processorPage
             // 
@@ -163,14 +184,14 @@
             // 
             // cpuUsageChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.cpuUsageChart.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.cpuUsageChart.ChartAreas.Add(chartArea1);
             this.cpuUsageChart.Location = new System.Drawing.Point(3, 192);
             this.cpuUsageChart.Name = "cpuUsageChart";
-            series4.ChartArea = "ChartArea1";
-            series4.MarkerBorderWidth = 2;
-            series4.Name = "Series1";
-            this.cpuUsageChart.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.MarkerBorderWidth = 2;
+            series1.Name = "Series1";
+            this.cpuUsageChart.Series.Add(series1);
             this.cpuUsageChart.Size = new System.Drawing.Size(331, 98);
             this.cpuUsageChart.TabIndex = 8;
             // 
@@ -305,6 +326,7 @@
             this.processorName.Size = new System.Drawing.Size(271, 20);
             this.processorName.TabIndex = 1;
             this.processorName.Text = "Witamson";
+            this.processorName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // processorNameLabel
             // 
@@ -361,6 +383,24 @@
             this.moboBiosGroup.TabStop = false;
             this.moboBiosGroup.Text = "BIOS";
             // 
+            // biosSerialTextBox
+            // 
+            this.biosSerialTextBox.Location = new System.Drawing.Point(82, 72);
+            this.biosSerialTextBox.Name = "biosSerialTextBox";
+            this.biosSerialTextBox.ReadOnly = true;
+            this.biosSerialTextBox.Size = new System.Drawing.Size(240, 20);
+            this.biosSerialTextBox.TabIndex = 8;
+            this.biosSerialTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // biosSerialLabel
+            // 
+            this.biosSerialLabel.AutoSize = true;
+            this.biosSerialLabel.Location = new System.Drawing.Point(3, 75);
+            this.biosSerialLabel.Name = "biosSerialLabel";
+            this.biosSerialLabel.Size = new System.Drawing.Size(73, 13);
+            this.biosSerialLabel.TabIndex = 9;
+            this.biosSerialLabel.Text = "Serial Number";
+            // 
             // biosVerBox
             // 
             this.biosVerBox.Location = new System.Drawing.Point(82, 45);
@@ -411,6 +451,24 @@
             this.moboGeneralGroup.TabIndex = 4;
             this.moboGeneralGroup.TabStop = false;
             this.moboGeneralGroup.Text = "General";
+            // 
+            // moboSerialTextBox
+            // 
+            this.moboSerialTextBox.Location = new System.Drawing.Point(82, 75);
+            this.moboSerialTextBox.Name = "moboSerialTextBox";
+            this.moboSerialTextBox.ReadOnly = true;
+            this.moboSerialTextBox.Size = new System.Drawing.Size(240, 20);
+            this.moboSerialTextBox.TabIndex = 4;
+            this.moboSerialTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // moboSerialLabel
+            // 
+            this.moboSerialLabel.AutoSize = true;
+            this.moboSerialLabel.Location = new System.Drawing.Point(3, 78);
+            this.moboSerialLabel.Name = "moboSerialLabel";
+            this.moboSerialLabel.Size = new System.Drawing.Size(73, 13);
+            this.moboSerialLabel.TabIndex = 5;
+            this.moboSerialLabel.Text = "Serial Number";
             // 
             // moboModelBox
             // 
@@ -620,6 +678,9 @@
             // 
             // videoPage
             // 
+            this.videoPage.Controls.Add(this.monitorDropDownBox);
+            this.videoPage.Controls.Add(this.label1);
+            this.videoPage.Controls.Add(this.monitorGroup);
             this.videoPage.Controls.Add(this.VideoCardDropDownBox);
             this.videoPage.Controls.Add(this.VideoSelectLabel);
             this.videoPage.Controls.Add(this.videoGeneralGroup);
@@ -629,6 +690,74 @@
             this.videoPage.TabIndex = 1;
             this.videoPage.Text = "Video";
             this.videoPage.UseVisualStyleBackColor = true;
+            // 
+            // monitorDropDownBox
+            // 
+            this.monitorDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.monitorDropDownBox.FormattingEnabled = true;
+            this.monitorDropDownBox.Location = new System.Drawing.Point(105, 154);
+            this.monitorDropDownBox.Name = "monitorDropDownBox";
+            this.monitorDropDownBox.Size = new System.Drawing.Size(225, 21);
+            this.monitorDropDownBox.TabIndex = 10;
+            this.monitorDropDownBox.SelectedIndexChanged += new System.EventHandler(this.monitorDropDownBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 157);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Select Monitor";
+            // 
+            // monitorGroup
+            // 
+            this.monitorGroup.Controls.Add(this.monitorIdLabel);
+            this.monitorGroup.Controls.Add(this.monitorIdTextBox);
+            this.monitorGroup.Controls.Add(this.monitorResolutionTextBox);
+            this.monitorGroup.Controls.Add(this.monitorResolutionLabel);
+            this.monitorGroup.Location = new System.Drawing.Point(3, 181);
+            this.monitorGroup.Name = "monitorGroup";
+            this.monitorGroup.Size = new System.Drawing.Size(334, 104);
+            this.monitorGroup.TabIndex = 7;
+            this.monitorGroup.TabStop = false;
+            this.monitorGroup.Text = "Monitor";
+            // 
+            // monitorIdLabel
+            // 
+            this.monitorIdLabel.AutoSize = true;
+            this.monitorIdLabel.Location = new System.Drawing.Point(40, 22);
+            this.monitorIdLabel.Name = "monitorIdLabel";
+            this.monitorIdLabel.Size = new System.Drawing.Size(55, 13);
+            this.monitorIdLabel.TabIndex = 5;
+            this.monitorIdLabel.Text = "Device ID";
+            // 
+            // monitorIdTextBox
+            // 
+            this.monitorIdTextBox.Location = new System.Drawing.Point(101, 19);
+            this.monitorIdTextBox.Name = "monitorIdTextBox";
+            this.monitorIdTextBox.ReadOnly = true;
+            this.monitorIdTextBox.Size = new System.Drawing.Size(182, 20);
+            this.monitorIdTextBox.TabIndex = 4;
+            this.monitorIdTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // monitorResolutionTextBox
+            // 
+            this.monitorResolutionTextBox.Location = new System.Drawing.Point(101, 45);
+            this.monitorResolutionTextBox.Name = "monitorResolutionTextBox";
+            this.monitorResolutionTextBox.ReadOnly = true;
+            this.monitorResolutionTextBox.Size = new System.Drawing.Size(182, 20);
+            this.monitorResolutionTextBox.TabIndex = 3;
+            this.monitorResolutionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // monitorResolutionLabel
+            // 
+            this.monitorResolutionLabel.AutoSize = true;
+            this.monitorResolutionLabel.Location = new System.Drawing.Point(38, 48);
+            this.monitorResolutionLabel.Name = "monitorResolutionLabel";
+            this.monitorResolutionLabel.Size = new System.Drawing.Size(57, 13);
+            this.monitorResolutionLabel.TabIndex = 2;
+            this.monitorResolutionLabel.Text = "Resolution";
             // 
             // VideoCardDropDownBox
             // 
@@ -680,6 +809,7 @@
             this.videoCardDriverBox.ReadOnly = true;
             this.videoCardDriverBox.Size = new System.Drawing.Size(148, 20);
             this.videoCardDriverBox.TabIndex = 7;
+            this.videoCardDriverBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // videoCardDriverLabel
             // 
@@ -706,6 +836,7 @@
             this.videoCardRamBox.ReadOnly = true;
             this.videoCardRamBox.Size = new System.Drawing.Size(149, 20);
             this.videoCardRamBox.TabIndex = 4;
+            this.videoCardRamBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // resolutionBox
             // 
@@ -714,6 +845,7 @@
             this.resolutionBox.ReadOnly = true;
             this.resolutionBox.Size = new System.Drawing.Size(149, 20);
             this.resolutionBox.TabIndex = 3;
+            this.resolutionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // resolutionLabel
             // 
@@ -737,6 +869,8 @@
             // 
             // systemGeneralGroup
             // 
+            this.systemGeneralGroup.Controls.Add(this.osUpTimeTextBox);
+            this.systemGeneralGroup.Controls.Add(this.osUpTimeLabel);
             this.systemGeneralGroup.Controls.Add(this.systemLogoBox);
             this.systemGeneralGroup.Controls.Add(this.osBootBox);
             this.systemGeneralGroup.Controls.Add(this.osBootLabel);
@@ -750,10 +884,28 @@
             this.systemGeneralGroup.Controls.Add(this.osNameLabel);
             this.systemGeneralGroup.Location = new System.Drawing.Point(3, 6);
             this.systemGeneralGroup.Name = "systemGeneralGroup";
-            this.systemGeneralGroup.Size = new System.Drawing.Size(334, 140);
+            this.systemGeneralGroup.Size = new System.Drawing.Size(334, 169);
             this.systemGeneralGroup.TabIndex = 0;
             this.systemGeneralGroup.TabStop = false;
             this.systemGeneralGroup.Text = "General";
+            // 
+            // osUpTimeTextBox
+            // 
+            this.osUpTimeTextBox.Location = new System.Drawing.Point(102, 123);
+            this.osUpTimeTextBox.Name = "osUpTimeTextBox";
+            this.osUpTimeTextBox.ReadOnly = true;
+            this.osUpTimeTextBox.Size = new System.Drawing.Size(148, 20);
+            this.osUpTimeTextBox.TabIndex = 12;
+            this.osUpTimeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // osUpTimeLabel
+            // 
+            this.osUpTimeLabel.AutoSize = true;
+            this.osUpTimeLabel.Location = new System.Drawing.Point(12, 126);
+            this.osUpTimeLabel.Name = "osUpTimeLabel";
+            this.osUpTimeLabel.Size = new System.Drawing.Size(84, 13);
+            this.osUpTimeLabel.TabIndex = 11;
+            this.osUpTimeLabel.Text = "System Up Time";
             // 
             // systemLogoBox
             // 
@@ -842,6 +994,7 @@
             this.osVersionBox.ReadOnly = true;
             this.osVersionBox.Size = new System.Drawing.Size(274, 20);
             this.osVersionBox.TabIndex = 1;
+            this.osVersionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // osNameLabel
             // 
@@ -852,53 +1005,77 @@
             this.osNameLabel.TabIndex = 0;
             this.osNameLabel.Text = "Version";
             // 
-            // moboSerialTextBox
+            // infoPage
             // 
-            this.moboSerialTextBox.Location = new System.Drawing.Point(82, 75);
-            this.moboSerialTextBox.Name = "moboSerialTextBox";
-            this.moboSerialTextBox.ReadOnly = true;
-            this.moboSerialTextBox.Size = new System.Drawing.Size(240, 20);
-            this.moboSerialTextBox.TabIndex = 4;
-            this.moboSerialTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.infoPage.Controls.Add(this.disclaimerGroup);
+            this.infoPage.Controls.Add(this.authorsGroup);
+            this.infoPage.Location = new System.Drawing.Point(4, 22);
+            this.infoPage.Name = "infoPage";
+            this.infoPage.Padding = new System.Windows.Forms.Padding(3);
+            this.infoPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.infoPage.Size = new System.Drawing.Size(340, 293);
+            this.infoPage.TabIndex = 5;
+            this.infoPage.Text = "Info";
+            this.infoPage.UseVisualStyleBackColor = true;
             // 
-            // moboSerialLabel
+            // disclaimerGroup
             // 
-            this.moboSerialLabel.AutoSize = true;
-            this.moboSerialLabel.Location = new System.Drawing.Point(3, 78);
-            this.moboSerialLabel.Name = "moboSerialLabel";
-            this.moboSerialLabel.Size = new System.Drawing.Size(73, 13);
-            this.moboSerialLabel.TabIndex = 5;
-            this.moboSerialLabel.Text = "Serial Number";
+            this.disclaimerGroup.Controls.Add(this.disclaimerTextBox);
+            this.disclaimerGroup.Location = new System.Drawing.Point(16, 178);
+            this.disclaimerGroup.Name = "disclaimerGroup";
+            this.disclaimerGroup.Size = new System.Drawing.Size(303, 76);
+            this.disclaimerGroup.TabIndex = 1;
+            this.disclaimerGroup.TabStop = false;
+            this.disclaimerGroup.Text = "Disclaimer";
             // 
-            // biosSerialTextBox
+            // disclaimerTextBox
             // 
-            this.biosSerialTextBox.Location = new System.Drawing.Point(101, 72);
-            this.biosSerialTextBox.Name = "biosSerialTextBox";
-            this.biosSerialTextBox.ReadOnly = true;
-            this.biosSerialTextBox.Size = new System.Drawing.Size(221, 20);
-            this.biosSerialTextBox.TabIndex = 8;
-            this.biosSerialTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.disclaimerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.disclaimerTextBox.Location = new System.Drawing.Point(41, 19);
+            this.disclaimerTextBox.Multiline = true;
+            this.disclaimerTextBox.Name = "disclaimerTextBox";
+            this.disclaimerTextBox.Size = new System.Drawing.Size(221, 47);
+            this.disclaimerTextBox.TabIndex = 0;
+            this.disclaimerTextBox.Text = "Loga firm występujące w programie są\r\nzastrzeżonymi znakami towarowymi\r\ni zostały" +
+    " użyte jedynie w celach edukacyjnych.\r\n\r\n";
+            this.disclaimerTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.disclaimerTextBox.UseWaitCursor = true;
             // 
-            // biosSerialLabel
+            // authorsGroup
             // 
-            this.biosSerialLabel.AutoSize = true;
-            this.biosSerialLabel.Location = new System.Drawing.Point(3, 75);
-            this.biosSerialLabel.Name = "biosSerialLabel";
-            this.biosSerialLabel.Size = new System.Drawing.Size(92, 13);
-            this.biosSerialLabel.TabIndex = 9;
-            this.biosSerialLabel.Text = "Nuner seryjny heh";
+            this.authorsGroup.Controls.Add(this.authorsTextBox);
+            this.authorsGroup.Location = new System.Drawing.Point(16, 15);
+            this.authorsGroup.Name = "authorsGroup";
+            this.authorsGroup.Size = new System.Drawing.Size(303, 146);
+            this.authorsGroup.TabIndex = 0;
+            this.authorsGroup.TabStop = false;
+            this.authorsGroup.Text = "Auta";
+            // 
+            // authorsTextBox
+            // 
+            this.authorsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.authorsTextBox.Location = new System.Drawing.Point(41, 19);
+            this.authorsTextBox.Multiline = true;
+            this.authorsTextBox.Name = "authorsTextBox";
+            this.authorsTextBox.Size = new System.Drawing.Size(235, 106);
+            this.authorsTextBox.TabIndex = 0;
+            this.authorsTextBox.Text = "Autorami programu są uczniowie ZSBI Żory\r\n\r\nDaniel Baczkowski\r\noraz\r\nJakub Stępie" +
+    "ń.\r\n\r\n\r\nAutorem grafiki ikony programu jest Robek Kuśka.";
+            this.authorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 343);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Program Diagnostyczny";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).EndInit();
@@ -918,6 +1095,8 @@
             this.memoryGeneralGroup.PerformLayout();
             this.videoPage.ResumeLayout(false);
             this.videoPage.PerformLayout();
+            this.monitorGroup.ResumeLayout(false);
+            this.monitorGroup.PerformLayout();
             this.videoGeneralGroup.ResumeLayout(false);
             this.videoGeneralGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
@@ -925,13 +1104,18 @@
             this.systemGeneralGroup.ResumeLayout(false);
             this.systemGeneralGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
+            this.infoPage.ResumeLayout(false);
+            this.disclaimerGroup.ResumeLayout(false);
+            this.disclaimerGroup.PerformLayout();
+            this.authorsGroup.ResumeLayout(false);
+            this.authorsGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage processorPage;
         private System.Windows.Forms.TextBox processorName;
         private System.Windows.Forms.Label processorNameLabel;
@@ -1009,6 +1193,20 @@
         private System.Windows.Forms.Label moboSerialLabel;
         private System.Windows.Forms.TextBox biosSerialTextBox;
         private System.Windows.Forms.Label biosSerialLabel;
+        private System.Windows.Forms.TextBox osUpTimeTextBox;
+        private System.Windows.Forms.Label osUpTimeLabel;
+        private System.Windows.Forms.TabPage infoPage;
+        private System.Windows.Forms.GroupBox authorsGroup;
+        private System.Windows.Forms.ComboBox monitorDropDownBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox monitorGroup;
+        private System.Windows.Forms.Label monitorIdLabel;
+        private System.Windows.Forms.TextBox monitorIdTextBox;
+        private System.Windows.Forms.TextBox monitorResolutionTextBox;
+        private System.Windows.Forms.Label monitorResolutionLabel;
+        private System.Windows.Forms.TextBox authorsTextBox;
+        private System.Windows.Forms.GroupBox disclaimerGroup;
+        private System.Windows.Forms.TextBox disclaimerTextBox;
     }
 }
 
