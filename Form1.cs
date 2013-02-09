@@ -11,6 +11,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using System.Management;
 using System.Diagnostics;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 
 namespace Diag
@@ -288,6 +289,13 @@ namespace Diag
             
             if (cpuUsageChart.Series[0].Points.Count > 20)
                 cpuUsageChart.Series[0].Points.RemoveAt(0);
+
+			TaskbarProgressBarState state =TaskbarProgressBarState.Normal;
+			if (usage > 40) state = TaskbarProgressBarState.Paused;
+			if (usage > 80) state = TaskbarProgressBarState.Error;
+
+			TaskbarManager.Instance.SetProgressState(state);
+			TaskbarManager.Instance.SetProgressValue((int)usage, 100);
         }
 
         private void updateUpTime()
@@ -321,8 +329,14 @@ namespace Diag
 			videoCardRamBox.Text = memory + " MB";
 			videoCardDriverBox.Text = driver;
 
+
+			rurzyczkaBox.Text = "True";
             if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
-			if (processor.IndexOf("GeForce") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
+			if (processor.IndexOf("GeForce") != -1) 
+			{
+				videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
+				rurzyczkaBox.Text = "False";
+			}
 			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
 
