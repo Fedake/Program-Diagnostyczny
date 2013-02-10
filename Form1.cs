@@ -291,8 +291,8 @@ namespace Diag
                 cpuUsageChart.Series[0].Points.RemoveAt(0);
 
 			TaskbarProgressBarState state =TaskbarProgressBarState.Normal;
-			if (usage > 40) state = TaskbarProgressBarState.Paused;
-			if (usage > 80) state = TaskbarProgressBarState.Error;
+			if (usage > 10) state = TaskbarProgressBarState.Paused;
+			if (usage > 20) state = TaskbarProgressBarState.Error;
 
 			TaskbarManager.Instance.SetProgressState(state);
 			TaskbarManager.Instance.SetProgressValue((int)usage, 100);
