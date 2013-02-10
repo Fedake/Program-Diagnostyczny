@@ -11,8 +11,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using System.Management;
 using System.Diagnostics;
-using Microsoft.WindowsAPICodePack.Taskbar;
-
 
 namespace Diag
 {
@@ -206,7 +204,9 @@ namespace Diag
 
                         if (ver == "5.1" || ver == "5.2")
                         {
-                            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));                            if (is64bit)
+                            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));
+
+                            if (is64bit)
                                 osArchitectureBox.Text = "64 bit";
                             else
                                 osArchitectureBox.Text = "32 bit";
@@ -281,6 +281,24 @@ namespace Diag
                 return "0";
         }
 
+        // Check if property is available and set it
+        private void setValue(Label label, TextBox textbox, string text, string between = null, string text2 = null, 
+                                string additional = null)
+        {
+            if (text == "0" || text2 == "0")
+            {
+                label.Enabled = false;
+                textbox.Enabled = false;
+                textbox.Text = "Not available";
+            }
+            else
+            {
+                label.Enabled = true;
+                textbox.Enabled = true;
+                textbox.Text = text + between + text2 + additional;
+            }
+        }
+
         private void updateCPUUsage()
         {
             float usage = cpuCounter.NextValue();
@@ -289,13 +307,6 @@ namespace Diag
             
             if (cpuUsageChart.Series[0].Points.Count > 20)
                 cpuUsageChart.Series[0].Points.RemoveAt(0);
-
-			TaskbarProgressBarState state =TaskbarProgressBarState.Normal;
-			if (usage > 10) state = TaskbarProgressBarState.Paused;
-			if (usage > 20) state = TaskbarProgressBarState.Error;
-
-			TaskbarManager.Instance.SetProgressState(state);
-			TaskbarManager.Instance.SetProgressValue((int)usage, 100);
         }
 
         private void updateUpTime()
@@ -313,42 +324,31 @@ namespace Diag
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
 			string processor = videoCards[VideoCardDropDownBox.SelectedIndex].processor;
 
-            if (width == "0" || height == "0")
-            {
-                resolutionBox.Enabled = false;
-                resolutionLabel.Enabled = false;
-                resolutionBox.Text = "No information available";
-            }
-            else
-            {
-                resolutionBox.Enabled = true;
-                resolutionLabel.Enabled = true;
-                resolutionBox.Text = width + " x " + height;
-            }
+            setValue(resolutionLabel, resolutionBox, width, " x ", height);
+            setValue(videoCardRamLabel, videoCardRamBox, memory, " MB");
+            setValue(videoCardDriverLabel, videoCardDriverBox, driver);
 
-			videoCardRamBox.Text = memory + " MB";
-			videoCardDriverBox.Text = driver;
-
-
-			rurzyczkaBox.Text = "True";
-            if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
-			if (processor.IndexOf("GeForce") != -1) 
-			{
+            if (processor.IndexOf("Intel") != -1) 
+                videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
+            else if (processor.IndexOf("GeForce") != -1)
 				videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
-				rurzyczkaBox.Text = "False";
-			}
-			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
+			else if (processor.IndexOf("Radeon") != -1) 
+                videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			memoryBankBox.Text = ramSticks[memorySelectionBox.SelectedIndex].bank;
+            string bank = ramSticks[memorySelectionBox.SelectedIndex].bank;
+            string size = ramSticks[memorySelectionBox.SelectedIndex].size.ToString();
+            string speed = ramSticks[memorySelectionBox.SelectedIndex].speed.ToString();
+            string part = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
+            string serial = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
 
-			memoryModuleSizeBox.Text = ramSticks[memorySelectionBox.SelectedIndex].size.ToString() + " MB";
-			memoryFrequencyBox.Text = ramSticks[memorySelectionBox.SelectedIndex].speed.ToString() + " MHz";
-
-			memoryPartBox.Text = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
-			memorySerialBox.Text = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
+            setValue(memoryBankLabel, memoryBankBox, bank);
+            setValue(memoryModuleSizeLabel, memoryModuleSizeBox, size, " MB");
+            setValue(memoryFreqencyLabel, memoryFrequencyBox, speed, " MHz");
+            setValue(memoryPartLabel, memoryPartBox, part);
+            setValue(memorySerialLabel, memorySerialBox, serial);
 		}
 
         private void monitorDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -356,10 +356,9 @@ namespace Diag
             string id = monitorsList[monitorDropDownBox.SelectedIndex].id;
             string width = monitorsList[monitorDropDownBox.SelectedIndex].width;
             string height = monitorsList[monitorDropDownBox.SelectedIndex].height;
-            
 
-            monitorIdTextBox.Text = id;
-            monitorResolutionTextBox.Text = width + " x " + height;
+            setValue(monitorIdLabel, monitorIdTextBox, id);
+            setValue(monitorResolutionLabel, monitorResolutionTextBox, width, " x ", height);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

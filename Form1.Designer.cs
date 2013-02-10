@@ -87,8 +87,6 @@
             this.monitorDropDownBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monitorGroup = new System.Windows.Forms.GroupBox();
-            this.rurzyczkaBox = new System.Windows.Forms.TextBox();
-            this.rurzyczkaLabel = new System.Windows.Forms.Label();
             this.monitorIdLabel = new System.Windows.Forms.Label();
             this.monitorIdTextBox = new System.Windows.Forms.TextBox();
             this.monitorResolutionTextBox = new System.Windows.Forms.TextBox();
@@ -714,36 +712,16 @@
             // 
             // monitorGroup
             // 
-            this.monitorGroup.Controls.Add(this.rurzyczkaBox);
-            this.monitorGroup.Controls.Add(this.rurzyczkaLabel);
             this.monitorGroup.Controls.Add(this.monitorIdLabel);
             this.monitorGroup.Controls.Add(this.monitorIdTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionLabel);
             this.monitorGroup.Location = new System.Drawing.Point(3, 181);
             this.monitorGroup.Name = "monitorGroup";
-            this.monitorGroup.Size = new System.Drawing.Size(334, 104);
+            this.monitorGroup.Size = new System.Drawing.Size(334, 75);
             this.monitorGroup.TabIndex = 7;
             this.monitorGroup.TabStop = false;
             this.monitorGroup.Text = "Monitor";
-            // 
-            // rurzyczkaBox
-            // 
-            this.rurzyczkaBox.Location = new System.Drawing.Point(101, 71);
-            this.rurzyczkaBox.Name = "rurzyczkaBox";
-            this.rurzyczkaBox.ReadOnly = true;
-            this.rurzyczkaBox.Size = new System.Drawing.Size(182, 20);
-            this.rurzyczkaBox.TabIndex = 7;
-            this.rurzyczkaBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // rurzyczkaLabel
-            // 
-            this.rurzyczkaLabel.AutoSize = true;
-            this.rurzyczkaLabel.Location = new System.Drawing.Point(38, 74);
-            this.rurzyczkaLabel.Name = "rurzyczkaLabel";
-            this.rurzyczkaLabel.Size = new System.Drawing.Size(57, 13);
-            this.rurzyczkaLabel.TabIndex = 6;
-            this.rurzyczkaLabel.Text = "Rurzyczka";
             // 
             // monitorIdLabel
             // 
@@ -1229,8 +1207,6 @@
         private System.Windows.Forms.TextBox authorsTextBox;
         private System.Windows.Forms.GroupBox disclaimerGroup;
         private System.Windows.Forms.TextBox disclaimerTextBox;
-		private System.Windows.Forms.TextBox rurzyczkaBox;
-		private System.Windows.Forms.Label rurzyczkaLabel;
     }
 }
 
