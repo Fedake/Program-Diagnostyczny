@@ -18,6 +18,8 @@ namespace Diag
     {
 		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
 		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
+        List<DiskInfo> disks = new List<DiskInfo>();
+
 
         Screen[] screens = Screen.AllScreens;
 
@@ -142,6 +144,32 @@ namespace Diag
                 totalSize = totalSize / 1024 / 1024;
                 this.memoryTotalSizeBox.Text = totalSize.ToString() + " MB";
 
+                // Disk Storage //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_DiskDrive");
+                
+                i = 1;
+                ulong diskSize;
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    diskSize = 0;
+                    diskSelectionBox.Items.Add("Disk " + i++.ToString());
+
+                    diskSize += ulong.Parse(getValue(obj, "Size"));
+                    string model = getValue(obj, "Model");
+                    string partitions = getValue(obj, "Partitions");
+                    string bps = getValue(obj, "BytesPerSector");
+
+                    DiskInfo disk;
+
+                    disk.size = (diskSize / 1000 / 1000 / 1000).ToString();
+                    disk.model = model;
+                    disk.partitions = partitions;
+                    disk.bps = bps;
+
+                    disks.Add(disk);
+                }
+                diskSelectionBox.SelectedIndex = 0;
+
                 // Video Controller //
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
                 foreach (ManagementObject obj in searcher.Get())
@@ -170,7 +198,6 @@ namespace Diag
                     monitorDropDownBox.Items.Add("Monitor " + ile);
                     ++ile;
                 }
-
                 monitorDropDownBox.SelectedIndex = 0;
 
 
@@ -346,15 +373,33 @@ namespace Diag
 
         private void monitorDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string width = screens[monitorDropDownBox.SelectedIndex].WorkingArea.Width.ToString();
+            string height = screens[monitorDropDownBox.SelectedIndex].WorkingArea.Height.ToString();
             string bpp = screens[monitorDropDownBox.SelectedIndex].BitsPerPixel.ToString();
+            string primary = screens[monitorDropDownBox.SelectedIndex].Primary.ToString();
             
-            setValue(monitorIdLabel, monitorIdTextBox, bpp);
+            setValue(monitorBppLabel, monitorIdTextBox, bpp);
+            setValue(monitorResolutionLabel, monitorResolutionTextBox, width, " x ", height);
+            setValue(monitorPrimaryLabel, monitorPrimaryBox, primary);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             running = false;
+        }
+
+        private void diskSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string size = disks[diskSelectionBox.SelectedIndex].size;
+            string model = disks[diskSelectionBox.SelectedIndex].model;
+            string partitions = disks[diskSelectionBox.SelectedIndex].partitions;
+            string bps = disks[diskSelectionBox.SelectedIndex].bps;
+
+
+            setValue(diskSizeLabel, diskSizeBox, size, null, null, " GB");
+            setValue(diskModelLabel, diskModelBox, model);
+            setValue(diskPartitionsLabel, diskPartitionsBox, partitions);
+            setValue(diskBpsLabel, diskBpsBox, bps);
         }
     }
 
@@ -376,10 +421,11 @@ namespace Diag
 		public string serialNumber;
 	}
 
-    struct MonitorInfo
+    struct DiskInfo
     {
-        public string id;
-        public string width;
-        public string height;
+        public string model;
+        public string size;
+        public string partitions;
+        public string bps;
     }
 }

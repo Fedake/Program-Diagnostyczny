@@ -33,7 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.processorPage = new System.Windows.Forms.TabPage();
-            this.processorLogoBox = new System.Windows.Forms.PictureBox();
             this.cpuUsageChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cacheGroup = new System.Windows.Forms.GroupBox();
             this.cache3Box = new System.Windows.Forms.TextBox();
@@ -67,6 +66,11 @@
             this.moboModelLabel = new System.Windows.Forms.Label();
             this.moboManuLabel = new System.Windows.Forms.Label();
             this.memoryPage = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.diskSelectionBox = new System.Windows.Forms.ComboBox();
+            this.diskSelectLabel = new System.Windows.Forms.Label();
+            this.diskSizeBox = new System.Windows.Forms.TextBox();
+            this.diskSizeLabel = new System.Windows.Forms.Label();
             this.memoryModuleInfoGroup = new System.Windows.Forms.GroupBox();
             this.memoryBankBox = new System.Windows.Forms.TextBox();
             this.memoryBankLabel = new System.Windows.Forms.Label();
@@ -87,14 +91,15 @@
             this.monitorDropDownBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monitorGroup = new System.Windows.Forms.GroupBox();
-            this.monitorIdLabel = new System.Windows.Forms.Label();
+            this.monitorPrimaryLabel = new System.Windows.Forms.Label();
+            this.monitorPrimaryBox = new System.Windows.Forms.TextBox();
+            this.monitorBppLabel = new System.Windows.Forms.Label();
             this.monitorIdTextBox = new System.Windows.Forms.TextBox();
             this.monitorResolutionTextBox = new System.Windows.Forms.TextBox();
             this.monitorResolutionLabel = new System.Windows.Forms.Label();
             this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
-            this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
             this.videoCardDriverBox = new System.Windows.Forms.TextBox();
             this.videoCardDriverLabel = new System.Windows.Forms.Label();
             this.videoCardRamLabel = new System.Windows.Forms.Label();
@@ -105,7 +110,6 @@
             this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
             this.osUpTimeTextBox = new System.Windows.Forms.TextBox();
             this.osUpTimeLabel = new System.Windows.Forms.Label();
-            this.systemLogoBox = new System.Windows.Forms.PictureBox();
             this.osBootBox = new System.Windows.Forms.TextBox();
             this.osBootLabel = new System.Windows.Forms.Label();
             this.osInstallBox = new System.Windows.Forms.TextBox();
@@ -121,9 +125,17 @@
             this.disclaimerTextBox = new System.Windows.Forms.TextBox();
             this.authorsGroup = new System.Windows.Forms.GroupBox();
             this.authorsTextBox = new System.Windows.Forms.TextBox();
+            this.processorLogoBox = new System.Windows.Forms.PictureBox();
+            this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
+            this.systemLogoBox = new System.Windows.Forms.PictureBox();
+            this.diskModelBox = new System.Windows.Forms.TextBox();
+            this.diskModelLabel = new System.Windows.Forms.Label();
+            this.diskPartitionsBox = new System.Windows.Forms.TextBox();
+            this.diskPartitionsLabel = new System.Windows.Forms.Label();
+            this.diskBpsBox = new System.Windows.Forms.TextBox();
+            this.diskBpsLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.processorPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).BeginInit();
             this.cacheGroup.SuspendLayout();
             this.processorGeneralGroup.SuspendLayout();
@@ -131,18 +143,20 @@
             this.moboBiosGroup.SuspendLayout();
             this.moboGeneralGroup.SuspendLayout();
             this.memoryPage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.memoryModuleInfoGroup.SuspendLayout();
             this.memoryGeneralGroup.SuspendLayout();
             this.videoPage.SuspendLayout();
             this.monitorGroup.SuspendLayout();
             this.videoGeneralGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
             this.systemPage.SuspendLayout();
             this.systemGeneralGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
             this.infoPage.SuspendLayout();
             this.disclaimerGroup.SuspendLayout();
             this.authorsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -173,14 +187,6 @@
             this.processorPage.TabIndex = 0;
             this.processorPage.Text = "Processor";
             this.processorPage.UseVisualStyleBackColor = true;
-            // 
-            // processorLogoBox
-            // 
-            this.processorLogoBox.Location = new System.Drawing.Point(166, 88);
-            this.processorLogoBox.Name = "processorLogoBox";
-            this.processorLogoBox.Size = new System.Drawing.Size(155, 102);
-            this.processorLogoBox.TabIndex = 9;
-            this.processorLogoBox.TabStop = false;
             // 
             // cpuUsageChart
             // 
@@ -508,6 +514,7 @@
             // 
             // memoryPage
             // 
+            this.memoryPage.Controls.Add(this.groupBox1);
             this.memoryPage.Controls.Add(this.memoryModuleInfoGroup);
             this.memoryPage.Controls.Add(this.memoryGeneralGroup);
             this.memoryPage.Location = new System.Drawing.Point(4, 22);
@@ -516,6 +523,62 @@
             this.memoryPage.TabIndex = 3;
             this.memoryPage.Text = "Memory";
             this.memoryPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.diskBpsBox);
+            this.groupBox1.Controls.Add(this.diskBpsLabel);
+            this.groupBox1.Controls.Add(this.diskPartitionsBox);
+            this.groupBox1.Controls.Add(this.diskPartitionsLabel);
+            this.groupBox1.Controls.Add(this.diskModelBox);
+            this.groupBox1.Controls.Add(this.diskModelLabel);
+            this.groupBox1.Controls.Add(this.diskSelectionBox);
+            this.groupBox1.Controls.Add(this.diskSelectLabel);
+            this.groupBox1.Controls.Add(this.diskSizeBox);
+            this.groupBox1.Controls.Add(this.diskSizeLabel);
+            this.groupBox1.Location = new System.Drawing.Point(3, 169);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 101);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Disk Storage";
+            // 
+            // diskSelectionBox
+            // 
+            this.diskSelectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.diskSelectionBox.FormattingEnabled = true;
+            this.diskSelectionBox.Location = new System.Drawing.Point(87, 19);
+            this.diskSelectionBox.Name = "diskSelectionBox";
+            this.diskSelectionBox.Size = new System.Drawing.Size(65, 21);
+            this.diskSelectionBox.TabIndex = 8;
+            this.diskSelectionBox.SelectedIndexChanged += new System.EventHandler(this.diskSelectionBox_SelectedIndexChanged);
+            // 
+            // diskSelectLabel
+            // 
+            this.diskSelectLabel.AutoSize = true;
+            this.diskSelectLabel.Location = new System.Drawing.Point(20, 22);
+            this.diskSelectLabel.Name = "diskSelectLabel";
+            this.diskSelectLabel.Size = new System.Drawing.Size(61, 13);
+            this.diskSelectLabel.TabIndex = 7;
+            this.diskSelectLabel.Text = "Select Disc";
+            // 
+            // diskSizeBox
+            // 
+            this.diskSizeBox.Location = new System.Drawing.Point(223, 19);
+            this.diskSizeBox.Name = "diskSizeBox";
+            this.diskSizeBox.ReadOnly = true;
+            this.diskSizeBox.Size = new System.Drawing.Size(105, 20);
+            this.diskSizeBox.TabIndex = 1;
+            this.diskSizeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskSizeLabel
+            // 
+            this.diskSizeLabel.AutoSize = true;
+            this.diskSizeLabel.Location = new System.Drawing.Point(160, 22);
+            this.diskSizeLabel.Name = "diskSizeLabel";
+            this.diskSizeLabel.Size = new System.Drawing.Size(54, 13);
+            this.diskSizeLabel.TabIndex = 0;
+            this.diskSizeLabel.Text = "Total Size";
             // 
             // memoryModuleInfoGroup
             // 
@@ -712,7 +775,9 @@
             // 
             // monitorGroup
             // 
-            this.monitorGroup.Controls.Add(this.monitorIdLabel);
+            this.monitorGroup.Controls.Add(this.monitorPrimaryLabel);
+            this.monitorGroup.Controls.Add(this.monitorPrimaryBox);
+            this.monitorGroup.Controls.Add(this.monitorBppLabel);
             this.monitorGroup.Controls.Add(this.monitorIdTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionLabel);
@@ -723,37 +788,57 @@
             this.monitorGroup.TabStop = false;
             this.monitorGroup.Text = "Monitor";
             // 
-            // monitorIdLabel
+            // monitorPrimaryLabel
             // 
-            this.monitorIdLabel.AutoSize = true;
-            this.monitorIdLabel.Location = new System.Drawing.Point(40, 22);
-            this.monitorIdLabel.Name = "monitorIdLabel";
-            this.monitorIdLabel.Size = new System.Drawing.Size(55, 13);
-            this.monitorIdLabel.TabIndex = 5;
-            this.monitorIdLabel.Text = "Device ID";
+            this.monitorPrimaryLabel.AutoSize = true;
+            this.monitorPrimaryLabel.Location = new System.Drawing.Point(160, 48);
+            this.monitorPrimaryLabel.Name = "monitorPrimaryLabel";
+            this.monitorPrimaryLabel.Size = new System.Drawing.Size(41, 13);
+            this.monitorPrimaryLabel.TabIndex = 7;
+            this.monitorPrimaryLabel.Text = "Primary";
+            this.monitorPrimaryLabel.UseMnemonic = false;
+            // 
+            // monitorPrimaryBox
+            // 
+            this.monitorPrimaryBox.Location = new System.Drawing.Point(207, 45);
+            this.monitorPrimaryBox.Name = "monitorPrimaryBox";
+            this.monitorPrimaryBox.ReadOnly = true;
+            this.monitorPrimaryBox.Size = new System.Drawing.Size(43, 20);
+            this.monitorPrimaryBox.TabIndex = 6;
+            this.monitorPrimaryBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // monitorBppLabel
+            // 
+            this.monitorBppLabel.AutoSize = true;
+            this.monitorBppLabel.Location = new System.Drawing.Point(29, 48);
+            this.monitorBppLabel.Name = "monitorBppLabel";
+            this.monitorBppLabel.Size = new System.Drawing.Size(66, 13);
+            this.monitorBppLabel.TabIndex = 5;
+            this.monitorBppLabel.Text = "Bits per pixel";
+            this.monitorBppLabel.UseMnemonic = false;
             // 
             // monitorIdTextBox
             // 
-            this.monitorIdTextBox.Location = new System.Drawing.Point(101, 19);
+            this.monitorIdTextBox.Location = new System.Drawing.Point(101, 45);
             this.monitorIdTextBox.Name = "monitorIdTextBox";
             this.monitorIdTextBox.ReadOnly = true;
-            this.monitorIdTextBox.Size = new System.Drawing.Size(182, 20);
+            this.monitorIdTextBox.Size = new System.Drawing.Size(29, 20);
             this.monitorIdTextBox.TabIndex = 4;
             this.monitorIdTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // monitorResolutionTextBox
             // 
-            this.monitorResolutionTextBox.Location = new System.Drawing.Point(101, 45);
+            this.monitorResolutionTextBox.Location = new System.Drawing.Point(101, 19);
             this.monitorResolutionTextBox.Name = "monitorResolutionTextBox";
             this.monitorResolutionTextBox.ReadOnly = true;
-            this.monitorResolutionTextBox.Size = new System.Drawing.Size(182, 20);
+            this.monitorResolutionTextBox.Size = new System.Drawing.Size(149, 20);
             this.monitorResolutionTextBox.TabIndex = 3;
             this.monitorResolutionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // monitorResolutionLabel
             // 
             this.monitorResolutionLabel.AutoSize = true;
-            this.monitorResolutionLabel.Location = new System.Drawing.Point(38, 48);
+            this.monitorResolutionLabel.Location = new System.Drawing.Point(38, 22);
             this.monitorResolutionLabel.Name = "monitorResolutionLabel";
             this.monitorResolutionLabel.Size = new System.Drawing.Size(57, 13);
             this.monitorResolutionLabel.TabIndex = 2;
@@ -793,14 +878,6 @@
             this.videoGeneralGroup.TabIndex = 2;
             this.videoGeneralGroup.TabStop = false;
             this.videoGeneralGroup.Text = "General";
-            // 
-            // videoCardLogoBox
-            // 
-            this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
-            this.videoCardLogoBox.Name = "videoCardLogoBox";
-            this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
-            this.videoCardLogoBox.TabIndex = 8;
-            this.videoCardLogoBox.TabStop = false;
             // 
             // videoCardDriverBox
             // 
@@ -906,14 +983,6 @@
             this.osUpTimeLabel.Size = new System.Drawing.Size(84, 13);
             this.osUpTimeLabel.TabIndex = 11;
             this.osUpTimeLabel.Text = "System Up Time";
-            // 
-            // systemLogoBox
-            // 
-            this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
-            this.systemLogoBox.Name = "systemLogoBox";
-            this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
-            this.systemLogoBox.TabIndex = 10;
-            this.systemLogoBox.TabStop = false;
             // 
             // osBootBox
             // 
@@ -1062,6 +1131,84 @@
     "ń.\r\n\r\n\r\nAutorem grafiki ikony programu jest Robek Kuśka.";
             this.authorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // processorLogoBox
+            // 
+            this.processorLogoBox.Location = new System.Drawing.Point(166, 88);
+            this.processorLogoBox.Name = "processorLogoBox";
+            this.processorLogoBox.Size = new System.Drawing.Size(155, 102);
+            this.processorLogoBox.TabIndex = 9;
+            this.processorLogoBox.TabStop = false;
+            // 
+            // videoCardLogoBox
+            // 
+            this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
+            this.videoCardLogoBox.Name = "videoCardLogoBox";
+            this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.videoCardLogoBox.TabIndex = 8;
+            this.videoCardLogoBox.TabStop = false;
+            // 
+            // systemLogoBox
+            // 
+            this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
+            this.systemLogoBox.Name = "systemLogoBox";
+            this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.systemLogoBox.TabIndex = 10;
+            this.systemLogoBox.TabStop = false;
+            // 
+            // diskModelBox
+            // 
+            this.diskModelBox.Location = new System.Drawing.Point(73, 48);
+            this.diskModelBox.Name = "diskModelBox";
+            this.diskModelBox.ReadOnly = true;
+            this.diskModelBox.Size = new System.Drawing.Size(241, 20);
+            this.diskModelBox.TabIndex = 10;
+            this.diskModelBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskModelLabel
+            // 
+            this.diskModelLabel.AutoSize = true;
+            this.diskModelLabel.Location = new System.Drawing.Point(31, 51);
+            this.diskModelLabel.Name = "diskModelLabel";
+            this.diskModelLabel.Size = new System.Drawing.Size(36, 13);
+            this.diskModelLabel.TabIndex = 9;
+            this.diskModelLabel.Text = "Model";
+            // 
+            // diskPartitionsBox
+            // 
+            this.diskPartitionsBox.Location = new System.Drawing.Point(73, 74);
+            this.diskPartitionsBox.Name = "diskPartitionsBox";
+            this.diskPartitionsBox.ReadOnly = true;
+            this.diskPartitionsBox.Size = new System.Drawing.Size(65, 20);
+            this.diskPartitionsBox.TabIndex = 12;
+            this.diskPartitionsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskPartitionsLabel
+            // 
+            this.diskPartitionsLabel.AutoSize = true;
+            this.diskPartitionsLabel.Location = new System.Drawing.Point(17, 77);
+            this.diskPartitionsLabel.Name = "diskPartitionsLabel";
+            this.diskPartitionsLabel.Size = new System.Drawing.Size(50, 13);
+            this.diskPartitionsLabel.TabIndex = 11;
+            this.diskPartitionsLabel.Text = "Partitions";
+            // 
+            // diskBpsBox
+            // 
+            this.diskBpsBox.Location = new System.Drawing.Point(249, 75);
+            this.diskBpsBox.Name = "diskBpsBox";
+            this.diskBpsBox.ReadOnly = true;
+            this.diskBpsBox.Size = new System.Drawing.Size(65, 20);
+            this.diskBpsBox.TabIndex = 14;
+            this.diskBpsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskBpsLabel
+            // 
+            this.diskBpsLabel.AutoSize = true;
+            this.diskBpsLabel.Location = new System.Drawing.Point(160, 78);
+            this.diskBpsLabel.Name = "diskBpsLabel";
+            this.diskBpsLabel.Size = new System.Drawing.Size(83, 13);
+            this.diskBpsLabel.TabIndex = 13;
+            this.diskBpsLabel.Text = "Bytes per sector";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1076,7 +1223,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).EndInit();
             this.cacheGroup.ResumeLayout(false);
             this.cacheGroup.PerformLayout();
@@ -1088,6 +1234,8 @@
             this.moboGeneralGroup.ResumeLayout(false);
             this.moboGeneralGroup.PerformLayout();
             this.memoryPage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.memoryModuleInfoGroup.ResumeLayout(false);
             this.memoryModuleInfoGroup.PerformLayout();
             this.memoryGeneralGroup.ResumeLayout(false);
@@ -1098,16 +1246,17 @@
             this.monitorGroup.PerformLayout();
             this.videoGeneralGroup.ResumeLayout(false);
             this.videoGeneralGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
             this.systemPage.ResumeLayout(false);
             this.systemGeneralGroup.ResumeLayout(false);
             this.systemGeneralGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
             this.infoPage.ResumeLayout(false);
             this.disclaimerGroup.ResumeLayout(false);
             this.disclaimerGroup.PerformLayout();
             this.authorsGroup.ResumeLayout(false);
             this.authorsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1199,13 +1348,26 @@
         private System.Windows.Forms.ComboBox monitorDropDownBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox monitorGroup;
-        private System.Windows.Forms.Label monitorIdLabel;
+        private System.Windows.Forms.Label monitorBppLabel;
         private System.Windows.Forms.TextBox monitorIdTextBox;
         private System.Windows.Forms.TextBox monitorResolutionTextBox;
         private System.Windows.Forms.Label monitorResolutionLabel;
         private System.Windows.Forms.TextBox authorsTextBox;
         private System.Windows.Forms.GroupBox disclaimerGroup;
         private System.Windows.Forms.TextBox disclaimerTextBox;
+        private System.Windows.Forms.Label monitorPrimaryLabel;
+        private System.Windows.Forms.TextBox monitorPrimaryBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label diskSelectLabel;
+        private System.Windows.Forms.TextBox diskSizeBox;
+        private System.Windows.Forms.Label diskSizeLabel;
+        private System.Windows.Forms.ComboBox diskSelectionBox;
+        private System.Windows.Forms.TextBox diskModelBox;
+        private System.Windows.Forms.Label diskModelLabel;
+        private System.Windows.Forms.TextBox diskPartitionsBox;
+        private System.Windows.Forms.Label diskPartitionsLabel;
+        private System.Windows.Forms.TextBox diskBpsBox;
+        private System.Windows.Forms.Label diskBpsLabel;
     }
 }
 
