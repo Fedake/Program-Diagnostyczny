@@ -18,9 +18,8 @@ namespace Diag
     {
 		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
 		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
-        List<MonitorInfo> monitorsList = new List<MonitorInfo>();
 
-        Screen[] monitors = Screen.AllScreens;
+        Screen[] screens = Screen.AllScreens;
 
         PerformanceCounter cpuCounter = new PerformanceCounter();
 
@@ -66,9 +65,9 @@ namespace Diag
 
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    this.processorName.Text = getValue(obj, "Name");
-                    this.cores.Text = getValue(obj, "NumberOfCores");
-                    this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+                    setValue(processorNameLabel, processorNameBox, getValue(obj, "Name"));
+                    setValue(coresLabel, coresBox, getValue(obj, "NumberOfCores"));
+                    setValue(threadsLabel, threadsBox, getValue(obj, "NumberOfLogicalProcessors"));
 
                     if (getValue(obj, "Manufacturer").IndexOf("Intel") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
                     else if (getValue(obj, "Manufacturer").IndexOf("AMD") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
@@ -81,20 +80,20 @@ namespace Diag
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     string size = "";
-                    size = obj["InstalledSize"].ToString() + " kB";
+                    size = getValue(obj, "InstalledSize");
 
-                    switch (obj["Level"].ToString())
+                    switch (getValue(obj, "Level"))
                     {
                         case "3":
-                            cache1Box.Text = size;
+                            setValue(cache1Label, cache1Box, size, null, null, " kB");
                             break;
 
                         case "4":
-                            cache2Box.Text = size;
+                            setValue(cache2Label, cache2Box, size, null, null, " kB");
                             break;
 
                         case "5":
-                            cache3Box.Text = size;
+                            setValue(cache3Label, cache3Box, size, null, null, " kB");
                             break;
                     }
                 }
@@ -103,24 +102,18 @@ namespace Diag
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_BaseBoard");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    foreach (PropertyData data in obj.Properties)
-                    {
-                        if (data.Name == "Manufacturer") this.moboManuBox.Text = data.Value.ToString();
-                        if (data.Name == "Product") this.moboModelBox.Text = data.Value.ToString();
-                        if (data.Name == "SerialNumber") this.moboSerialTextBox.Text = data.Value.ToString();
-                    }
+                    setValue(moboManuLabel, moboManuBox, getValue(obj, "Manufacturer"));
+                    setValue(moboModelLabel, moboModelBox, getValue(obj, "Product"));
+                    setValue(moboSerialLabel, moboSerialTextBox, getValue(obj, "SerialNumber"));
                 }
 
                 // BIOS //
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_BIOS");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    foreach (PropertyData data in obj.Properties)
-                    {
-                        if (data.Name == "Manufacturer") this.biosManuBox.Text = data.Value.ToString();
-                        if (data.Name == "SMBIOSBIOSVersion") this.biosVerBox.Text = data.Value.ToString();
-                        if (data.Name == "SerialNumber") this.biosSerialTextBox.Text = data.Value.ToString();
-                    }
+                    setValue(biosManuLabel, biosManuBox, getValue(obj, "Manufacturer"));
+                    setValue(biosVerLabel, biosVerBox, getValue(obj, "SMBIOSBIOSVersion"));
+                    setValue(biosSerialLabel, biosSerialTextBox, getValue(obj, "SerialNumber"));
                 }
 
                 // Physical Memory //
@@ -153,6 +146,7 @@ namespace Diag
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
                 foreach (ManagementObject obj in searcher.Get())
                 {
+
                     VideoCardDropDownBox.Items.Add(getValue(obj, "Name"));
 
                     VideoCardInfo info;
@@ -169,18 +163,14 @@ namespace Diag
                 }
                 VideoCardDropDownBox.SelectedIndex = 0;
 
-                searcher.Query = new ObjectQuery("SELECT * FROM Win32_DesktopMonitor");
-                foreach (ManagementObject obj in searcher.Get())
+                // Monitors //
+                int ile = 1;
+                foreach (Screen screen in screens)
                 {
-                    monitorDropDownBox.Items.Add(getValue(obj, "Name"));
-
-                    MonitorInfo info;
-                    info.id = getValue(obj, "DeviceID");
-                    info.width = getValue(obj, "ScreenWidth");
-                    info.height = getValue(obj, "ScreenHeight");
-
-                    monitorsList.Add(info);
+                    monitorDropDownBox.Items.Add("Monitor " + ile);
+                    ++ile;
                 }
+
                 monitorDropDownBox.SelectedIndex = 0;
 
 
@@ -228,7 +218,8 @@ namespace Diag
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString() + "\n" + ex.Message.ToString());
+                MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
             }
         }
 
@@ -258,7 +249,8 @@ namespace Diag
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Exception while invoking in CPU Usage thread");
+                        MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                        System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
                     }
                 }));
 
@@ -268,7 +260,8 @@ namespace Diag
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception while running CPU Usage thread");
+                MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
             }
         }
 
@@ -353,12 +346,10 @@ namespace Diag
 
         private void monitorDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = monitorsList[monitorDropDownBox.SelectedIndex].id;
-            string width = monitorsList[monitorDropDownBox.SelectedIndex].width;
-            string height = monitorsList[monitorDropDownBox.SelectedIndex].height;
 
-            setValue(monitorIdLabel, monitorIdTextBox, id);
-            setValue(monitorResolutionLabel, monitorResolutionTextBox, width, " x ", height);
+            string bpp = screens[monitorDropDownBox.SelectedIndex].BitsPerPixel.ToString();
+            
+            setValue(monitorIdLabel, monitorIdTextBox, bpp);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

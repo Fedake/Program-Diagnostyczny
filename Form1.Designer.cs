@@ -46,10 +46,10 @@
             this.cpuUsageLabel = new System.Windows.Forms.Label();
             this.cpuUsageBox = new System.Windows.Forms.TextBox();
             this.coresLabel = new System.Windows.Forms.Label();
-            this.cores = new System.Windows.Forms.TextBox();
-            this.processorName = new System.Windows.Forms.TextBox();
+            this.coresBox = new System.Windows.Forms.TextBox();
+            this.processorNameBox = new System.Windows.Forms.TextBox();
             this.processorNameLabel = new System.Windows.Forms.Label();
-            this.threads = new System.Windows.Forms.TextBox();
+            this.threadsBox = new System.Windows.Forms.TextBox();
             this.threadsLabel = new System.Windows.Forms.Label();
             this.moboPage = new System.Windows.Forms.TabPage();
             this.moboBiosGroup = new System.Windows.Forms.GroupBox();
@@ -269,10 +269,10 @@
             this.processorGeneralGroup.Controls.Add(this.cpuUsageLabel);
             this.processorGeneralGroup.Controls.Add(this.cpuUsageBox);
             this.processorGeneralGroup.Controls.Add(this.coresLabel);
-            this.processorGeneralGroup.Controls.Add(this.cores);
-            this.processorGeneralGroup.Controls.Add(this.processorName);
+            this.processorGeneralGroup.Controls.Add(this.coresBox);
+            this.processorGeneralGroup.Controls.Add(this.processorNameBox);
             this.processorGeneralGroup.Controls.Add(this.processorNameLabel);
-            this.processorGeneralGroup.Controls.Add(this.threads);
+            this.processorGeneralGroup.Controls.Add(this.threadsBox);
             this.processorGeneralGroup.Controls.Add(this.threadsLabel);
             this.processorGeneralGroup.Location = new System.Drawing.Point(3, 3);
             this.processorGeneralGroup.Name = "processorGeneralGroup";
@@ -308,25 +308,25 @@
             this.coresLabel.TabIndex = 2;
             this.coresLabel.Text = "Cores";
             // 
-            // cores
+            // coresBox
             // 
-            this.cores.Location = new System.Drawing.Point(47, 45);
-            this.cores.Name = "cores";
-            this.cores.ReadOnly = true;
-            this.cores.Size = new System.Drawing.Size(20, 20);
-            this.cores.TabIndex = 3;
-            this.cores.Text = "99";
-            this.cores.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.coresBox.Location = new System.Drawing.Point(47, 45);
+            this.coresBox.Name = "coresBox";
+            this.coresBox.ReadOnly = true;
+            this.coresBox.Size = new System.Drawing.Size(20, 20);
+            this.coresBox.TabIndex = 3;
+            this.coresBox.Text = "99";
+            this.coresBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // processorName
+            // processorNameBox
             // 
-            this.processorName.Location = new System.Drawing.Point(47, 19);
-            this.processorName.Name = "processorName";
-            this.processorName.ReadOnly = true;
-            this.processorName.Size = new System.Drawing.Size(271, 20);
-            this.processorName.TabIndex = 1;
-            this.processorName.Text = "Witamson";
-            this.processorName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.processorNameBox.Location = new System.Drawing.Point(47, 19);
+            this.processorNameBox.Name = "processorNameBox";
+            this.processorNameBox.ReadOnly = true;
+            this.processorNameBox.Size = new System.Drawing.Size(271, 20);
+            this.processorNameBox.TabIndex = 1;
+            this.processorNameBox.Text = "Witamson";
+            this.processorNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // processorNameLabel
             // 
@@ -337,15 +337,15 @@
             this.processorNameLabel.TabIndex = 0;
             this.processorNameLabel.Text = "Name";
             // 
-            // threads
+            // threadsBox
             // 
-            this.threads.Location = new System.Drawing.Point(125, 45);
-            this.threads.Name = "threads";
-            this.threads.ReadOnly = true;
-            this.threads.Size = new System.Drawing.Size(20, 20);
-            this.threads.TabIndex = 5;
-            this.threads.Text = "99";
-            this.threads.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.threadsBox.Location = new System.Drawing.Point(125, 45);
+            this.threadsBox.Name = "threadsBox";
+            this.threadsBox.ReadOnly = true;
+            this.threadsBox.Size = new System.Drawing.Size(20, 20);
+            this.threadsBox.TabIndex = 5;
+            this.threadsBox.Text = "99";
+            this.threadsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // threadsLabel
             // 
@@ -695,7 +695,7 @@
             // 
             this.monitorDropDownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.monitorDropDownBox.FormattingEnabled = true;
-            this.monitorDropDownBox.Location = new System.Drawing.Point(105, 154);
+            this.monitorDropDownBox.Location = new System.Drawing.Point(105, 170);
             this.monitorDropDownBox.Name = "monitorDropDownBox";
             this.monitorDropDownBox.Size = new System.Drawing.Size(225, 21);
             this.monitorDropDownBox.TabIndex = 10;
@@ -704,7 +704,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 157);
+            this.label1.Location = new System.Drawing.Point(23, 173);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 8;
@@ -716,7 +716,7 @@
             this.monitorGroup.Controls.Add(this.monitorIdTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionTextBox);
             this.monitorGroup.Controls.Add(this.monitorResolutionLabel);
-            this.monitorGroup.Location = new System.Drawing.Point(3, 181);
+            this.monitorGroup.Location = new System.Drawing.Point(3, 197);
             this.monitorGroup.Name = "monitorGroup";
             this.monitorGroup.Size = new System.Drawing.Size(334, 75);
             this.monitorGroup.TabIndex = 7;
@@ -1039,7 +1039,6 @@
             this.disclaimerTextBox.Text = "Loga firm występujące w programie są\r\nzastrzeżonymi znakami towarowymi\r\ni zostały" +
     " użyte jedynie w celach edukacyjnych.\r\n\r\n";
             this.disclaimerTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.disclaimerTextBox.UseWaitCursor = true;
             // 
             // authorsGroup
             // 
@@ -1117,11 +1116,11 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage processorPage;
-        private System.Windows.Forms.TextBox processorName;
+        private System.Windows.Forms.TextBox processorNameBox;
         private System.Windows.Forms.Label processorNameLabel;
-        private System.Windows.Forms.TextBox threads;
+        private System.Windows.Forms.TextBox threadsBox;
         private System.Windows.Forms.Label threadsLabel;
-        private System.Windows.Forms.TextBox cores;
+        private System.Windows.Forms.TextBox coresBox;
         private System.Windows.Forms.Label coresLabel;
         private System.Windows.Forms.TabPage videoPage;
         private System.Windows.Forms.GroupBox processorGeneralGroup;

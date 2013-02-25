@@ -21,7 +21,9 @@ namespace Diag
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString() + "\n" + ex.Message.ToString());
+
+                MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
             }
         }
     }
