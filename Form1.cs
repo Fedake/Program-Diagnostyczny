@@ -331,7 +331,7 @@ namespace Diag
 
 
 			rurzyczkaBox.Text = "True";
-            if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
+            if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.IntelGraphics;
 			if (processor.IndexOf("GeForce") != -1) 
 			{
 				videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
