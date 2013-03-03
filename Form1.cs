@@ -11,8 +11,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 using System.Management;
 using System.Diagnostics;
-using Microsoft.WindowsAPICodePack.Taskbar;
-
 
 namespace Diag
 {
@@ -20,9 +18,10 @@ namespace Diag
     {
 		List<VideoCardInfo> videoCards = new List<VideoCardInfo>();
 		List<MemoryInfo> ramSticks = new List<MemoryInfo>();
-        List<MonitorInfo> monitorsList = new List<MonitorInfo>();
+        List<DiskInfo> disks = new List<DiskInfo>();
 
-        Screen[] monitors = Screen.AllScreens;
+
+        Screen[] screens = Screen.AllScreens;
 
         PerformanceCounter cpuCounter = new PerformanceCounter();
 
@@ -68,9 +67,9 @@ namespace Diag
 
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    this.processorName.Text = getValue(obj, "Name");
-                    this.cores.Text = getValue(obj, "NumberOfCores");
-                    this.threads.Text = getValue(obj, "NumberOfLogicalProcessors");
+                    setValue(processorNameLabel, processorNameBox, getValue(obj, "Name"));
+                    setValue(coresLabel, coresBox, getValue(obj, "NumberOfCores"));
+                    setValue(threadsLabel, threadsBox, getValue(obj, "NumberOfLogicalProcessors"));
 
                     if (getValue(obj, "Manufacturer").IndexOf("Intel") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Intel;
                     else if (getValue(obj, "Manufacturer").IndexOf("AMD") != -1) processorLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.AMD;
@@ -83,20 +82,20 @@ namespace Diag
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     string size = "";
-                    size = obj["InstalledSize"].ToString() + " kB";
+                    size = getValue(obj, "InstalledSize");
 
-                    switch (obj["Level"].ToString())
+                    switch (getValue(obj, "Level"))
                     {
                         case "3":
-                            cache1Box.Text = size;
+                            setValue(cache1Label, cache1Box, size, null, null, " kB");
                             break;
 
                         case "4":
-                            cache2Box.Text = size;
+                            setValue(cache2Label, cache2Box, size, null, null, " kB");
                             break;
 
                         case "5":
-                            cache3Box.Text = size;
+                            setValue(cache3Label, cache3Box, size, null, null, " kB");
                             break;
                     }
                 }
@@ -105,24 +104,18 @@ namespace Diag
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_BaseBoard");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    foreach (PropertyData data in obj.Properties)
-                    {
-                        if (data.Name == "Manufacturer") this.moboManuBox.Text = data.Value.ToString();
-                        if (data.Name == "Product") this.moboModelBox.Text = data.Value.ToString();
-                        if (data.Name == "SerialNumber") this.moboSerialTextBox.Text = data.Value.ToString();
-                    }
+                    setValue(moboManuLabel, moboManuBox, getValue(obj, "Manufacturer"));
+                    setValue(moboModelLabel, moboModelBox, getValue(obj, "Product"));
+                    setValue(moboSerialLabel, moboSerialTextBox, getValue(obj, "SerialNumber"));
                 }
 
                 // BIOS //
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_BIOS");
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    foreach (PropertyData data in obj.Properties)
-                    {
-                        if (data.Name == "Manufacturer") this.biosManuBox.Text = data.Value.ToString();
-                        if (data.Name == "SMBIOSBIOSVersion") this.biosVerBox.Text = data.Value.ToString();
-                        if (data.Name == "SerialNumber") this.biosSerialTextBox.Text = data.Value.ToString();
-                    }
+                    setValue(biosManuLabel, biosManuBox, getValue(obj, "Manufacturer"));
+                    setValue(biosVerLabel, biosVerBox, getValue(obj, "SMBIOSBIOSVersion"));
+                    setValue(biosSerialLabel, biosSerialTextBox, getValue(obj, "SerialNumber"));
                 }
 
                 // Physical Memory //
@@ -151,10 +144,37 @@ namespace Diag
                 totalSize = totalSize / 1024 / 1024;
                 this.memoryTotalSizeBox.Text = totalSize.ToString() + " MB";
 
+                // Disk Storage //
+                searcher.Query = new ObjectQuery("SELECT * FROM Win32_DiskDrive");
+                
+                i = 1;
+                ulong diskSize;
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    diskSize = 0;
+                    diskSelectionBox.Items.Add("Disk " + i++.ToString());
+
+                    diskSize += ulong.Parse(getValue(obj, "Size"));
+                    string model = getValue(obj, "Model");
+                    string partitions = getValue(obj, "Partitions");
+                    string bps = getValue(obj, "BytesPerSector");
+
+                    DiskInfo disk;
+
+                    disk.size = (diskSize / 1000 / 1000 / 1000).ToString();
+                    disk.model = model;
+                    disk.partitions = partitions;
+                    disk.bps = bps;
+
+                    disks.Add(disk);
+                }
+                diskSelectionBox.SelectedIndex = 0;
+
                 // Video Controller //
                 searcher.Query = new ObjectQuery("SELECT * FROM Win32_VideoController");
                 foreach (ManagementObject obj in searcher.Get())
                 {
+
                     VideoCardDropDownBox.Items.Add(getValue(obj, "Name"));
 
                     VideoCardInfo info;
@@ -171,17 +191,12 @@ namespace Diag
                 }
                 VideoCardDropDownBox.SelectedIndex = 0;
 
-                searcher.Query = new ObjectQuery("SELECT * FROM Win32_DesktopMonitor");
-                foreach (ManagementObject obj in searcher.Get())
+                // Monitors //
+                int ile = 1;
+                foreach (Screen screen in screens)
                 {
-                    monitorDropDownBox.Items.Add(getValue(obj, "Name"));
-
-                    MonitorInfo info;
-                    info.id = getValue(obj, "DeviceID");
-                    info.width = getValue(obj, "ScreenWidth");
-                    info.height = getValue(obj, "ScreenHeight");
-
-                    monitorsList.Add(info);
+                    monitorDropDownBox.Items.Add("Monitor " + ile);
+                    ++ile;
                 }
                 monitorDropDownBox.SelectedIndex = 0;
 
@@ -206,7 +221,9 @@ namespace Diag
 
                         if (ver == "5.1" || ver == "5.2")
                         {
-                            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));                            if (is64bit)
+                            bool is64bit = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));
+
+                            if (is64bit)
                                 osArchitectureBox.Text = "64 bit";
                             else
                                 osArchitectureBox.Text = "32 bit";
@@ -228,7 +245,8 @@ namespace Diag
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString() + "\n" + ex.Message.ToString());
+                MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
             }
         }
 
@@ -258,7 +276,8 @@ namespace Diag
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Exception while invoking in CPU Usage thread");
+                        MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                        System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
                     }
                 }));
 
@@ -268,7 +287,8 @@ namespace Diag
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception while running CPU Usage thread");
+                MessageBox.Show("An exception occured. Program may not work properly.\nException content will be saved to file: log.txt");
+                System.IO.File.WriteAllText(".\\log.txt", ex.ToString() + "\n" + ex.Message.ToString());
             }
         }
 
@@ -281,6 +301,24 @@ namespace Diag
                 return "0";
         }
 
+        // Check if property is available and set it
+        private void setValue(Label label, TextBox textbox, string text, string between = null, string text2 = null, 
+                                string additional = null)
+        {
+            if (text == "0" || text2 == "0")
+            {
+                label.Enabled = false;
+                textbox.Enabled = false;
+                textbox.Text = "Not available";
+            }
+            else
+            {
+                label.Enabled = true;
+                textbox.Enabled = true;
+                textbox.Text = text + between + text2 + additional;
+            }
+        }
+
         private void updateCPUUsage()
         {
             float usage = cpuCounter.NextValue();
@@ -289,13 +327,6 @@ namespace Diag
             
             if (cpuUsageChart.Series[0].Points.Count > 20)
                 cpuUsageChart.Series[0].Points.RemoveAt(0);
-
-			TaskbarProgressBarState state =TaskbarProgressBarState.Normal;
-			if (usage > 40) state = TaskbarProgressBarState.Paused;
-			if (usage > 80) state = TaskbarProgressBarState.Error;
-
-			TaskbarManager.Instance.SetProgressState(state);
-			TaskbarManager.Instance.SetProgressValue((int)usage, 100);
         }
 
         private void updateUpTime()
@@ -313,58 +344,62 @@ namespace Diag
 			string driver = videoCards[VideoCardDropDownBox.SelectedIndex].driverVersion;
 			string processor = videoCards[VideoCardDropDownBox.SelectedIndex].processor;
 
-            if (width == "0" || height == "0")
-            {
-                resolutionBox.Enabled = false;
-                resolutionLabel.Enabled = false;
-                resolutionBox.Text = "No information available";
-            }
-            else
-            {
-                resolutionBox.Enabled = true;
-                resolutionLabel.Enabled = true;
-                resolutionBox.Text = width + " x " + height;
-            }
+            setValue(resolutionLabel, resolutionBox, width, " x ", height);
+            setValue(videoCardRamLabel, videoCardRamBox, memory, " MB");
+            setValue(videoCardDriverLabel, videoCardDriverBox, driver);
 
-			videoCardRamBox.Text = memory + " MB";
-			videoCardDriverBox.Text = driver;
-
-
-			rurzyczkaBox.Text = "True";
-            if (processor.IndexOf("Intel") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.IntelGraphics;
-			if (processor.IndexOf("GeForce") != -1) 
-			{
+            if (processor.IndexOf("Intel") != -1) 
+                videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.IntelGraphics;
+            else if (processor.IndexOf("GeForce") != -1)
 				videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
-				rurzyczkaBox.Text = "False";
-			}
-			if (processor.IndexOf("Radeon") != -1) videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
+			else if (processor.IndexOf("Radeon") != -1) 
+                videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			memoryBankBox.Text = ramSticks[memorySelectionBox.SelectedIndex].bank;
+            string bank = ramSticks[memorySelectionBox.SelectedIndex].bank;
+            string size = ramSticks[memorySelectionBox.SelectedIndex].size.ToString();
+            string speed = ramSticks[memorySelectionBox.SelectedIndex].speed.ToString();
+            string part = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
+            string serial = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
 
-			memoryModuleSizeBox.Text = ramSticks[memorySelectionBox.SelectedIndex].size.ToString() + " MB";
-			memoryFrequencyBox.Text = ramSticks[memorySelectionBox.SelectedIndex].speed.ToString() + " MHz";
-
-			memoryPartBox.Text = ramSticks[memorySelectionBox.SelectedIndex].partNumber;
-			memorySerialBox.Text = ramSticks[memorySelectionBox.SelectedIndex].serialNumber;
+            setValue(memoryBankLabel, memoryBankBox, bank);
+            setValue(memoryModuleSizeLabel, memoryModuleSizeBox, size, " MB");
+            setValue(memoryFreqencyLabel, memoryFrequencyBox, speed, " MHz");
+            setValue(memoryPartLabel, memoryPartBox, part);
+            setValue(memorySerialLabel, memorySerialBox, serial);
 		}
 
         private void monitorDropDownBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string id = monitorsList[monitorDropDownBox.SelectedIndex].id;
-            string width = monitorsList[monitorDropDownBox.SelectedIndex].width;
-            string height = monitorsList[monitorDropDownBox.SelectedIndex].height;
+            string width = screens[monitorDropDownBox.SelectedIndex].WorkingArea.Width.ToString();
+            string height = screens[monitorDropDownBox.SelectedIndex].WorkingArea.Height.ToString();
+            string bpp = screens[monitorDropDownBox.SelectedIndex].BitsPerPixel.ToString();
+            string primary = screens[monitorDropDownBox.SelectedIndex].Primary.ToString();
             
-
-            monitorIdTextBox.Text = id;
-            monitorResolutionTextBox.Text = width + " x " + height;
+            setValue(monitorBppLabel, monitorIdTextBox, bpp);
+            setValue(monitorResolutionLabel, monitorResolutionTextBox, width, " x ", height);
+            setValue(monitorPrimaryLabel, monitorPrimaryBox, primary);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             running = false;
+        }
+
+        private void diskSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string size = disks[diskSelectionBox.SelectedIndex].size;
+            string model = disks[diskSelectionBox.SelectedIndex].model;
+            string partitions = disks[diskSelectionBox.SelectedIndex].partitions;
+            string bps = disks[diskSelectionBox.SelectedIndex].bps;
+
+
+            setValue(diskSizeLabel, diskSizeBox, size, null, null, " GB");
+            setValue(diskModelLabel, diskModelBox, model);
+            setValue(diskPartitionsLabel, diskPartitionsBox, partitions);
+            setValue(diskBpsLabel, diskBpsBox, bps);
         }
     }
 
@@ -386,10 +421,11 @@ namespace Diag
 		public string serialNumber;
 	}
 
-    struct MonitorInfo
+    struct DiskInfo
     {
-        public string id;
-        public string width;
-        public string height;
+        public string model;
+        public string size;
+        public string partitions;
+        public string bps;
     }
 }
