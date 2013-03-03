@@ -1300,8 +1300,6 @@
         private System.Windows.Forms.Label resolutionLabel;
         private System.Windows.Forms.Label VideoSelectLabel;
         private System.Windows.Forms.ComboBox VideoCardDropDownBox;
-        private System.Windows.Forms.Label addressWidthLabel;
-        private System.Windows.Forms.TextBox addressWidthTextBox;
         private System.Windows.Forms.Label videoCardRamLabel;
         private System.Windows.Forms.TextBox videoCardRamBox;
         private System.Windows.Forms.TextBox videoCardDriverBox;
