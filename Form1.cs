@@ -44,14 +44,19 @@ namespace Diag
 
                 this.cpuUsageChart.Series.Clear();
                 Series series = this.cpuUsageChart.Series.Add(seriesStr);
-                cpuUsageChart.Series[0].ChartType = SeriesChartType.Line;
+                cpuUsageChart.Series[0].ChartType = SeriesChartType.SplineArea;
 
                 series.Points.Add(0);
+                for (int klm = 0; klm < 20; ++klm)
+                {
+                    cpuUsageChart.Series[0].Points.Add(0);
+                }
 
                 cpuUsageChart.Series[0].YAxisType = AxisType.Primary;
                 cpuUsageChart.Series[0].YValueType = ChartValueType.Int32;
                 cpuUsageChart.Series[0].IsXValueIndexed = false;
-                cpuUsageChart.Series[0].Color = Color.Red;
+                cpuUsageChart.Series[0].Color = Color.FromArgb(180, 255, 0, 0);
+                
 
                 cpuUsageChart.ResetAutoValues();
                 cpuUsageChart.ChartAreas[0].AxisY.Maximum = 100;//Max Y 
@@ -354,6 +359,8 @@ namespace Diag
 				videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.GeForce;
 			else if (processor.IndexOf("Radeon") != -1) 
                 videoCardLogoBox.Image = ProgramDiagnostyczny.Properties.Resources.Radeon;
+            else
+                videoCardLogoBox.Image = null;
         }
 
 		private void memorySelectionBox_SelectedIndexChanged(object sender, EventArgs e)

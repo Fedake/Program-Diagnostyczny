@@ -67,6 +67,12 @@
             this.moboManuLabel = new System.Windows.Forms.Label();
             this.memoryPage = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.diskBpsBox = new System.Windows.Forms.TextBox();
+            this.diskBpsLabel = new System.Windows.Forms.Label();
+            this.diskPartitionsBox = new System.Windows.Forms.TextBox();
+            this.diskPartitionsLabel = new System.Windows.Forms.Label();
+            this.diskModelBox = new System.Windows.Forms.TextBox();
+            this.diskModelLabel = new System.Windows.Forms.Label();
             this.diskSelectionBox = new System.Windows.Forms.ComboBox();
             this.diskSelectLabel = new System.Windows.Forms.Label();
             this.diskSizeBox = new System.Windows.Forms.TextBox();
@@ -128,12 +134,7 @@
             this.processorLogoBox = new System.Windows.Forms.PictureBox();
             this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
             this.systemLogoBox = new System.Windows.Forms.PictureBox();
-            this.diskModelBox = new System.Windows.Forms.TextBox();
-            this.diskModelLabel = new System.Windows.Forms.Label();
-            this.diskPartitionsBox = new System.Windows.Forms.TextBox();
-            this.diskPartitionsLabel = new System.Windows.Forms.Label();
-            this.diskBpsBox = new System.Windows.Forms.TextBox();
-            this.diskBpsLabel = new System.Windows.Forms.Label();
+            this.versionBox = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.processorPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).BeginInit();
@@ -321,7 +322,6 @@
             this.coresBox.ReadOnly = true;
             this.coresBox.Size = new System.Drawing.Size(20, 20);
             this.coresBox.TabIndex = 3;
-            this.coresBox.Text = "99";
             this.coresBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // processorNameBox
@@ -331,7 +331,6 @@
             this.processorNameBox.ReadOnly = true;
             this.processorNameBox.Size = new System.Drawing.Size(271, 20);
             this.processorNameBox.TabIndex = 1;
-            this.processorNameBox.Text = "Witamson";
             this.processorNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // processorNameLabel
@@ -350,7 +349,6 @@
             this.threadsBox.ReadOnly = true;
             this.threadsBox.Size = new System.Drawing.Size(20, 20);
             this.threadsBox.TabIndex = 5;
-            this.threadsBox.Text = "99";
             this.threadsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // threadsLabel
@@ -543,6 +541,60 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disk Storage";
             // 
+            // diskBpsBox
+            // 
+            this.diskBpsBox.Location = new System.Drawing.Point(249, 75);
+            this.diskBpsBox.Name = "diskBpsBox";
+            this.diskBpsBox.ReadOnly = true;
+            this.diskBpsBox.Size = new System.Drawing.Size(65, 20);
+            this.diskBpsBox.TabIndex = 14;
+            this.diskBpsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskBpsLabel
+            // 
+            this.diskBpsLabel.AutoSize = true;
+            this.diskBpsLabel.Location = new System.Drawing.Point(160, 78);
+            this.diskBpsLabel.Name = "diskBpsLabel";
+            this.diskBpsLabel.Size = new System.Drawing.Size(83, 13);
+            this.diskBpsLabel.TabIndex = 13;
+            this.diskBpsLabel.Text = "Bytes per sector";
+            // 
+            // diskPartitionsBox
+            // 
+            this.diskPartitionsBox.Location = new System.Drawing.Point(73, 74);
+            this.diskPartitionsBox.Name = "diskPartitionsBox";
+            this.diskPartitionsBox.ReadOnly = true;
+            this.diskPartitionsBox.Size = new System.Drawing.Size(65, 20);
+            this.diskPartitionsBox.TabIndex = 12;
+            this.diskPartitionsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskPartitionsLabel
+            // 
+            this.diskPartitionsLabel.AutoSize = true;
+            this.diskPartitionsLabel.Location = new System.Drawing.Point(17, 77);
+            this.diskPartitionsLabel.Name = "diskPartitionsLabel";
+            this.diskPartitionsLabel.Size = new System.Drawing.Size(50, 13);
+            this.diskPartitionsLabel.TabIndex = 11;
+            this.diskPartitionsLabel.Text = "Partitions";
+            // 
+            // diskModelBox
+            // 
+            this.diskModelBox.Location = new System.Drawing.Point(73, 48);
+            this.diskModelBox.Name = "diskModelBox";
+            this.diskModelBox.ReadOnly = true;
+            this.diskModelBox.Size = new System.Drawing.Size(241, 20);
+            this.diskModelBox.TabIndex = 10;
+            this.diskModelBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // diskModelLabel
+            // 
+            this.diskModelLabel.AutoSize = true;
+            this.diskModelLabel.Location = new System.Drawing.Point(31, 51);
+            this.diskModelLabel.Name = "diskModelLabel";
+            this.diskModelLabel.Size = new System.Drawing.Size(36, 13);
+            this.diskModelLabel.TabIndex = 9;
+            this.diskModelLabel.Text = "Model";
+            // 
             // diskSelectionBox
             // 
             this.diskSelectionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -560,7 +612,7 @@
             this.diskSelectLabel.Name = "diskSelectLabel";
             this.diskSelectLabel.Size = new System.Drawing.Size(61, 13);
             this.diskSelectLabel.TabIndex = 7;
-            this.diskSelectLabel.Text = "Select Disc";
+            this.diskSelectLabel.Text = "Select Disk";
             // 
             // diskSizeBox
             // 
@@ -1076,6 +1128,7 @@
             // 
             // infoPage
             // 
+            this.infoPage.Controls.Add(this.versionBox);
             this.infoPage.Controls.Add(this.disclaimerGroup);
             this.infoPage.Controls.Add(this.authorsGroup);
             this.infoPage.Location = new System.Drawing.Point(4, 22);
@@ -1117,18 +1170,18 @@
             this.authorsGroup.Size = new System.Drawing.Size(303, 146);
             this.authorsGroup.TabIndex = 0;
             this.authorsGroup.TabStop = false;
-            this.authorsGroup.Text = "Auta";
+            this.authorsGroup.Text = "Authors";
             // 
             // authorsTextBox
             // 
             this.authorsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.authorsTextBox.Location = new System.Drawing.Point(41, 19);
+            this.authorsTextBox.Location = new System.Drawing.Point(41, 34);
             this.authorsTextBox.Multiline = true;
             this.authorsTextBox.Name = "authorsTextBox";
             this.authorsTextBox.Size = new System.Drawing.Size(235, 106);
             this.authorsTextBox.TabIndex = 0;
-            this.authorsTextBox.Text = "Autorami programu są uczniowie ZSBI Żory\r\n\r\nDaniel Baczkowski\r\noraz\r\nJakub Stępie" +
-    "ń.\r\n\r\n\r\nAutorem grafiki ikony programu jest Robek Kuśka.";
+            this.authorsTextBox.Text = "Autorami programu są uczniowie ZSBI Żory\r\n\r\nDaniel Baczkowski oraz Jakub Stępień." +
+    "\r\n\r\n\r\n\r\nAutorem grafiki ikony programu jest Robert Kuśka.";
             this.authorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // processorLogoBox
@@ -1155,59 +1208,16 @@
             this.systemLogoBox.TabIndex = 10;
             this.systemLogoBox.TabStop = false;
             // 
-            // diskModelBox
+            // versionBox
             // 
-            this.diskModelBox.Location = new System.Drawing.Point(73, 48);
-            this.diskModelBox.Name = "diskModelBox";
-            this.diskModelBox.ReadOnly = true;
-            this.diskModelBox.Size = new System.Drawing.Size(241, 20);
-            this.diskModelBox.TabIndex = 10;
-            this.diskModelBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // diskModelLabel
-            // 
-            this.diskModelLabel.AutoSize = true;
-            this.diskModelLabel.Location = new System.Drawing.Point(31, 51);
-            this.diskModelLabel.Name = "diskModelLabel";
-            this.diskModelLabel.Size = new System.Drawing.Size(36, 13);
-            this.diskModelLabel.TabIndex = 9;
-            this.diskModelLabel.Text = "Model";
-            // 
-            // diskPartitionsBox
-            // 
-            this.diskPartitionsBox.Location = new System.Drawing.Point(73, 74);
-            this.diskPartitionsBox.Name = "diskPartitionsBox";
-            this.diskPartitionsBox.ReadOnly = true;
-            this.diskPartitionsBox.Size = new System.Drawing.Size(65, 20);
-            this.diskPartitionsBox.TabIndex = 12;
-            this.diskPartitionsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // diskPartitionsLabel
-            // 
-            this.diskPartitionsLabel.AutoSize = true;
-            this.diskPartitionsLabel.Location = new System.Drawing.Point(17, 77);
-            this.diskPartitionsLabel.Name = "diskPartitionsLabel";
-            this.diskPartitionsLabel.Size = new System.Drawing.Size(50, 13);
-            this.diskPartitionsLabel.TabIndex = 11;
-            this.diskPartitionsLabel.Text = "Partitions";
-            // 
-            // diskBpsBox
-            // 
-            this.diskBpsBox.Location = new System.Drawing.Point(249, 75);
-            this.diskBpsBox.Name = "diskBpsBox";
-            this.diskBpsBox.ReadOnly = true;
-            this.diskBpsBox.Size = new System.Drawing.Size(65, 20);
-            this.diskBpsBox.TabIndex = 14;
-            this.diskBpsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // diskBpsLabel
-            // 
-            this.diskBpsLabel.AutoSize = true;
-            this.diskBpsLabel.Location = new System.Drawing.Point(160, 78);
-            this.diskBpsLabel.Name = "diskBpsLabel";
-            this.diskBpsLabel.Size = new System.Drawing.Size(83, 13);
-            this.diskBpsLabel.TabIndex = 13;
-            this.diskBpsLabel.Text = "Bytes per sector";
+            this.versionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.versionBox.Location = new System.Drawing.Point(219, 273);
+            this.versionBox.Multiline = true;
+            this.versionBox.Name = "versionBox";
+            this.versionBox.Size = new System.Drawing.Size(100, 14);
+            this.versionBox.TabIndex = 1;
+            this.versionBox.Text = "Ver. 1.0.0";
+            this.versionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
@@ -1219,7 +1229,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Program Diagnostyczny";
+            this.Text = "QuickDiag";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
@@ -1250,6 +1260,7 @@
             this.systemGeneralGroup.ResumeLayout(false);
             this.systemGeneralGroup.PerformLayout();
             this.infoPage.ResumeLayout(false);
+            this.infoPage.PerformLayout();
             this.disclaimerGroup.ResumeLayout(false);
             this.disclaimerGroup.PerformLayout();
             this.authorsGroup.ResumeLayout(false);
@@ -1366,6 +1377,7 @@
         private System.Windows.Forms.Label diskPartitionsLabel;
         private System.Windows.Forms.TextBox diskBpsBox;
         private System.Windows.Forms.Label diskBpsLabel;
+        private System.Windows.Forms.TextBox versionBox;
     }
 }
 
