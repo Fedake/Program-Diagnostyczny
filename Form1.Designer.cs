@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.processorPage = new System.Windows.Forms.TabPage();
+            this.processorLogoBox = new System.Windows.Forms.PictureBox();
             this.cpuUsageChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cacheGroup = new System.Windows.Forms.GroupBox();
             this.cache3Box = new System.Windows.Forms.TextBox();
@@ -106,6 +107,7 @@
             this.VideoCardDropDownBox = new System.Windows.Forms.ComboBox();
             this.VideoSelectLabel = new System.Windows.Forms.Label();
             this.videoGeneralGroup = new System.Windows.Forms.GroupBox();
+            this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
             this.videoCardDriverBox = new System.Windows.Forms.TextBox();
             this.videoCardDriverLabel = new System.Windows.Forms.Label();
             this.videoCardRamLabel = new System.Windows.Forms.Label();
@@ -116,6 +118,7 @@
             this.systemGeneralGroup = new System.Windows.Forms.GroupBox();
             this.osUpTimeTextBox = new System.Windows.Forms.TextBox();
             this.osUpTimeLabel = new System.Windows.Forms.Label();
+            this.systemLogoBox = new System.Windows.Forms.PictureBox();
             this.osBootBox = new System.Windows.Forms.TextBox();
             this.osBootLabel = new System.Windows.Forms.Label();
             this.osInstallBox = new System.Windows.Forms.TextBox();
@@ -127,16 +130,14 @@
             this.osVersionBox = new System.Windows.Forms.TextBox();
             this.osNameLabel = new System.Windows.Forms.Label();
             this.infoPage = new System.Windows.Forms.TabPage();
+            this.versionBox = new System.Windows.Forms.TextBox();
             this.disclaimerGroup = new System.Windows.Forms.GroupBox();
             this.disclaimerTextBox = new System.Windows.Forms.TextBox();
             this.authorsGroup = new System.Windows.Forms.GroupBox();
             this.authorsTextBox = new System.Windows.Forms.TextBox();
-            this.processorLogoBox = new System.Windows.Forms.PictureBox();
-            this.videoCardLogoBox = new System.Windows.Forms.PictureBox();
-            this.systemLogoBox = new System.Windows.Forms.PictureBox();
-            this.versionBox = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.processorPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).BeginInit();
             this.cacheGroup.SuspendLayout();
             this.processorGeneralGroup.SuspendLayout();
@@ -150,14 +151,13 @@
             this.videoPage.SuspendLayout();
             this.monitorGroup.SuspendLayout();
             this.videoGeneralGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
             this.systemPage.SuspendLayout();
             this.systemGeneralGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
             this.infoPage.SuspendLayout();
             this.disclaimerGroup.SuspendLayout();
             this.authorsGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -188,6 +188,14 @@
             this.processorPage.TabIndex = 0;
             this.processorPage.Text = "Processor";
             this.processorPage.UseVisualStyleBackColor = true;
+            // 
+            // processorLogoBox
+            // 
+            this.processorLogoBox.Location = new System.Drawing.Point(166, 88);
+            this.processorLogoBox.Name = "processorLogoBox";
+            this.processorLogoBox.Size = new System.Drawing.Size(155, 102);
+            this.processorLogoBox.TabIndex = 9;
+            this.processorLogoBox.TabStop = false;
             // 
             // cpuUsageChart
             // 
@@ -555,9 +563,9 @@
             this.diskBpsLabel.AutoSize = true;
             this.diskBpsLabel.Location = new System.Drawing.Point(160, 78);
             this.diskBpsLabel.Name = "diskBpsLabel";
-            this.diskBpsLabel.Size = new System.Drawing.Size(83, 13);
+            this.diskBpsLabel.Size = new System.Drawing.Size(85, 13);
             this.diskBpsLabel.TabIndex = 13;
-            this.diskBpsLabel.Text = "Bytes per sector";
+            this.diskBpsLabel.Text = "Bytes per Sector";
             // 
             // diskPartitionsBox
             // 
@@ -626,11 +634,11 @@
             // diskSizeLabel
             // 
             this.diskSizeLabel.AutoSize = true;
-            this.diskSizeLabel.Location = new System.Drawing.Point(160, 22);
+            this.diskSizeLabel.Location = new System.Drawing.Point(184, 22);
             this.diskSizeLabel.Name = "diskSizeLabel";
-            this.diskSizeLabel.Size = new System.Drawing.Size(54, 13);
+            this.diskSizeLabel.Size = new System.Drawing.Size(30, 13);
             this.diskSizeLabel.TabIndex = 0;
-            this.diskSizeLabel.Text = "Total Size";
+            this.diskSizeLabel.Text = " Size";
             // 
             // memoryModuleInfoGroup
             // 
@@ -862,11 +870,11 @@
             // monitorBppLabel
             // 
             this.monitorBppLabel.AutoSize = true;
-            this.monitorBppLabel.Location = new System.Drawing.Point(29, 48);
+            this.monitorBppLabel.Location = new System.Drawing.Point(28, 48);
             this.monitorBppLabel.Name = "monitorBppLabel";
-            this.monitorBppLabel.Size = new System.Drawing.Size(66, 13);
+            this.monitorBppLabel.Size = new System.Drawing.Size(67, 13);
             this.monitorBppLabel.TabIndex = 5;
-            this.monitorBppLabel.Text = "Bits per pixel";
+            this.monitorBppLabel.Text = "Bits per Pixel";
             this.monitorBppLabel.UseMnemonic = false;
             // 
             // monitorIdTextBox
@@ -931,6 +939,14 @@
             this.videoGeneralGroup.TabStop = false;
             this.videoGeneralGroup.Text = "General";
             // 
+            // videoCardLogoBox
+            // 
+            this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
+            this.videoCardLogoBox.Name = "videoCardLogoBox";
+            this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.videoCardLogoBox.TabIndex = 8;
+            this.videoCardLogoBox.TabStop = false;
+            // 
             // videoCardDriverBox
             // 
             this.videoCardDriverBox.Location = new System.Drawing.Point(102, 71);
@@ -979,11 +995,11 @@
             // resolutionLabel
             // 
             this.resolutionLabel.AutoSize = true;
-            this.resolutionLabel.Location = new System.Drawing.Point(6, 48);
+            this.resolutionLabel.Location = new System.Drawing.Point(1, 48);
             this.resolutionLabel.Name = "resolutionLabel";
-            this.resolutionLabel.Size = new System.Drawing.Size(89, 13);
+            this.resolutionLabel.Size = new System.Drawing.Size(94, 13);
             this.resolutionLabel.TabIndex = 2;
-            this.resolutionLabel.Text = "Current resolution";
+            this.resolutionLabel.Text = "Current Resolution";
             // 
             // systemPage
             // 
@@ -1035,6 +1051,14 @@
             this.osUpTimeLabel.Size = new System.Drawing.Size(84, 13);
             this.osUpTimeLabel.TabIndex = 11;
             this.osUpTimeLabel.Text = "System Up Time";
+            // 
+            // systemLogoBox
+            // 
+            this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
+            this.systemLogoBox.Name = "systemLogoBox";
+            this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
+            this.systemLogoBox.TabIndex = 10;
+            this.systemLogoBox.TabStop = false;
             // 
             // osBootBox
             // 
@@ -1140,6 +1164,17 @@
             this.infoPage.Text = "Info";
             this.infoPage.UseVisualStyleBackColor = true;
             // 
+            // versionBox
+            // 
+            this.versionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.versionBox.Location = new System.Drawing.Point(219, 273);
+            this.versionBox.Multiline = true;
+            this.versionBox.Name = "versionBox";
+            this.versionBox.Size = new System.Drawing.Size(100, 14);
+            this.versionBox.TabIndex = 1;
+            this.versionBox.Text = "Ver. 1.0.0";
+            this.versionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // disclaimerGroup
             // 
             this.disclaimerGroup.Controls.Add(this.disclaimerTextBox);
@@ -1184,41 +1219,6 @@
     "\r\n\r\n\r\n\r\nAutorem grafiki ikony programu jest Robert Kuśka.";
             this.authorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // processorLogoBox
-            // 
-            this.processorLogoBox.Location = new System.Drawing.Point(166, 88);
-            this.processorLogoBox.Name = "processorLogoBox";
-            this.processorLogoBox.Size = new System.Drawing.Size(155, 102);
-            this.processorLogoBox.TabIndex = 9;
-            this.processorLogoBox.TabStop = false;
-            // 
-            // videoCardLogoBox
-            // 
-            this.videoCardLogoBox.Location = new System.Drawing.Point(256, 19);
-            this.videoCardLogoBox.Name = "videoCardLogoBox";
-            this.videoCardLogoBox.Size = new System.Drawing.Size(72, 72);
-            this.videoCardLogoBox.TabIndex = 8;
-            this.videoCardLogoBox.TabStop = false;
-            // 
-            // systemLogoBox
-            // 
-            this.systemLogoBox.Location = new System.Drawing.Point(256, 45);
-            this.systemLogoBox.Name = "systemLogoBox";
-            this.systemLogoBox.Size = new System.Drawing.Size(72, 72);
-            this.systemLogoBox.TabIndex = 10;
-            this.systemLogoBox.TabStop = false;
-            // 
-            // versionBox
-            // 
-            this.versionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.versionBox.Location = new System.Drawing.Point(219, 273);
-            this.versionBox.Multiline = true;
-            this.versionBox.Name = "versionBox";
-            this.versionBox.Size = new System.Drawing.Size(100, 14);
-            this.versionBox.TabIndex = 1;
-            this.versionBox.Text = "Ver. 1.0.0";
-            this.versionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1233,6 +1233,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl.ResumeLayout(false);
             this.processorPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpuUsageChart)).EndInit();
             this.cacheGroup.ResumeLayout(false);
             this.cacheGroup.PerformLayout();
@@ -1256,18 +1257,17 @@
             this.monitorGroup.PerformLayout();
             this.videoGeneralGroup.ResumeLayout(false);
             this.videoGeneralGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
             this.systemPage.ResumeLayout(false);
             this.systemGeneralGroup.ResumeLayout(false);
             this.systemGeneralGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
             this.infoPage.ResumeLayout(false);
             this.infoPage.PerformLayout();
             this.disclaimerGroup.ResumeLayout(false);
             this.disclaimerGroup.PerformLayout();
             this.authorsGroup.ResumeLayout(false);
             this.authorsGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.processorLogoBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.videoCardLogoBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.systemLogoBox)).EndInit();
             this.ResumeLayout(false);
 
         }
